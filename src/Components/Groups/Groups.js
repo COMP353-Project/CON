@@ -6,7 +6,6 @@ function Groups () {
 
     const [dataSent, setDataSent] = React.useState(false);
     const data = {
-        id: 3,
         name: 'example',
         email: 'example@example.com',
         feedback: 'hey! this is my feedback'
@@ -31,10 +30,18 @@ function Groups () {
                 error: error.message
             }));
     }
+
+    React.useEffect(() => {
+        handleClick();
+    });
+
     return (
         <div>
-            <p>Groups page</p>
-            <Button onClick={handleClick}>Click me!</Button>
+            <div style={{ padding: 100 }}>
+                <h1>Groups page</h1>
+
+                <Button variant="contained" color="secondary" container style={{ size: 'large', backgroundColor: 'black', color: 'white' }} onClick={handleClick}>Click me!</Button>
+            </div>
         </div>
 
     );

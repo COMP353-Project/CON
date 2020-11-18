@@ -7,9 +7,8 @@ header("Content-Type: application/json; charset=UTF-8");
 $rest_json = file_get_contents("php://input");
 $_POST = json_decode($rest_json, true);
 $conn = mysqli_connect("localhost", "root", "mysql", "reactphp");
-$query = "insert into test (id, name,email, feedback)
+$query = "insert into test (name,email, feedback)
 values(
-    '" . $_POST['id'] . "',
     '" . $_POST['name'] . "',
     '" . $_POST['email'] . "',
     '" . $_POST['feedback'] . "'
