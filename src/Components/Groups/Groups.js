@@ -1,4 +1,4 @@
-import { Button, TextareaAutosize } from '@material-ui/core';
+import { Box, Button, TextareaAutosize, TextField } from '@material-ui/core';
 import { render } from '@testing-library/react';
 import axios from 'axios';
 import React, {useState, useEffect} from 'react';
@@ -9,7 +9,7 @@ import '../../css/GroupsStyle.css'
 function Groups () {
 
     const [dataSent, setDataSent] = React.useState(false);
-    const [posts, setPosts] = React.useState(() => []);
+    const [posts, setPosts] = React.useState(() => [{text: "I want this apt", imagePath:"h", time: new Date()}, {text: "How much is this", imagePath:"h", time: new Date()}]);
     const [textInput, setText] = React.useState("");
     //useEffect(() => console.log("posts changed"), [posts])
     //const posts = []
@@ -42,7 +42,7 @@ function Groups () {
     const handlePost = (text, imagePath) => {
         console.log("Received: " + text + imagePath)
         var newPosts = posts
-        newPosts.push({text: text, imagePath: imagePath})
+        newPosts.push({text: text, imagePath: imagePath, time: new Date()})
         setPosts(newPosts)
         setText("")
        // posts.push({text: text, imagePath: imagePath});
@@ -59,11 +59,12 @@ function Groups () {
      return (
         <div>
             <h1>Groups page</h1>
-            <div>
+            <div class="post-container">
                 {posts.map(post =>{
                     return (
-                    <div>
+                    <div class="groupPost">
                         <Post text={post.text} imagePath={post.imagePath}/>
+                        <span class="date">{(post.time).toString()}</span>
                     </div>
                     );
                 }
@@ -71,10 +72,10 @@ function Groups () {
             </div>
             <div class="groupsInput">
                 <label>Attach images and text here!</label> 
-                <div>
-                    <TextareaAutosize type="text" value ={textInput} onChange={handleTextChange}/>
+                <Box>
+                    <TextField type="text" value ={textInput} onChange={handleTextChange}/>
                     <input type="file"></input>
-                </div>
+                </Box>
                 
                 <div>
                     <Button type ="submit" onClick={() => handlePost(textInput, "img")}>Post</Button>
