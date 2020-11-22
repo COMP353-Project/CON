@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Arimo&family=Yantramanav:wght@100;300&display=swap');
 .container {
     height: 100vh;
@@ -6,7 +5,7 @@
 
 .container2 {
     display: flex;
-    min-height: 30vh;
+    height: 50vh;
     align-items: center;
     justify-content: center;
 }
@@ -17,24 +16,17 @@
     float: right;
 }
 
-.form {
+.button-container {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    min-height: 30vh;
+    min-height: 20vh;
 }
 
 .title {
     text-align: center;
     color: #32a895;
     font-family: 'Yantramanav', sans-serif;
-}
-
-.is-error {
-    color: red;
-}
-
-.is-success {
-    color: green;
+    font-size: 50px;
 }
