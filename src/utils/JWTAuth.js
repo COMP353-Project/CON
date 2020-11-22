@@ -21,6 +21,7 @@ const login = async (data) => {
 
             localStorage.setItem("access_token", jwt);
             localStorage.setItem("expire_at", expire_at);
+            localStorage.setItem("is_active", true);
             return response.data;
         }
     } catch (e) {
