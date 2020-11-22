@@ -14,7 +14,6 @@ $table_name = 'Users';
 
 $email = $_POST['email'];
 $password = $_POST['password'];
-$password_hash = password_hash($password, PASSWORD_DEFAULT);
 
 $query = "SELECT id, first_name, last_name, password FROM " . $table_name . " WHERE email = '$email' LIMIT 0, 1";
 
@@ -26,10 +25,10 @@ if($row) {
     $id= $row['id'];
     $firstname = $row['first_name'];
     $lastname = $row['last_name'];
-    $password2 = $row['password'];
+    $password_hash = $row['password'];
     $key = md5(microtime().rand());
 
-    if(password_verify($password2, $password_hash)) {
+    if(password_verify($password, $password_hash)) {
 
         $secret_key = $key; // TODO: change this later
         $issuer_claim = "localhost";
