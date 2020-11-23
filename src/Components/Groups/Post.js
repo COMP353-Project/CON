@@ -5,13 +5,15 @@ function Post (props){
     
     const[text, setText] = React.useState(props.text)
     const[imagePath, setImgPath] = React.useState(props.imagePath)
+    const[date, setDate]=React.useState(props.date)
 
       return (
           
-          <Box>
-              <p>{text}</p>
-              <img src={imagePath} alt=""></img>
-          </Box>
+          <div class="groupPost">
+                <div>{text}</div>
+                <img class="postedImage" src={imagePath} alt=""/>
+                <span class="date">{date.toString()}</span>
+          </div>
       );
   }
 export default Post

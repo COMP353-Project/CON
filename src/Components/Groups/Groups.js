@@ -1,4 +1,4 @@
-import { Box, Button, TextareaAutosize, TextField } from '@material-ui/core';
+import { Accordion, Button, OutlinedInput } from '@material-ui/core';
 import { render } from '@testing-library/react';
 import axios from 'axios';
 import React, {useState, useEffect} from 'react';
@@ -9,8 +9,9 @@ import '../../css/GroupsStyle.css'
 function Groups () {
 
     const [dataSent, setDataSent] = React.useState(false);
-    const [posts, setPosts] = React.useState(() => [{text: "I want this apt", imagePath:"h", time: new Date()}, {text: "How much is this", imagePath:"h", time: new Date()}]);
+    const [posts, setPosts] = React.useState(() => [{text: "I want this apt", imagePath:"h", date: new Date()}, {text: "How much is this", imagePath:"h", date: new Date()}]);
     const [textInput, setText] = React.useState("");
+    const [imageInput, setImageURL] = React.useState(0);
     //useEffect(() => console.log("posts changed"), [posts])
     //const posts = []
     const data = {
@@ -40,19 +41,27 @@ function Groups () {
     }
 
     const handlePost = (text, imagePath) => {
-        console.log("Received: " + text + imagePath)
-        var newPosts = posts
-        newPosts.push({text: text, imagePath: imagePath, time: new Date()})
-        setPosts(newPosts)
-        setText("")
-       // posts.push({text: text, imagePath: imagePath});
-        console.log(posts.length)
-        if (posts.length != 0)
-            console.log(posts[posts.length - 1])
+        if(textInput.length > 0){
+            console.log("Received: " + text + imagePath)
+            var newPosts = posts
+            newPosts.push({text: text, imagePath: imagePath, date: new Date()})
+            setPosts(newPosts)
+            setText("")
+        } else alert("Text field cannot be empty!")
+        
     }
 
     const handleTextChange = ({target}) => {
         setText(target.value)
+    }
+
+    const handleFileUpload = ({target}) => {
+        try{
+            setImageURL(URL.createObjectURL(target.files[0]))
+        } catch (err){
+            console.log("image empty")
+        }
+        
     }
 
     
@@ -62,24 +71,20 @@ function Groups () {
             <div class="post-container">
                 {posts.map(post =>{
                     return (
-                    <div class="groupPost">
-                        <Post text={post.text} imagePath={post.imagePath}/>
-                        <span class="date">{(post.time).toString()}</span>
-                    </div>
+                        <Post text={post.text} imagePath={post.imagePath} date={post.date}/>
                     );
                 }
                 )}
             </div>
             <div class="groupsInput">
                 <label>Attach images and text here!</label> 
-                <Box>
-                    <TextField type="text" value ={textInput} onChange={handleTextChange}/>
-                    <input type="file"></input>
-                </Box>
-                
-                <div>
-                    <Button type ="submit" onClick={() => handlePost(textInput, "img")}>Post</Button>
+                <div class="post-input-wrapper">
+                    <OutlinedInput type="text" class="postText" placeholder="Write a post..." fullWidth="true" multiline="true" rows="5" value ={textInput} onChange={handleTextChange}/>
+                    <input type="file" accept=".jpg,.png,.gif" onChange={handleFileUpload}></input>
+                    <Button type ="submit" variant="outlined" onClick={() => handlePost(textInput, imageInput)}>Post</Button>
                 </div>
+               
+                    
                 
             </div>
             <Button onClick={handleClick}>Click me!</Button>

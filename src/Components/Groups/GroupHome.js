@@ -10,7 +10,7 @@ import Groups from './Groups';
 
 function GroupHome () {
 
-    const [groups, setGroups] = React.useState(() => [{id: 1}])
+    const [groups, setGroups] = React.useState(() => [{id: 1}, {id: 2}])
 
      return (
         <div>
@@ -19,11 +19,13 @@ function GroupHome () {
                 <List>
                     {groups.map(group =>{
                         return (
-                            <Container maxwidth="sm">
-                                <Link to={"/groups/" + group.id}>
-                                    <ListItem Button/>
-                                    <ListItemText primary="Click this to go to group 1"/>
-                                </Link>
+                            <Container class="groupList" maxwidth="sm">
+                                <ListItem>
+                                    <Button component={Link} to={"/groups/" + group.id}>
+                                        <ListItemText primary={"Click this to go to group " + group.id}/>
+                                    </Button>
+                                    <div>Users go here</div>
+                                </ListItem>
                             </Container>
                         );
                         }

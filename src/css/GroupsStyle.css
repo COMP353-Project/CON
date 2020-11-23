@@ -6,6 +6,15 @@ div.groupPost {
   margin-bottom: 20px;
   margin-left: 50px;
   margin-right: 50px;
+  display: block;
+  min-width: 150px;
+  min-height: 150px;
+  position: relative;
+}
+
+.groupPost div {
+  padding-top: 40px;
+  display: inline;
 }
 
 div.groupsInput {
@@ -18,6 +27,22 @@ div.postContainer {
 }
 
 div.groupPost span.date {
-  margin-left: 15px;
   font-size: 12px;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  padding-bottom: 20px;
+  padding-left: 40px;
+}
+
+.postedImage {
+  float: right;
+  position: static;
+  padding: 5px;
+  max-width: 150px;
+  max-height: 150px;
+}
+
+.groupList {
+  outline-style: auto;
 }

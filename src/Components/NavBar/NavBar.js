@@ -39,8 +39,6 @@ export default function NavBar () {
                         <Button component={Link} to='/group-home' color="inherit" className={classes.test} >Groups</Button>
                         <Button component={Link} to='/email' color="inherit" className={classes.test} >Email</Button>
                         <Button component={Link} to='/my-account' color="inherit" className={classes.test} >My account</Button>
-
-
                     </div>
                 </Toolbar>
             </AppBar>
