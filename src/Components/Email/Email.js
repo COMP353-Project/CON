@@ -1,11 +1,8 @@
+import React from 'react';
+import Conversation from './pages/Conversation';
 
-function Email () {
-    return (
-        <div>
-            <p>Email page</p>
-        </div>
-
-    );
-}
+const Email = () => {
+	return <Conversation />;
+};
 
 export default Email;
