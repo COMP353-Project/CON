@@ -59,6 +59,6 @@ const signout = dispatch => async () => {
   history.push('/login');
 };
 
-export default createDataContext(reducer, {
+export const { Context, Provider } = createDataContext(reducer, {
   signin, editProfile, signout
 }, { isLoading: false, error: '', user: null });

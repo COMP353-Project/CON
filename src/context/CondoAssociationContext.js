@@ -112,7 +112,7 @@ const createDiscussion = dispatch => async ({ condoAssociationId, title, isPubli
 
 // Update Discussion
 
-const updateDiscussion = dispatch => async ({ discussionId, title, isPublic, content }) => {
+const updateDiscussion = dispatch => async ({ discussionId, condoAssociationId, title, isPublic, content }) => {
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
 
@@ -210,7 +210,7 @@ const createAd = dispatch => async ({ condoAssociationId, title, contactNumber, 
 
 // Update Ad
 
-const udpdateAd = dispatch => async ({ adId, title, contactNumber, price, isPublic, description }) => {
+const udpdateAd = dispatch => async ({ adId, condoAssociationId, title, contactNumber, price, isPublic, description }) => {
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
 
@@ -408,7 +408,7 @@ const voteElection = dispatch => async ({ electionId, candidateId }) => {
   }
 };
 
-export default createDataContext(reducer, {
+export const { Context, Provider } = createDataContext(reducer, {
   fetchCondoAssociations, fetchCondoAssociation, fetchDiscussions, fetchDiscussion, createDiscussion, updateDiscussion,
   deleteDiscussion, addComment, fetchAds, fetchAd, createAd, udpdateAd, deleteAd, fetchAdminMeetings, fetchAdminMeeting,
   fetchGeneralMeetings, fetchGeneralMeeting, fetchPolls, fetchPoll, votePoll, fetchElections, fetchElection, voteElection

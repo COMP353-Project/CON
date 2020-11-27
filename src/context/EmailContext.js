@@ -115,6 +115,6 @@ const leaveConversation = dispatch => async ({ conversationId }) => {
   }
 };
 
-export default createDataContext(reducer, {
-  fetchConversations, fetchConversation, sendEmail, createConversation, leaveConversation
+export const { Provider, Context } = createDataContext(reducer, {
+  fetchConversations, fetchConversation, sendEmail, fetchSent, createConversation, leaveConversation
 }, { conversations: [], sentMessages: [], conversation: null, isLoading: false, error: '' });

@@ -296,7 +296,7 @@ const handleRequest = dispatch => async ({ groupId, userId, accept }) => {
   }
 };
 
-export default createDataContext(reducer, {
+export const { Context, Provider } = createDataContext(reducer, {
   fetchAllGroups, requestGroup, fetchMyGroups, createGroup, fetchGroup, editGroup, leaveGroup, fetchPosts, fetchPost,
   createPost, editPost, deletePost, addComment, fetchChatMessages, sendChatMessage, fetchRequests, handleRequest
 }, {
