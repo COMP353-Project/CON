@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import './Email.css';
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
@@ -12,6 +13,13 @@ const Email = () => {
 			<Route path="/email/compose" component={Compose} />
 		</div>
 	);
+=======
+import React from 'react';
+import Conversation from './pages/Conversation';
+
+const Email = () => {
+	return <Conversation />;
+>>>>>>> develop
 };
 
 export default Email;
