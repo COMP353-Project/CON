@@ -2,4 +2,7 @@
 node_modules
 
 # misc
-.DS_Store
+._.DS_Store
+
+# build folder
+build

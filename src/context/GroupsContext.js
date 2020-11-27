@@ -1,0 +1,304 @@
+import createDataContext from './createDataContext';
+import axios from 'axios';
+import history from '../navigation/history';
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'start_loading': return { ...state, isLoading: true };
+    case 'stop_loading': return { ...state, isLoading: false };
+    case 'set_error': return { ...state, error: action.payload };
+    case 'reset_error': return { ...state, error: '' };
+    case 'fetch_my_groups': return { ...state, myGroups: action.payload };
+    case 'fetch_all_groups': return { ...state, allGroups: action.payload };
+    case 'fetch_group': return { ...state, group: action.payload };
+    case 'fetch_posts': return { ...state, posts: action.payload };
+    case 'fetch_post': return { ...state, post: action.payload };
+    case 'fetch_chat_messages': return { ...state, chatMessages: action.payload };
+    case 'fetch_requests': return { ...state, requests: action.payload };
+    default: return state;
+  }
+};
+
+// Fetch All Groups
+
+const fetchAllGroups = dispatch => async () => {
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    const { data } = await axios.get(''); // GET all groups URL
+    dispatch({ type: 'fetch_all_groups', payload: data });
+
+    dispatch({ type: 'stop_loading' });
+  } catch (e) {
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: e.message });
+  }
+};
+
+// Request Group
+
+const requestGroup = dispatch => async ({ groupId }) => {
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    await axios.post('', { groupId }); // POST group_request URL
+
+    fetchAllGroups();
+  } catch (e) {
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: e.message });
+  }
+};
+
+// Fetch My Groups
+
+const fetchMyGroups = dispatch => async () => {
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    const { data } = await axios.get(''); // GET My Groups URL
+    dispatch({ type: 'fech_my_groups', payload: data });
+
+    dispatch({ type: 'stop_loading' });
+  } catch (e) {
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: e.message });
+  }
+};
+
+// Create Group
+
+const createGroup = dispatch => async ({ name, description }) => {
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    const { data } = await axios.post('', { name, description }); // POST groups URL
+    
+    history.push(`/mygroups/${data.id}`);
+  } catch (e) {
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: e.message });
+  }
+};
+
+// Fetch Group
+
+const fetchGroup = dispatch => async ({ groupId }) => {
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    const { data } = await axios.get('', { params: { groupId } }); // GET group URL
+    dispatch({ type: 'fetch_group', payload: data });
+
+    dispatch({ type: 'stop_loading' });
+  } catch (e) {
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: e.message });
+  }
+};
+
+// Edit Group
+
+const editGroup = dispatch => async ({ groupId, title, description }) => {
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    await axios.put('', { groupId, title, description }); // PUT group URL
+
+    history.push(`/groups/${groupId}`);
+  } catch (e) {
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: e.message });
+  }
+};
+
+// Leave Group
+
+const leaveGroup = dispatch => async ({ groupId }) => {
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    await axios.delete('', { groupId }); // DELETE group_member URL
+
+    history.push('/mygroups/');
+  } catch (e) {
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: e.message });
+  }
+};
+
+// Fetch Posts
+
+const fetchPosts = dispatch => async ({ groupId }) => {
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    const { data } = await axios.get('', { params: { groupId } }); // GET group_posts URL
+    dispatch({ type: 'fetch_posts', payload: data });
+
+    dispatch({ type: 'stop_loading' });
+  } catch (e) {
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: e.message });
+  }
+};
+
+const fetchPost = dispatch => async ({ postId }) => {
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    const { data } = await axios.get('', { params: { postId } }); // GET post URL
+    dispatch({ type: 'fetch_post', payload: data });
+
+    dispatch({ type: 'stop_loading' });
+  } catch (e) {
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: e.message });
+  }
+};
+
+// Create Discussion Post
+
+const createPost = dispatch => async ({ groupId, title, content, type }) => {
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    const { data } = await axios.post('', { groupId, title, content, type }); // POST post URL
+    
+    history.push(`groups/${groupId}/posts/${data.id}`);
+  } catch (e) {
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: e.message });
+  }
+};
+
+// Edit Post
+
+const editPost = dispatch => async ({ groupId, postId, title, content }) => {
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    await axios.put('', { postId, title, content }); // PUT post URL
+
+    history.push(`/groups/${groupId}/posts/${postId}`);
+  } catch (e) {
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: e.message });
+  }
+};
+
+// Delete Post
+
+const deletePost = dispatch => async ({ groupId, postId }) => {
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    await axios.delete('', { postId });
+
+    history.push(`groups/${groupId}/posts`);
+  } catch (e) {
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: e.message });
+  }
+};
+
+// Add Comment
+
+const addComment = dispatch => async ({ postId, content }) => {
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    await axios.post('', { postId, content }); // POST comment URL
+
+    fetchPost({ postId });
+  } catch (e) {
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: e.message });
+  }
+};
+
+// Fetch Chat Messages
+
+const fetchChatMessages = dispatch => async ({ groupId }) => {
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    const { data } = await axios.get('', { params: { groupId } }); // GET chat_messages URL
+    dispatch({ type: 'fetch_chat_messages', payload: data });
+
+    dispatch({ type: 'stop_loading' });
+  } catch (e) {
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: e.message });
+  }
+};
+
+// Send Chat Message
+
+const sendChatMessage = dispatch => async ({ groupId, content }) => {
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    await axios.post('', { groupId, content }); // POST chat_message URL
+
+    fetchChatMessages({ groupId });
+  } catch (e) {
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: e.message });
+  }
+};
+
+// Fetch Requests
+
+const fetchRequests = dispatch => async ({ groupId }) => {
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    const { data } = await axios.get('', { params: { groupId } }); // GET requests URL
+    dispatch({ type: 'fetch_requests', payload: data });
+
+    dispatch({ type: 'stop_loading' });
+  } catch (e) {
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: e.message });
+  }
+};
+
+// Handle Request
+
+const handleRequest = dispatch => async ({ groupId, userId, accept }) => {
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    await axios.put('', { groupId, userId, accept }); // PUT request URL
+
+    fetchRequests({ groupId });
+  } catch (e) {
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: e.message });
+  }
+};
+
+export default createDataContext(reducer, {
+  fetchAllGroups, requestGroup, fetchMyGroups, createGroup, fetchGroup, editGroup, leaveGroup, fetchPosts, fetchPost,
+  createPost, editPost, deletePost, addComment, fetchChatMessages, sendChatMessage, fetchRequests, handleRequest
+}, {
+  myGroups: [], allGroups: [], group: null, posts: [], post: null, chatMessages: [], requests: [], isLoading: false, error: ''
+});

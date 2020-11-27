@@ -101,7 +101,6 @@ function Groups () {
     //useEffect(() => console.log("posts changed"), [posts])
     //const posts = []
     const data = {
-        id: 3,
         name: 'example',
         email: 'example@example.com',
         feedback: 'hey! this is my feedback'
