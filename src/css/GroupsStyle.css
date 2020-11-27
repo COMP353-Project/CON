@@ -1,5 +1,4 @@
-div.groupPost {
-  outline-style: double;
+div.group-post {
   padding-left: 50px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -26,23 +25,24 @@ div.postContainer {
   outline-style: double;
 }
 
-div.groupPost span.date {
+span.date {
   font-size: 12px;
-  bottom: 0;
-  left: 0;
-  position: absolute;
   padding-bottom: 20px;
-  padding-left: 40px;
+  padding-top: 40px;
 }
 
 .postedImage {
-  float: right;
+  float: left;
   position: static;
-  padding: 5px;
-  max-width: 150px;
-  max-height: 150px;
+  padding-left: 70px;
+  max-width: 300px;
+  max-height: 300px;
 }
 
 .groupList {
   outline-style: auto;
+}
+
+.reply-input-wrapper {
+  padding-left: 60px;
 }
