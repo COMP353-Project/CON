@@ -1,0 +1,41 @@
+.nav {
+  display: flex;
+  justify-content: space-evenly;
+  background: #0000002b;
+  color: #32a895;
+}
+
+.container--admin {
+  display: flex;
+  justify-content: center;
+  margin: 40px;
+}
+
+.container--form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 40px;
+  padding: 20px;
+  border: 1px solid black;
+  width: 100%;
+  max-width: 600px;
+}
+
+.form__title {
+  margin: 0 auto 20px;
+}
+
+.form__field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.form__field .submit-btn{
+  margin-top: 20px;
+}
+
+#admin-post-attachments {
+  margin-top: 10px;
+}
