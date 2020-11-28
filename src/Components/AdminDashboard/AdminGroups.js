@@ -1,6 +1,6 @@
 import React from 'react';
 import './AdminStyles.css';
-import AdminNav from './AdminNav';
+import Nav from './AdminNav';
 import TextField from '@material-ui/core/TextField';
 
 function AdminGroups () {
@@ -8,7 +8,7 @@ function AdminGroups () {
 
   return (
     <div>
-      <AdminNav />
+      <Nav />
       <div className="container--admin">
         <form className="container--form">
           <h3 className="form__title">Delete group</h3>

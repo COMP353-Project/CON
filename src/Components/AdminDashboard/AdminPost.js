@@ -1,5 +1,5 @@
 import React from 'react';
-import AdminNav from './AdminNav';
+import Nav from './AdminNav';
 import './AdminStyles.css';
 import TextField from '@material-ui/core/TextField';
 
@@ -9,7 +9,7 @@ function AdminPost () {
 
   return (
     <div>
-      <AdminNav />
+      <Nav />
       <div className="container--admin">
         <form className="container--form">
           <h3 className="form__title">Create Post</h3>
