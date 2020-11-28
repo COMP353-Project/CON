@@ -35,6 +35,7 @@ export default function NavBar () {
                         CONSys
                     </Typography>
                     <div style={{ display: 'flex' }}>
+                        <Button component={Link} to='/admin' color="inherit" className={classes.test} >Admin</Button>
                         <Button component={Link} to='/condo-association' color="inherit" className={classes.test}>Condo Association</Button>
                         <Button component={Link} to='/group-home' color="inherit" className={classes.test} >Groups</Button>
                         <Button component={Link} to='/email' color="inherit" className={classes.test} >Email</Button>
@@ -42,6 +43,6 @@ export default function NavBar () {
                     </div>
                 </Toolbar>
             </AppBar>
-        </div >
+        </div>
     );
 }
