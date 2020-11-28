@@ -4,9 +4,11 @@ import './AdminStyles.css';
 import TextField from '@material-ui/core/TextField';
 
 function AdminUsers () {
-  const [email, setEmail] = React.useState("");
   const [firstName, setFirstName] = React.useState("");  
-  const [lastName, setLastName] = React.useState(""); 
+  const [lastName, setLastName] = React.useState("");
+  const [regEmail, setRegEmail] = React.useState("")
+  const [promoteEmail, setPromoteEmail] = React.useState("")
+  const [delEmail, setDelEmail] = React.useState("")
   // const [success, setSuccessMessage] = React.useState("")
   // const [error, setError] = React.useState(false);
   return (
@@ -44,9 +46,9 @@ function AdminUsers () {
               label="Email"
               type="email"
               variant="outlined"
-              value={email}
+              value={regEmail}
               required
-              onChange={e => setEmail(e.target.value)}
+              onChange={e => setRegEmail(e.target.value)}
             />
           </div>
           <button className="submit-btn" /**onClick={handleClick}**/>REGISTER</button>
@@ -61,9 +63,9 @@ function AdminUsers () {
               label="Email"
               type="email"
               variant="outlined"
-              value={email}
+              value={promoteEmail}
               required
-              onChange={ e => setEmail(e.target.value) }
+              onChange={ e => setPromoteEmail(e.target.value) }
             />
           </div>
           <button className="submit-btn" /*onClick={handleClick}*/>PROMOTE</button>
@@ -80,9 +82,9 @@ function AdminUsers () {
               label="Email"
               type="email"
               variant="outlined"
-              value={email}
+              value={delEmail}
               required
-              onChange={e => setEmail(e.target.value)}
+              onChange={e => setDelEmail(e.target.value)}
             />
           </div>
           <button className="submit-btn delete" /**onClick={handleClick}**/>DELETE</button>

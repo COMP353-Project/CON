@@ -5,7 +5,9 @@ import TextField from '@material-ui/core/TextField';
 
 function AdminCA () {
   const [email, setEmail] = React.useState("");
-  const [name, setName] = React.useState("")
+  const [regName, setRegName] = React.useState("")
+  const [promoteName, setPromoteName] = React.useState("")
+  const [delName, setDelName] = React.useState("")
 
   return (
     <div>
@@ -19,9 +21,9 @@ function AdminCA () {
               label="Condo-Association name"
               type="text"
               variant="outlined"
-              value={name}
+              value={regName}
               required
-              onChange={e => setName(e.target.value)}
+              onChange={e => setRegName(e.target.value)}
             />
           </div>
           <button className="submit-btn" /**onClick={handleClick}**/>REGISTER</button>
@@ -37,9 +39,9 @@ function AdminCA () {
               label="Condo-Association name"
               type="text"
               variant="outlined"
-              value={name}
+              value={promoteName}
               required
-              onChange={e => setName(e.target.value)}
+              onChange={e => setPromoteName(e.target.value)}
             />
           </div>
           <div className="form__field">
@@ -66,9 +68,9 @@ function AdminCA () {
               label="Condo-Association name"
               type="text"
               variant="outlined"
-              value={name}
+              value={delName}
               required
-              onChange={e => setName(e.target.value)}
+              onChange={e => setDelName(e.target.value)}
             />
           </div>
           <button className="submit-btn delete" /**onClick={handleClick}**/>DELETE</button>
