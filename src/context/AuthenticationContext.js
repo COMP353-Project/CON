@@ -31,6 +31,24 @@ const signin = dispatch => async ({ email, password }) => {
   }
 };
 
+const login = dispatch => async ({ email, password }) => {
+  const LOGIN_ENDPOINT = 'http://localhost/con/CON/api/login.php'
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    const { data } = await axios.post(LOGIN_ENDPOINT, { email, password }); // POST Sign In URL
+    dispatch({ type: 'signin', payload: data });
+    localStorage.setItem('user', data);
+
+    dispatch({ type: 'stop_loading' });
+    history.push('/private-homepage');
+  } catch (e) {
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: e.message });
+  }
+};
+
 // Edit Profile
 
 const editProfile = dispatch => async ({ firstName, lastName, address, password }) => {

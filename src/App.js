@@ -1,8 +1,9 @@
 import './App.css';
-import { Route, Switch } from 'react-router-dom';
-import NavBar from './Components/NavBar/NavBar';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import NavBar, { PrivateNavBar, PublicNavBar } from './Components/NavBar/NavBar';
 import GroupHome from './Components/Groups/GroupHome';
-import Home from './Components/Home/Home';
+import PublicHomePage from './Components/Home/PublicHomePage';
+import PrivateHomePage from './Components/Home/PrivateHomePage';
 import MyAccount from './Components/MyAccount/MyAccount';
 import Email from './Components/Email/Email';
 import Groups from './Components/Groups/Groups';
@@ -17,6 +18,10 @@ import { Provider as EmailProvider } from './context/EmailContext';
 import { Provider as GroupsProvider } from './context/GroupsContext';
 
 function App () {
+
+
+  const loggedIn = localStorage.getItem('is_authenticated');
+  console.log(loggedIn);
   return (
     <AuthenticationProvider>
       <AccountProvider>
@@ -31,7 +36,7 @@ function App () {
                   <Route path="/email" component={Email}></Route>
                   <Route path="/group-home" component={GroupHome}></Route>
                   <Route path="/condo-association" component={CondoAssociation}></Route>
-                  <Route path="/groups/:id" component={Groups}/>
+                  <Route path="/groups/:id" component={Groups} />
                   <Route path="/login" component={Login}></Route>
 
                 </Switch>
