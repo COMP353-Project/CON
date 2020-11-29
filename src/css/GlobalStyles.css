@@ -1,0 +1,28 @@
+.submit-btn {
+  border: 1px solid #000;
+  width: fit-content !important;
+  min-width: 100px;
+  background: #a9e2d9;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 15px;
+  margin: auto;
+  cursor: pointer;
+}
+  
+.submit-btn.delete {
+  background: #ffaaaa;
+}
+
+.selected {
+  font-weight: bold !important;
+  text-decoration: underline !important;
+}
+
+.is-error {
+  color: red;
+}
+
+.is-success {
+  color: blue;
+}
