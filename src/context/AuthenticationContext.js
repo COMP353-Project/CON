@@ -1,6 +1,5 @@
 import createDataContext from './createDataContext';
 import axios from 'axios';
-import history from '../navigation/history';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -26,7 +25,6 @@ const signin = dispatch => async ({ email, password }) => {
     localStorage.setItem('user', data);
 
     dispatch({ type: 'stop_loading' });
-    history.push('/condo_associations');
   } catch (e) {
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });
@@ -44,7 +42,6 @@ const editProfile = dispatch => async ({ firstName, lastName, address, password 
     dispatch({ type: 'signin', payload: data });
 
     dispatch({ type: 'stop_loading' });
-    history.push(`/users/${data.id}`);
   } catch (e) {
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });
@@ -56,9 +53,8 @@ const editProfile = dispatch => async ({ firstName, lastName, address, password 
 const signout = dispatch => async () => {
   dispatch({ type: 'signout' });
   localStorage.removeItem('user');
-  history.push('/login');
 };
 
-export default createDataContext(reducer, {
+export const { Context, Provider } = createDataContext(reducer, {
   signin, editProfile, signout
 }, { isLoading: false, error: '', user: null });

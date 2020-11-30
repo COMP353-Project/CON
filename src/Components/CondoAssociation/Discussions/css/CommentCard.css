@@ -1,0 +1,13 @@
+.info-header {
+  display: flex;
+  flex-direction: row;
+}
+
+.author {
+  color: rgb(57, 168, 149);
+  font-weight: 600;
+}
+
+.date {
+  color: #757575;
+}

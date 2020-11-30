@@ -1,0 +1,11 @@
+.title-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.title-txt {
+  color: black;
+  font-weight: 500;
+  font-size: 40px;
+}

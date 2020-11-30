@@ -1,0 +1,35 @@
+.field {
+  width: 100%;
+}
+
+.header-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.recipient {
+  display: flex;
+  flex-direction: row;
+}
+
+.add-recipient {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: white;
+  cursor: pointer;
+  background-color: rgb(57, 168, 149);
+  text-align: center;
+}
+
+.back-button {
+  font-weight: bold;
+  color: rgb(57, 168, 149);
+  font-size: 15px;
+}

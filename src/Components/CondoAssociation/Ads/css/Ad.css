@@ -1,0 +1,48 @@
+.vertical-separator {
+  height: 10px;
+}
+
+.horizontal-separator {
+  width: 25px;
+}
+
+.header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.info {
+  display: flex;
+  flex-direction: row;
+}
+
+.title-text {
+  color: black;
+  font-weight: 600;
+  font-size: 23px;
+}
+
+.price {
+  color: rgb(57, 168, 149);
+  font-weight: bold;
+}
+
+.date {
+  color: #757575;
+  font-weight: 600;
+}
+
+.contact {
+  font-weight: bold;
+}
+
+.edit {
+  color: rgb(57, 168, 149);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.edit:hover {
+  text-decoration: underline;
+}
