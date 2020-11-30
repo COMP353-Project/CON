@@ -6,7 +6,7 @@ import './LoginForm.css';
 import { Context as AuthenticationContext } from '../../context/AuthenticationContext';
 
 function LoginFormWithContext (props) {
-    const { state, signin } = useContext(AuthenticationContext);
+    const { signin } = useContext(AuthenticationContext);
     // const { isLoading, error } = state;
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -31,7 +31,7 @@ function LoginFormWithContext (props) {
     return (
         <div className="container">
 
-            <img className="img" src={condo} slt="condo"></img>
+            <img className="img" src={condo} alt="condo"></img>
             <div className="container2">
                 <h1 className="title">CON System</h1>
             </div>

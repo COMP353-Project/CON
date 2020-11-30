@@ -7,7 +7,7 @@ import './Login.css';
 function Login () {
     return (
         <div className="main-container" >
-            <img className="img" src={condo} slt="condo"></img>
+            <img className="img" src={condo} alt="condo"></img>
 
             <div className="container2">
                 <h1 className="title">CON System</h1>
