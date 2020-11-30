@@ -1,0 +1,19 @@
+.conversations-table-tile {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  border-bottom: gray 0.5px solid;
+}
+
+li.stretch {
+  flex: 9;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.link:hover {
+  text-decoration: underline;
+  color: black;
+  font-weight: 700;
+}

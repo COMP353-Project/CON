@@ -168,7 +168,7 @@ const fetchCondo = dispatch => async ({ condoId }) => {
   }
 };
 
-export default createDataContext(
+export const { Context, Provider } = createDataContext(
   reducer,
   { fetchPosts, fetchFriends, handleRequest, addFriend, deleteFriend, fetchPayments, payPayment, fetchCondos, fetchCondo },
   { posts: [], friends: [], payments: [], condos: [], parkingSpots: [], storageRooms: [], isLoading: false, error: '' }
