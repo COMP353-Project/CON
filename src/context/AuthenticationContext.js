@@ -25,6 +25,7 @@ const signin = dispatch => async ({ email, password }) => {
 
     if (response.status === 200 && response.data.jwt && response.data.expireAt) {
       dispatch({ type: 'signin', payload: response.data });
+      localStorage.setItem('is_authenticated', true);
       localStorage.setItem('user', response.data);
       dispatch({ type: 'stop_loading' });
       return response;
@@ -57,6 +58,7 @@ const editProfile = dispatch => async ({ firstName, lastName, address, password 
 
 const signout = dispatch => async () => {
   dispatch({ type: 'signout' });
+  localStorage.setItem('is_authenticated', false);
   localStorage.removeItem('user');
 };
 
