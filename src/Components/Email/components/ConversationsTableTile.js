@@ -1,7 +1,8 @@
 import '../css/ConversationsTableTile.css';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const ConversationsTableTile = ({ subject, recipients, date, onDelete }) => {
+const ConversationsTableTile = ({ id, subject, recipients, date, onDelete }) => {
   const renderRecipients = () => {
     let str = '';
     for (let i = 0; i < recipients.length; i++) {
@@ -12,7 +13,11 @@ const ConversationsTableTile = ({ subject, recipients, date, onDelete }) => {
 
   return (
     <div className="conversations-table-tile">
-      <li className="stretch">{subject}</li>
+      <li className="stretch">
+        <Link to={`/email/conversations/${id}`} className="link">
+          {subject}
+        </Link>
+      </li>
       <li className="stretch">{recipients ? renderRecipients() : ''}</li>
       <li className="stretch">{date}</li>
       <li

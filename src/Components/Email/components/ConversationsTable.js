@@ -11,6 +11,7 @@ const ConversationsTable = ({ conversations }) => {
       return (
         <ConversationsTableTile
           key={id}
+          id={id}
           subject={subject}
           recipients={recipients}
           date={date}

@@ -1,12 +1,8 @@
-.compose {
-  padding: 30px;
-}
-
 .field {
   width: 100%;
 }
 
-.header {
+.header-box {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -30,4 +26,10 @@
   cursor: pointer;
   background-color: rgb(57, 168, 149);
   text-align: center;
+}
+
+.back-button {
+  font-weight: bold;
+  color: rgb(57, 168, 149);
+  font-size: 15px;
 }
