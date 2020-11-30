@@ -3,6 +3,7 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import AdCard from '../components/AdCard';
 import PostAdButton from '../components/PostAdButton';
+import CondoNav from '../../CondoNav';
 
 const ads = [
   {
@@ -59,15 +60,18 @@ const Ads = () => {
   };
 
   return (
-    <div>
-      <div className="title-box">
-        <div className="title-txt">Ads</div>
-        <Link to="/condo-association/ads/new">
-          <PostAdButton />
-        </Link>
+    <>
+      <CondoNav />
+      <div style={{ padding: '30px' }}>
+        <div className="title-box">
+          <div className="title-txt">Ads</div>
+          <Link to="/condo-association/ads/new">
+            <PostAdButton />
+          </Link>
+        </div>
+        {renderAds()}
       </div>
-      {renderAds()}
-    </div>
+    </>
   );
 };
 

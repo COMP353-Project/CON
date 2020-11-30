@@ -1,10 +1,11 @@
 import Nav from './CondoNav.js';
+import DiscussionNav from './Discussions/pages/DiscussionsNav';
 
 function CondoDiscussions () {
     return (
         <div>
             <Nav />
-            <p>Condo Association Discussions</p>
+            <DiscussionNav />
         </div>
 
     );

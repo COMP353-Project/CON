@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import BackButton from '../../../Global/BackButton';
 import Box from '../../../Global/Box';
 import CommentCard from '../components/CommentCard';
+import CondoNav from '../../CondoNav';
 
 const comments = [
   {
@@ -51,36 +52,39 @@ const Discussion = () => {
   };
 
   return (
-    <div>
-      <BackButton />
-      <div className="vertical-separator" />
-      <Box>
-        <div className="header-box">
-          <div className="title-box">
-            <div style={{ fontSize: '25px', fontWeight: 500 }}>Discussion Title</div>
-            <div className="horizontal-separator" />
-            <div className="author">Author Name</div>
-            <div className="horizontal-separator" />
-            <div className="date">January 12th 2020</div>
-            <div className="horizontal-separator" />
-          </div>
-          <Link to={`/condo-association/discussions/${id}/edit`}>
-            <div className="edit-button">Edit</div>
-          </Link>
-        </div>
+    <>
+      <CondoNav />
+      <div style={{ padding: '30px' }}>
+        <BackButton />
         <div className="vertical-separator" />
-        <div className="description">Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book</div>
-        <div className="description">Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book</div>
-        <div className="description">Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book</div>
-      <h3>Comments</h3>
-      {renderComments()}
-      <div className="vertical-separator" />
-      <div className="field comment-form">
-        <textarea rows="2" cols="2" placeholder="Add Comment" />
-        <div className="comment-button">Post</div>
+        <Box>
+          <div className="header-box">
+            <div className="title-box">
+              <div style={{ fontSize: '25px', fontWeight: 500 }}>Discussion Title</div>
+              <div className="horizontal-separator" />
+              <div className="author">Author Name</div>
+              <div className="horizontal-separator" />
+              <div className="date">January 12th 2020</div>
+              <div className="horizontal-separator" />
+            </div>
+            <Link to={`/condo-association/discussions/${id}/edit`}>
+              <div className="edit-button">Edit</div>
+            </Link>
+          </div>
+          <div className="vertical-separator" />
+          <div className="description">Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book</div>
+          <div className="description">Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book</div>
+          <div className="description">Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book</div>
+        <h3>Comments</h3>
+        {renderComments()}
+        <div className="vertical-separator" />
+        <div className="field comment-form">
+          <textarea rows="2" cols="2" placeholder="Add Comment" />
+          <div className="comment-button">Post</div>
+        </div>
+        </Box>
       </div>
-      </Box>
-    </div>
+    </>
   );
 };
 

@@ -3,6 +3,7 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import DiscussionCard from '../components/DiscussionCard';
 import PostDiscussionButton from '../components/PostDiscussionButton';
+import CondoNav from '../../CondoNav';
 
 const discussions = [
   {
@@ -59,15 +60,18 @@ const Discussions = () => {
   };
   
   return (
-    <div>
-      <div className="header-box">
-        <h1>Discussions</h1>
-        <Link to="/condo-association/discussions/new">
-          <PostDiscussionButton />
-        </Link>
+    <>
+      <CondoNav />
+      <div style={{ padding: '30px' }}>
+        <div className="header-box">
+          <h1>Discussions</h1>
+          <Link to="/condo-association/discussions/new">
+            <PostDiscussionButton />
+          </Link>
+        </div>
+        {renderDiscussions()}
       </div>
-      {renderDiscussions()}
-    </div>
+    </>
   );
 };
 
