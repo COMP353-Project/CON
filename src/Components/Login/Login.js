@@ -4,7 +4,7 @@ import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import './Login.css';
 
-function Login (props) {
+function Login () {
     return (
         <div className="main-container" >
             <img className="img" src={condo} slt="condo"></img>

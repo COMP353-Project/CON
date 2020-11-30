@@ -16,33 +16,20 @@ const reducer = (state, action) => {
 // Sign In
 
 const signin = dispatch => async ({ email, password }) => {
-  dispatch({ type: 'reset_error' });
-  dispatch({ type: 'start_loading' });
-
-  try {
-    const { data } = await axios.post('', { email, password }); // POST Sign In URL
-    dispatch({ type: 'signin', payload: data });
-    localStorage.setItem('user', data);
-
-    dispatch({ type: 'stop_loading' });
-  } catch (e) {
-    dispatch({ type: 'stop_loading' });
-    dispatch({ type: 'set_error', payload: e.message });
-  }
-};
-
-const login = dispatch => async ({ email, password }) => {
   const LOGIN_ENDPOINT = 'http://localhost/con/CON/api/login.php'
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
 
   try {
-    const { data } = await axios.post(LOGIN_ENDPOINT, { email, password }); // POST Sign In URL
-    dispatch({ type: 'signin', payload: data });
-    localStorage.setItem('user', data);
+    const response = await axios.post(LOGIN_ENDPOINT, { email, password }); // POST Sign In URL
 
-    dispatch({ type: 'stop_loading' });
-    history.push('/private-homepage');
+    if (response.status === 200 && response.data.jwt && response.data.expireAt) {
+      dispatch({ type: 'signin', payload: response.data });
+      localStorage.setItem('user', response.data);
+      dispatch({ type: 'stop_loading' });
+      return response;
+    }
+
   } catch (e) {
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });

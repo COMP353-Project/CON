@@ -1,41 +1,29 @@
-import { login } from "../../utils/JWTAuth";
 import { Button } from '@material-ui/core';
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import TextField from '@material-ui/core/TextField';
 import condo from '../../assets/condo.jpg'
 import './LoginForm.css';
-import { withRouter } from 'react-router-dom';
+import { Context as AuthenticationContext } from '../../context/AuthenticationContext';
 
-
-function LoginForm (props) {
-    const [email, setEmail] = React.useState("");
-    const [password, setPassword] = React.useState("");
-    const [active, setActive] = React.useState(false);
-    const [success, setSuccessMessage] = React.useState("")
-    const [error, setError] = React.useState(false);
+function LoginFormWithContext (props) {
+    const { state, signin } = useContext(AuthenticationContext);
+    // const { isLoading, error } = state;
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
 
 
     /**
      * Handles clicking on the 'sign in' button
      * @param {*} event 
      */
-    const handleClick = async (event) => {
-        event.preventDefault();
-
-        let formData = {
-            email: email,
-            password: password
-        }
-        const data = await login(formData);
-        console.log(data)
+    const handleClick = async () => {
+        const data = await signin({ email: email, password: password });
         if (data) {
-            setActive(true);
             setError(false);
-            setSuccessMessage(data.message);
-            props.history.push('/private-homepage');
+            props.history.push('/condo-association');
         }
         else {
-            setActive(false);
             setError(true);
         }
     }
@@ -76,11 +64,10 @@ function LoginForm (props) {
                 </div>
 
                 {error && <p className="is-error">Your email or password is invalid. Please try again.</p>}
-                {!error && <p className="is-success">{success}</p>}
             </form>
         </div>
 
     );
 }
 
-export default withRouter(LoginForm);
+export default LoginFormWithContext;
