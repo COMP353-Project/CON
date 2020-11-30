@@ -1,13 +1,13 @@
 import './App.css';
-import { Route, Switch, Redirect } from 'react-router-dom';
-import NavBar, { PrivateNavBar, PublicNavBar } from './Components/NavBar/NavBar';
+import { Route, Switch } from 'react-router-dom';
+import NavBar from './Components/NavBar/NavBar';
 import GroupHome from './Components/Groups/GroupHome';
 import PublicHomePage from './Components/Home/PublicHomePage';
-import PrivateHomePage from './Components/Home/PrivateHomePage';
 import MyAccount from './Components/MyAccount/MyAccount';
 import Email from './Components/Email/Email';
 import Groups from './Components/Groups/Groups';
 import Login from './Components/Login/Login';
+import LoginForm from './Components/Login/LoginForm';
 import AdminHome from './Components/AdminDashboard/AdminHome';
 import AdminUsers from './Components/AdminDashboard/AdminUsers';
 import AdminPost from './Components/AdminDashboard/AdminPost';
@@ -28,9 +28,6 @@ import { Provider as GroupsProvider } from './context/GroupsContext';
 
 function App () {
 
-
-  const loggedIn = localStorage.getItem('is_authenticated');
-  console.log(loggedIn);
   return (
     <AuthenticationProvider>
       <AccountProvider>
@@ -40,12 +37,13 @@ function App () {
               <main>
                 <NavBar />
                 <Switch>
-                  <Route path="/" component={Home} exact />
+                  <Route path="/" component={PublicHomePage} exact />
                   <Route path="/my-account" component={MyAccount} />
                   <Route path="/email" component={Email}></Route>
                   <Route path="/group-home" component={GroupHome}></Route>
                   <Route path="/groups/:id" component={Groups} />
-                  <Route path="/login" component={Login}></Route>
+                  <Route path="/login" component={Login} exact></Route>
+                  <Route path="/login/loginform" component={LoginForm} exact ></Route>
                   <Route path="/admin" component={AdminHome} exact />
                   <Route path="/admin/users" component={AdminUsers} exact />
                   <Route path="/admin/groups" component={AdminGroups} exact />
@@ -62,7 +60,7 @@ function App () {
           </EmailProvider>
         </CondoAssociationProvider>
       </AccountProvider>
-    </AuthenticationProvider>
+    </AuthenticationProvider >
   );
 }
 
