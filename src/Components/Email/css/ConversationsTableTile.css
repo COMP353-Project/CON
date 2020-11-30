@@ -11,3 +11,9 @@ li.stretch {
   overflow: hidden;
   white-space: nowrap;
 }
+
+.link:hover {
+  text-decoration: underline;
+  color: black;
+  font-weight: 700;
+}
