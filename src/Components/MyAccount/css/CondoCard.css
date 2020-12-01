@@ -1,0 +1,31 @@
+.plain-button {
+  font-weight: bold;
+  cursor: pointer;
+  color: rgb(57, 168, 149);
+  margin-top: 15px;
+  font-size: 15px;
+}
+
+.plain-button:hover {
+  text-decoration: underline;
+}
+
+.condo-heading {
+  margin-top: 45px;
+}
+
+.condo-spec {
+  display: flex;
+  align-items: baseline;
+}
+
+.condo-spec-title {
+  font-size: 19px;
+  font-weight: 600;
+  margin: 5px;
+}
+
+.condo-spec-value {
+  font-size: 18px;
+  margin-left: 5px;
+}

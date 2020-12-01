@@ -1,10 +1,11 @@
 import Nav from './CondoNav.js';
+import AdsNav from './Ads/pages/AdsNav';
 
 function CondoAds () {
     return (
         <div>
             <Nav />
-            <p>Condo Association Ads</p>
+            <AdsNav />
         </div>
 
     );
