@@ -24,6 +24,29 @@
   background: #ffaaaa;
 }
 
+.post-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(57, 168, 149);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  color: white;
+  cursor: pointer;
+}
+
+.details-button {
+  color: rgb(57, 168, 149);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.details-button:hover {
+  text-decoration: underline;
+}
+
 .selected {
   font-weight: bold !important;
   text-decoration: underline !important;
@@ -76,7 +99,7 @@
   margin-right: 20px;
 }
 
-.card-author {
+.card-author, .card-duration {
   margin-right: 20px;
   font-size: 15px;
   font-weight: 500;

@@ -22,13 +22,3 @@
 .date {
   color: #757575;
 }
-
-.details-button {
-  color: rgb(57, 168, 149);
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.details-button:hover {
-  text-decoration: underline;
-}

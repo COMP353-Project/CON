@@ -9,7 +9,7 @@ const AdForm = ({ isEdit, id }) => {
   return (
     <>
       <CondoNav />
-      <div style={{ padding: '30px' }}>
+      <div className="page-container">
         <BackButton />
         <div className="page-header">
           <div className="title-text">{isEdit ? 'Edit Ad' : 'Post Ad'}</div>
