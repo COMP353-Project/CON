@@ -96,7 +96,6 @@ const Profile = () => {
             <Button title="Edit Profile" />
           </Link>
           <div className="horizontal-separator" />
-          <Button title="Logout" color="#858585" />
         </div>
       </div>
       <div className="info"><span className="label">Email Address:</span><div className="space" />{user.email}</div>
