@@ -1,9 +1,9 @@
-import '../css/PostAdButton.css';
+import '../../../../css/GlobalStyles.css'
 import React from 'react';
 
 const PostAdButton = ({ title }) => {
   return (
-    <div className="post-ad-button">{title || 'Post Ad'}</div>
+    <div className="post-btn">{title || 'Post Ad'}</div>
   );
 };
 

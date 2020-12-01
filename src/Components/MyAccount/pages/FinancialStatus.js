@@ -20,7 +20,6 @@ const FinancialStatus = () => {
     return payments.map(({ id, description, date, fee }) => {
       return (
         <Fragment key={id}>
-          <div style={{ height: '10px' }} />
           <PaymentCard
             id={id}
             description={description}
@@ -36,7 +35,6 @@ const FinancialStatus = () => {
     return transactions.map(({ id, description, date, fee }) => {
       return (
         <Fragment key={id}>
-          <div style={{ height: '10px' }} />
           <PaymentCard
             id={id}
             isPaid
@@ -54,7 +52,6 @@ const FinancialStatus = () => {
       <h1>Financial Status</h1>
       <div style={{ display: 'flex', flexDirection: 'row', fontSize: '18px', marginBottom: '40px' }}>
         <span style={{ fontWeight: 'bold' }}>Total due:</span>
-        <div style={{ width: '6px' }} />
         <div style={{ color: 'rgb(57, 168, 149)', fontWeight: 'bold' }}>1500$</div>
       </div>
       <h2>Payments</h2>

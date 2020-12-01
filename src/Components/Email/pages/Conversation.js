@@ -52,8 +52,9 @@ const Conversation = () => {
 
   return (
     <div className="conversation">
-      <Link to="/email" className="back-button">&lt; Back to Conversations</Link>
-      <div style={{ height: '10px' }} />
+      <div className="breadcrumb">
+        <Link to="/email" className="back-button">&lt; Back to Conversations</Link>
+      </div>
       <div className="box-container">
         <div className="header">
           <span style={{ fontWeight: 'bold' }}>Subject:</span> Subject Title

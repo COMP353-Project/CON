@@ -13,14 +13,6 @@
   color: rgb(57, 168, 149);
 }
 
-.horizontal-separator {
-  width: 15px;
-}
-
-.vertical-separator {
-  height: 15px;
-}
-
 .date {
   color: #757575;
   font-weight: 600;
@@ -37,6 +29,7 @@
   padding-right: 20px;
   color: white;
   cursor: pointer;
+  margin-left: 15px;
 }
 
 textarea {
@@ -44,15 +37,10 @@ textarea {
 }
 
 .comment-form {
+  margin-top: 40px;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-}
-
-.header-box {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
 }
 
 .edit-button {

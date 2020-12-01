@@ -40,8 +40,8 @@ function AdminPost () {
             <label for="admin-post-attachments">Attachments</label> 
             <input type="file" id="admin-post-attachments" accept=".jpg,.png,.gif"></input>
           </div>
-          <div className="form__field">
-            <button className="submit-btn" /**onClick={handleClick}**/>POST</button>
+          <div className="btn-container">
+            <button className="post-btn" /**onClick={handleClick}**/>POST</button>
           </div>
         </form>
       </div>

@@ -12,20 +12,15 @@ const ConversationsTableTile = ({ id, subject, recipients, date, onDelete }) => 
   };
 
   return (
-    <div className="conversations-table-tile">
-      <li className="stretch">
+    <div className="conversations-table-row">
+      <div className="conversations-table-el">
         <Link to={`/email/conversations/${id}`} className="link">
           {subject}
         </Link>
-      </li>
-      <li className="stretch">{recipients ? renderRecipients() : ''}</li>
-      <li className="stretch">{date}</li>
-      <li
-        style={{ flex: 1, color: 'red', fontWeight: 'bold', cursor: 'pointer' }}
-        onClick={onDelete ? onDelete : () => {}}
-      >
-          X
-      </li>
+      </div>
+      <div className="conversations-table-el">{recipients ? renderRecipients() : ''}</div>
+      <div className="conversations-table-el">{date}</div>
+      <div className="conversations-table-el del" onClick={onDelete ? onDelete : () => {}}>X</div>
     </div>
   );
 };

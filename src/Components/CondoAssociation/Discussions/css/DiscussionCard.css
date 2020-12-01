@@ -13,14 +13,6 @@
   color: rgb(57, 168, 149);
 }
 
-.horizontal-separator {
-  width: 15px;
-}
-
-.vertical-separator {
-  height: 10px;
-}
-
 .date {
   color: #757575;
   font-weight: 600;

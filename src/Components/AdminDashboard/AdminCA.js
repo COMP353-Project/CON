@@ -26,7 +26,9 @@ function AdminCA () {
               onChange={e => setRegName(e.target.value)}
             />
           </div>
-          <button className="submit-btn" /**onClick={handleClick}**/>REGISTER</button>
+          <div className="btn-container">
+            <button className="post-btn" /**onClick={handleClick}**/>REGISTER</button>
+          </div>
         </form>
       </div>
 
@@ -55,7 +57,9 @@ function AdminCA () {
               onChange={e => setEmail(e.target.value)}
             />
           </div>
-          <button className="submit-btn" /**onClick={handleClick}**/>REGISTER</button>
+          <div className="btn-container">
+            <button className="post-btn" /**onClick={handleClick}**/>ASSIGN</button>
+          </div>
         </form>
       </div>
 
@@ -73,7 +77,9 @@ function AdminCA () {
               onChange={e => setDelName(e.target.value)}
             />
           </div>
-          <button className="submit-btn delete" /**onClick={handleClick}**/>DELETE</button>
+          <div className="btn-container">
+            <button className="post-btn del" /**onClick={handleClick}**/>DELETE</button>
+          </div>
         </form>
       </div>
     </div>
