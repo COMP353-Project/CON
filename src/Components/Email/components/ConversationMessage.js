@@ -6,9 +6,7 @@ const ConversationMessage = ({ from, date, message }) => {
     <div className="conversation-message">
       <div><span>From:</span> {from}</div>
       <div><span>Date:</span> {date}</div>
-      <div className="separator" />
       <div className="description">{message}</div>
-      <div className="separator" />
     </div>
   );
 };

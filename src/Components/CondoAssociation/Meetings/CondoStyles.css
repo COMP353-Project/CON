@@ -1,0 +1,20 @@
+
+.subnav {
+    display: flex;
+    color: #32a895;
+    margin: 30px 0 10px;
+    padding-left: 30px;
+}
+
+.container--condo {
+    padding: 0 20px;
+}
+
+.container--condo.admin .card.general{
+    display: none;
+}
+
+.container--condo.general .card.admin {
+    display: none;
+}
+

@@ -19,7 +19,6 @@ const Condo = () => {
     return parkings.map(({ id, acquired }) => {
       return (
         <Fragment key={id}>
-          <div style={{ height: '10px' }} />
           <ParkingCard id={id} acquired={acquired} />
         </Fragment>
       );
@@ -30,7 +29,6 @@ const Condo = () => {
     return storages.map(({ id, size, acquired }) => {
       return (
         <Fragment key={id}>
-          <div style={{ height: '10px' }} />
           <StorageCard id={id} size={size} acquired={acquired} />
         </Fragment>
       );
@@ -40,29 +38,23 @@ const Condo = () => {
   return (
     <div>
       <BackButton />
-      <div style={{ height: '20px' }} />
-      <div style={{ display: 'flex', flexDirection: 'row', fontSize: '35px' }}>
-        <div style={{ fontWeight: 500 }}>Condo:</div>
-        <div style={{ width: '6px' }} />
-        <div>1341234</div>
+      <h2 className="condo-heading">Condo Details</h2>
+      <div className="condo-spec">
+        <div className="condo-spec-title">Condo:</div>
+        <div className="condo-spec-value">1341234</div>
       </div>
-      <div style={{ height: '20px' }} />
-      <div style={{ fontSize: '15px' }}>
-        <div style={{ display: 'flex', flexDirection: 'row' }}>
-          <span>Size:</span>
-          <div style={{ width: '6px' }} />
-          <div>500 ft</div>
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'row' }}>
-          <span>Acquired:</span>
-          <div style={{ width: '6px' }} />
-          <div>January 12th 2020</div>
-        </div>
+      <div className="condo-spec">
+        <div className="condo-spec-title">Size:</div>
+        <div className="condo-spec-value">500 ft</div>
       </div>
-      <h2>Parking Spots</h2>
-      {renderParkings()}
-      <h2>Storage Spaces</h2>
-      {renderStorages()}
+      <div className="condo-spec">
+        <div className="condo-spec-title">Acquired:</div>
+        <div className="condo-spec-value">January 12th 2020</div>
+      </div>
+      <h2 className="condo-heading">Parking Spots</h2>
+        {renderParkings()}
+      <h2 className="condo-heading">Storage Spaces</h2>
+        {renderStorages()}
     </div>
   );
 };

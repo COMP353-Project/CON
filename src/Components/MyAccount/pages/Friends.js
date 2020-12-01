@@ -22,7 +22,6 @@ const Friends = () => {
     return friendRequests.map(({ id, from, date }) => {
       return (
         <Fragment key={id}>
-          <div style={{ height: '10px' }} />
           <FriendRequestCard
             id={id}
             from={from}
@@ -37,7 +36,6 @@ const Friends = () => {
     return friends.map(({ id, friendName, date }) => {
       return (
         <Fragment key={id}>
-          <div style={{ height: '10px' }} />
           <FriendCard
             id={id}
             friendName={friendName}
@@ -54,7 +52,6 @@ const Friends = () => {
         <input type="text" placeholder="Enter User Email" style={{
           flex: 1, border: 'none', backgroundColor: '#EAEAEA', paddingLeft: '10px', paddingRight: '10px'
         }} />
-        <div style={{ width: '10px' }} />
         <Button title="Add Friend" />
       </div>
       <h2>Requests</h2>

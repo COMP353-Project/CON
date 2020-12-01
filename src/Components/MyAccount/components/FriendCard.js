@@ -8,7 +8,6 @@ const FriendCard = ({ friendName, date }) => {
       <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
         <div style={{ display: 'flex', flexDirection: 'row' }}>
           <div>{friendName}</div>
-          <div className="horizontal-separator" />
           <div className="date">{date}</div>
         </div>
         <Button title="Remove" color="#696969" />

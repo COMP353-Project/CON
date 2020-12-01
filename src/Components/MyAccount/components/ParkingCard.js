@@ -4,16 +4,13 @@ import Box from '../../Global/Box';
 const ParkingCard = ({ id, acquired }) => {
   return (
     <Box>
-      <div style={{ display: 'flex', flexDirection: 'row', fontSize: '25px' }}>
-        <div style={{ fontWeight: 600 }}>Parking:</div>
-        <div style={{ width: '6px' }} />
-        <div>{id}</div>
+      <div className="condo-spec">
+        <div className="condo-spec-title">Parking:</div>
+        <div className="condo-spec-value">{id}</div>
       </div>
-      <div style={{ height: '10px' }} />
-      <div style={{ display: 'flex', flexDirection: 'row' }}>
-        <div style={{ fontWeight: 600 }}>Acquired:</div>
-        <div style={{ width: '6px' }} />
-        <div>{acquired}</div>
+      <div className="condo-spec">
+        <div className="condo-spec-title">Acquired:</div>
+        <div className="condo-spec-value">{acquired}</div>
       </div>
     </Box>
   );

@@ -2,6 +2,7 @@ import '../css/AdCard.css';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Box from '../../../Global/Box';
+import '../../../../css/GlobalStyles.css';
 
 const AdCard = ({ id, title, author, price, date, description }) => {
 
@@ -14,18 +15,13 @@ const AdCard = ({ id, title, author, price, date, description }) => {
   return (
     <div>
       <Box>
-        <div style={{ display: 'flex', flexDirection: 'row' }}>
-          <div style={{ fontSize: '25px', fontWeight: 500 }}>{title}</div>
-          <div className="horizontal-separator" />
-          <div className="price">{price}$</div>
-          <div className="horizontal-separator" />
-          <div className="author">{author}</div>
-          <div className="horizontal-separator" />
-          <div className="date">{date}</div>
+        <div className="card-info">
+          <h3 className="card-title">{title}</h3>
+          <div className="card-price">{price}$</div>
+          <div className="card-author">{author}</div>
+          <div className="card-date">{date}</div>
         </div>
-        <div className="vertical-separator" />
-        <div className="description">{renderDescription()}</div>
-        <div className="vertical-separator" />
+        <div className="card-description">{renderDescription()}</div>
         <Link to={`/condo-association/ads/${id}`}>
           <div className="details-button">View Details</div>
         </Link>

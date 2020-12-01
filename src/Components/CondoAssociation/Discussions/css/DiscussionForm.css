@@ -1,13 +1,3 @@
-.header-box {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.vertical-separator {
-  height: 15px;
-}
-
 .delete-button {
   background-color: red;
   color: white;

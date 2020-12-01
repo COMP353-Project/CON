@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Button from '../components/Button';
 import DiscussionCard from '../../CondoAssociation/Discussions/components/DiscussionCard';
 import AdCard from '../../CondoAssociation/Ads/components/AdCard';
+import '../../../css/GlobalStyles.css';
 
 const user = {
   id: 0,
@@ -55,7 +56,6 @@ const Profile = () => {
     return discussions.map(({ id, title, author, date, description, commentsLength }) => {
       return (
         <Fragment key={id}>
-          <div style={{ height: '15px' }} />
           <DiscussionCard
             id={id}
             title={title}
@@ -73,7 +73,6 @@ const Profile = () => {
     return ads.map(({ id, title, price, author, date, description }) => {
       return (
         <Fragment key={id}>
-          <div style={{ height: '15px' }} />
           <AdCard
             id={id}
             title={title}
@@ -89,26 +88,21 @@ const Profile = () => {
 
   return (
     <div>
-      <div className="header-box">
+      <div className="page-header">
         <h1>{user.name}</h1>
         <div className="buttons-box">
           <Link to="/my-account/edit">
             <Button title="Edit Profile" />
           </Link>
-          <div className="horizontal-separator" />
           <Button title="Logout" color="#858585" />
         </div>
       </div>
       <div className="info"><span className="label">Email Address:</span><div className="space" />{user.email}</div>
-      <div className="vertical-separator" />
       <div className="info"><span className="label">Address:</span><div className="space" />{user.address}</div>
-      <div className="vertical-separator" />
       <h2>Discussion Posts</h2>
       {renderDiscussions()}
-      <div className="vertical-separator" />
       <h2>Ads Posted</h2>
       {renderAds()}
-      <div className="vertical-separator" />
       <h2>Group Posts</h2>
     </div>
   );

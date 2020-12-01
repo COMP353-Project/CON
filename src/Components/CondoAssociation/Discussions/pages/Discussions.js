@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import DiscussionCard from '../components/DiscussionCard';
 import PostDiscussionButton from '../components/PostDiscussionButton';
 import CondoNav from '../../CondoNav';
+import '../../../../css/GlobalStyles.css';
 
 const discussions = [
   {
@@ -45,7 +46,6 @@ const Discussions = () => {
     return discussions.map(({ id, title, author, date, description, commentsLength }) => {
       return (
         <Fragment key={id}>
-          <div style={{ height: '15px' }} />
           <DiscussionCard
             id={id}
             title={title}
@@ -63,7 +63,7 @@ const Discussions = () => {
     <>
       <CondoNav />
       <div style={{ padding: '30px' }}>
-        <div className="header-box">
+        <div className="page-header">
           <h1>Discussions</h1>
           <Link to="/condo-association/discussions/new">
             <PostDiscussionButton />

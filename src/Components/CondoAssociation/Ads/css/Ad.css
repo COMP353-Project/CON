@@ -1,11 +1,3 @@
-.vertical-separator {
-  height: 10px;
-}
-
-.horizontal-separator {
-  width: 25px;
-}
-
 .header-container {
   display: flex;
   flex-direction: row;

@@ -21,7 +21,7 @@ import Ads from './Components/CondoAssociation/Ads/pages/Ads';
 import PostAd from './Components/CondoAssociation/Ads/pages/PostAd';
 import Ad from './Components/CondoAssociation/Ads/pages/Ad';
 import EditAd from './Components/CondoAssociation/Ads/pages/EditAd';
-import CondoMeetings from './Components/CondoAssociation/CondoMeetings';
+import CondoMeetings from './Components/CondoAssociation//Meetings/CondoMeetings';
 import CondoVotes from './Components/CondoAssociation/CondoVotes';
 
 // Importing Providers
@@ -62,6 +62,7 @@ function App () {
                 <Route path="/condo-association/ads/:id" component={Ad} />
                 <Route path="/condo-association/ads" component={Ads} />
                 <Route path="/condo-association/meetings" component={CondoMeetings} exact/>
+                <Route path="/condo-association/meetings/:id" component={CondoMeetings} exact/>
                 <Route path="/condo-association/votes" component={CondoVotes} exact/>
               </Switch>
             </main>

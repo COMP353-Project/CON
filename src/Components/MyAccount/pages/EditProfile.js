@@ -1,13 +1,13 @@
 import React from 'react';
 import Button from '../components/Button';
 import BackButton from '../../Global/BackButton';
+import '../../../css/GlobalStyles.css';
 
 const EditProfile = () => {
   return (
     <div>
       <BackButton />
-      <div style={{ height: '20px' }} />
-      <div className="header-box">
+      <div className="page-header">
         <h1>Edit Info</h1>
         <Button title="Edit Info" />
       </div>
@@ -32,8 +32,7 @@ const EditProfile = () => {
           <input type="text" placeholder="Address" />
         </div>
       </form>
-      <div style={{ height: '40px' }} />
-      <div className="header-box">
+      <div className="page-header">
         <h1>Privacy</h1>
         <Button title="Update Privacy Settings" />
       </div>

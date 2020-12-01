@@ -8,12 +8,10 @@ const FriendRequestCard = ({ from, date }) => {
       <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
         <div style={{ display: 'flex', flexDirection: 'row' }}>
           <div>{from}</div>
-          <div className="horizontal-separator" />
           <div className="date">{date}</div>
         </div>
         <div style={{ display: 'flex', flexDirection: 'row' }}>
           <Button title="Accept" />
-          <div className="horizontal-separator" />
           <Button title="Reject" color="#696969" />
         </div>
       </div>
