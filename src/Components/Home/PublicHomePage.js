@@ -1,5 +1,4 @@
 import React from 'react';
-import './PublicHomePage.css';
 
 function PublicHomePage (props) {
     return (

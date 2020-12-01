@@ -1,5 +1,4 @@
 import React from 'react';
-import './PrivateHomePage.css';
 
 function PrivateHomePage () {
     return (
