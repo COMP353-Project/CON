@@ -1,5 +1,6 @@
 import '../css/Conversation.css';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import ConversationMessage from '../components/ConversationMessage';
 
 const messages = [
@@ -51,7 +52,9 @@ const Conversation = () => {
 
   return (
     <div className="conversation">
-      <div className="container">
+      <Link to="/email" className="back-button">&lt; Back to Conversations</Link>
+      <div style={{ height: '10px' }} />
+      <div className="box-container">
         <div className="header">
           <span style={{ fontWeight: 'bold' }}>Subject:</span> Subject Title
         </div>

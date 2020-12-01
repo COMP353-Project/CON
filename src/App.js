@@ -14,8 +14,14 @@ import AdminPost from './Components/AdminDashboard/AdminPost';
 import AdminGroups from './Components/AdminDashboard/AdminGroups';
 import AdminCA from './Components/AdminDashboard/AdminCA';
 import CondoHome from './Components/CondoAssociation/CondoHome';
-import CondoAds from './Components/CondoAssociation/CondoAds';
-import CondoDiscussions from './Components/CondoAssociation/CondoDiscussions';
+import Discussions from './Components/CondoAssociation/Discussions/pages/Discussions';
+import PostDiscussion from './Components/CondoAssociation/Discussions/components/DiscussionForm';
+import Discussion from './Components/CondoAssociation/Discussions/pages/Discussion';
+import EditDiscussion from './Components/CondoAssociation/Discussions/pages/EditDiscussion';
+import Ads from './Components/CondoAssociation/Ads/pages/Ads';
+import PostAd from './Components/CondoAssociation/Ads/pages/PostAd';
+import Ad from './Components/CondoAssociation/Ads/pages/Ad';
+import EditAd from './Components/CondoAssociation/Ads/pages/EditAd';
 import CondoMeetings from './Components/CondoAssociation/CondoMeetings';
 import CondoVotes from './Components/CondoAssociation/CondoVotes';
 
@@ -50,8 +56,14 @@ function App () {
                   <Route path="/admin/ca" component={AdminCA} exact />
                   <Route path="/admin/post" component={AdminPost} exact />
                   <Route path="/condo-association" component={CondoHome} exact />
-                  <Route path="/condo-association/discussions" component={CondoDiscussions} exact />
-                  <Route path="/condo-association/ads" component={CondoAds} exact />
+                  <Route path="/condo-association/discussions/new" component={PostDiscussion} exact />
+                  <Route path="/condo-association/discussions/:id/edit" component={EditDiscussion} exact />
+                  <Route path="/condo-association/discussions/:id" component={Discussion} exact />
+                  <Route path="/condo-association/discussions" component={Discussions} exact />
+                  <Route path="/condo-association/ads/new" component={PostAd} />
+                  <Route path="/condo-association/ads/:id/edit" component={EditAd} />
+                  <Route path="/condo-association/ads/:id" component={Ad} />
+                  <Route path="/condo-association/ads" component={Ads} />
                   <Route path="/condo-association/meetings" component={CondoMeetings} exact />
                   <Route path="/condo-association/votes" component={CondoVotes} exact />
                 </Switch>

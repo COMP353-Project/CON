@@ -1,0 +1,37 @@
+.title-box {
+  display: flex;
+  flex-direction: row;
+}
+
+.title-text {
+  font-size: 25px;
+  font-weight: 500;
+  color: black;
+}
+
+.author {
+  color: rgb(57, 168, 149);
+}
+
+.horizontal-separator {
+  width: 15px;
+}
+
+.vertical-separator {
+  height: 10px;
+}
+
+.date {
+  color: #757575;
+  font-weight: 600;
+}
+
+.comments-button {
+  color: rgb(57, 168, 149);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.comments-button:hover {
+  text-decoration: underline;
+}

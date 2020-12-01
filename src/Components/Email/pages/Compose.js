@@ -1,11 +1,13 @@
 import '../css/Compose.css'
 import React from 'react';
+import { Link } from 'react-router-dom';
 import ComposeButton from '../components/ComposeButton';
 
 const Compose = () => {
   return (
     <div className="compose">
-      <div className="header">
+      <Link to="/email" className="back-button">&lt; Back to Conversations</Link>
+      <div className="header-box">
         <h1>Create Conversation</h1>
         <ComposeButton />
       </div>
