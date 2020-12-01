@@ -52,9 +52,8 @@ function App () {
                   <Route path="/email" component={Email}></Route>
                   <Route path="/group-home" component={GroupHome}></Route>
                   <Route path="/groups/:id" component={Groups} />
-                  <Route path="/login" component={Login}></Route>
+                  <Route path="/login" component={Login} exact></Route>
                   <Route path="/login/loginform" component={LoginForm} exact ></Route>
-
 
                   {/* Admin routes */}
                   <Route path="/admin" component={AdminHome} exact />
