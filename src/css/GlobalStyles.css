@@ -8,33 +8,20 @@
   font-weight: 700;
 }
 
-.submit-btn {
-  border: 1px solid #000;
-  width: fit-content !important;
-  min-width: 100px;
-  background: #a9e2d9;
-  border-radius: 5px;
-  padding: 5px 10px;
-  font-size: 15px;
-  margin: auto;
-  cursor: pointer;
-}
-  
-.submit-btn.delete {
-  background: #ffaaaa;
-}
-
 .post-btn {
   display: flex;
+  border: 1px solid black;
   align-items: center;
   justify-content: center;
   background-color: rgb(57, 168, 149);
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding: 10px 15px;
   color: white;
   cursor: pointer;
+  max-width: 150px;
+}
+
+.post-btn.del {
+  background-color:rgb(195, 0, 0);
 }
 
 .details-button {
@@ -50,10 +37,6 @@
 .selected {
   font-weight: bold !important;
   text-decoration: underline !important;
-}
-
-.is-error {
-  color: red;
 }
 
 /* PAGE STYLES */
@@ -119,6 +102,11 @@
 
 .card-description {
   margin-bottom: 15px;
+}
+
+/* STATUS STYLES */
+.is-error {
+  color: red;
 }
 
 .is-success {

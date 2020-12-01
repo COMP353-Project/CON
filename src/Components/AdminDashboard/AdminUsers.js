@@ -51,7 +51,9 @@ function AdminUsers () {
               onChange={e => setRegEmail(e.target.value)}
             />
           </div>
-          <button className="submit-btn" /**onClick={handleClick}**/>REGISTER</button>
+          <div className="btn-container">
+            <button className="post-btn" /**onClick={handleClick}**/>REGISTER</button>
+          </div>
         </form>
       </div>
       <div className="container--admin">
@@ -68,7 +70,9 @@ function AdminUsers () {
               onChange={ e => setPromoteEmail(e.target.value) }
             />
           </div>
-          <button className="submit-btn" /*onClick={handleClick}*/>PROMOTE</button>
+          <div className="btn-container">
+            <button className="post-btn" /*onClick={handleClick}*/>PROMOTE</button>
+          </div>
           {/* {error && <p className="is-error">No such user exists!</p>}
           {!error && <p className="is-success">{success}</p>} */}
         </form>
@@ -87,7 +91,10 @@ function AdminUsers () {
               onChange={e => setDelEmail(e.target.value)}
             />
           </div>
-          <button className="submit-btn delete" /**onClick={handleClick}**/>DELETE</button>
+
+          <div className="btn-container">
+            <button className="post-btn del" /**onClick={handleClick}**/>DELETE</button>
+          </div>
         </form>
       </div>
     </div>
