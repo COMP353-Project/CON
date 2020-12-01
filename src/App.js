@@ -34,7 +34,6 @@ import { Provider as AuthenticationProvider } from './context/AuthenticationCont
 import { Provider as CondoAssociationProvider } from './context/CondoAssociationContext';
 import { Provider as EmailProvider } from './context/EmailContext';
 import { Provider as GroupsProvider } from './context/GroupsContext';
-import './Components/Home/PublicHomePage.css';
 
 function App () {
 
