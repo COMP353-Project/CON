@@ -1,15 +1,14 @@
-import '../css/CommentCard.css';
+import '../../../../css/GlobalStyles.css';
 import React from 'react';
 
 const CommentCard = ({ author, date, comment }) => {
   return (
-    <div>
-      <div className="info-header">
-        <div className="author">{author}</div>
-        <div className="horizontal-separator" />
-        <div className="date">{date}</div>
+    <div className="card-comment">
+      <div className="card-info">
+        <div className="card-author">{author}</div>
+        <div className="card-date">{date}</div>
       </div>
-      <div>{comment}</div>
+      <div className="card-description">{comment}</div>
     </div>
   );
 };

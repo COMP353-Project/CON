@@ -12,7 +12,6 @@ const Condos = () => {
     return condos.map(({ id, size, acquiredDate }) => {
       return (
         <Fragment key={id}>
-          <div style={{ height: '10px' }} />
           <CondoCard id={id} size={size} acquiredDate={acquiredDate} />
         </Fragment>
       );

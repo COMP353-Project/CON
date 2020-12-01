@@ -23,7 +23,9 @@ function AdminGroups () {
               onChange={e => setName(e.target.value)}
             />
           </div>
-          <button className="submit-btn delete" /**onClick={handleClick}**/>DELETE</button>
+          <div className="btn-container">
+            <button className="post-btn del" /**onClick={handleClick}**/>DELETE</button>
+          </div>
         </form>
       </div>
     </div>

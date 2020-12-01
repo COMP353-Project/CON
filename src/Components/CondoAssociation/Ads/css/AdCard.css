@@ -22,21 +22,3 @@
 .date {
   color: #757575;
 }
-
-.horizontal-separator {
-  width: 30px;
-}
-
-.vertical-separator {
-  height: 10px;
-}
-
-.details-button {
-  color: rgb(57, 168, 149);
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.details-button:hover {
-  text-decoration: underline;
-}

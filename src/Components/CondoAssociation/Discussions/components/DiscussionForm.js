@@ -1,4 +1,5 @@
 import '../css/DiscussionForm.css';
+import '../../../../css/GlobalStyles.css';
 import React from 'react';
 import PostDiscussionButton from './PostDiscussionButton';
 import BackButton from '../../../Global/BackButton';
@@ -8,20 +9,19 @@ const PostDiscussion = ({ isEdit, id, title, isPrivate, content }) => {
   return (
     <>
       <CondoNav />
-      <div style={{ padding: '30px' }}>
-        <BackButton />
-        <div className="vertical-separator" />
-        <div className="header-box">
+      <div className="page-container">
+        <div>
+          <BackButton />
+        </div>
+        <div className="page-header">
           <h1>{isEdit ? 'Edit Discussion' : 'Post Discussion'}</h1>
           {isEdit
           ? <div className="buttons-container">
             <div className="delete-button">Delete Discussion</div>
-            <div className="horizontal-separator" />
             <PostDiscussionButton title="Edit Discussion" />
           </div>
           : <PostDiscussionButton />}
         </div>
-        <div className="vertical-separator" />
         <form className="ui form">
           <div className="field">
             <input type="text" placeholder="Discussion Title" />

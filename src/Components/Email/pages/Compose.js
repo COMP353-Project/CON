@@ -1,13 +1,16 @@
 import '../css/Compose.css'
+import '../../../css/GlobalStyles.css'
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ComposeButton from '../components/ComposeButton';
 
 const Compose = () => {
   return (
-    <div className="compose">
-      <Link to="/email" className="back-button">&lt; Back to Conversations</Link>
-      <div className="header-box">
+    <div>
+      <div className="breadcrumb">
+        <Link to="/email" className="back-button">&lt; Back to Conversations</Link>
+      </div>
+      <div className="page-header">
         <h1>Create Conversation</h1>
         <ComposeButton />
       </div>

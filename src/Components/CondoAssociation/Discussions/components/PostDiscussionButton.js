@@ -3,7 +3,7 @@ import React from 'react';
 
 const PostDiscussionButton = ({ title }) => {
   return (
-    <div className="button">
+    <div className="post-btn">
       {title || 'Post Discussion'}
     </div>
   );

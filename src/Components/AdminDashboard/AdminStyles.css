@@ -36,6 +36,11 @@
   margin-top: 20px;
 }
 
+.btn-container {
+  display: flex;
+  justify-content: center;
+}
+
 #admin-post-attachments {
   margin-top: 10px;
 }

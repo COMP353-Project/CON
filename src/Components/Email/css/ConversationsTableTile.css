@@ -1,16 +1,23 @@
-.conversations-table-tile {
+.conversations-table-row {
   display: flex;
   flex-direction: row;
   padding: 10px;
   border-bottom: gray 0.5px solid;
 }
 
-li.stretch {
+.conversations-table-el {
   flex: 9;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
 }
+
+.conversations-table-el.del {
+  flex: 1;
+  color: red;
+  font-weight: bold;
+  cursor: pointer;
+} 
 
 .link:hover {
   text-decoration: underline;

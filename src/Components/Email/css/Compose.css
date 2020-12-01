@@ -2,13 +2,6 @@
   width: 100%;
 }
 
-.header-box {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .recipient {
   display: flex;
   flex-direction: row;
@@ -26,10 +19,4 @@
   cursor: pointer;
   background-color: rgb(57, 168, 149);
   text-align: center;
-}
-
-.back-button {
-  font-weight: bold;
-  color: rgb(57, 168, 149);
-  font-size: 15px;
 }

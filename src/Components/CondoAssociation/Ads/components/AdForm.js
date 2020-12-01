@@ -1,4 +1,5 @@
 import '../css/AdForm.css';
+import '../../../../css/GlobalStyles.css'
 import React from 'react';
 import PostAdButton from './PostAdButton';
 import BackButton from '../../../Global/BackButton';
@@ -8,20 +9,17 @@ const AdForm = ({ isEdit, id }) => {
   return (
     <>
       <CondoNav />
-      <div style={{ padding: '30px' }}>
+      <div className="page-container">
         <BackButton />
-        <div style={{ height: '10px' }} />
-        <div className="header-box">
+        <div className="page-header">
           <div className="title-text">{isEdit ? 'Edit Ad' : 'Post Ad'}</div>
           {isEdit
           ? <div className="buttons-container">
             <div className="delete">Delete Ad</div>
-            <div style={{ width: '10px' }} />
             <PostAdButton title="Edit Ad" />
           </div>
           : <PostAdButton />}
         </div>
-        <div style={{ height: '20px' }} />
         <form className="ui form">
           <div className="field">
             <div className="fields">

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import AdCard from '../components/AdCard';
 import PostAdButton from '../components/PostAdButton';
 import CondoNav from '../../CondoNav';
+import '../../../../css/GlobalStyles.css';
 
 const ads = [
   {
@@ -45,7 +46,6 @@ const Ads = () => {
     return ads.map(({ id, title, price, author, date, description }) => {
       return (
         <Fragment key={id}>
-          <div style={{ height: '15px' }} />
           <AdCard
             id={id}
             title={title}
@@ -62,9 +62,9 @@ const Ads = () => {
   return (
     <>
       <CondoNav />
-      <div style={{ padding: '30px' }}>
-        <div className="title-box">
-          <div className="title-txt">Ads</div>
+      <div className="page-container">
+        <div className="page-header">
+          <h1>Ads</h1>
           <Link to="/condo-association/ads/new">
             <PostAdButton />
           </Link>
