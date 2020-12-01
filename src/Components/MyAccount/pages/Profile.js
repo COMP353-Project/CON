@@ -94,7 +94,6 @@ const Profile = () => {
           <Link to="/my-account/edit">
             <Button title="Edit Profile" />
           </Link>
-          <Button title="Logout" color="#858585" />
         </div>
       </div>
       <div className="info"><span className="label">Email Address:</span><div className="space" />{user.email}</div>

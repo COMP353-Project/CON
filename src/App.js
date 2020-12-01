@@ -2,11 +2,12 @@ import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import NavBar from './Components/NavBar/NavBar';
 import GroupHome from './Components/Groups/GroupHome';
-import Home from './Components/Home/Home';
+import PublicHomePage from './Components/Home/PublicHomePage';
 import MyAccount from './Components/MyAccount/MyAccount';
 import Email from './Components/Email/Email';
 import Groups from './Components/Groups/Groups';
 import Login from './Components/Login/Login';
+import LoginForm from './Components/Login/LoginForm';
 import AdminHome from './Components/AdminDashboard/AdminHome';
 import AdminUsers from './Components/AdminDashboard/AdminUsers';
 import AdminPost from './Components/AdminDashboard/AdminPost';
@@ -35,55 +36,57 @@ import { Provider as EmailProvider } from './context/EmailContext';
 import { Provider as GroupsProvider } from './context/GroupsContext';
 
 function App () {
+
   return (
     <AuthenticationProvider>
       <AccountProvider>
         <CondoAssociationProvider>
           <EmailProvider>
             <GroupsProvider>
-            <main>
-              <NavBar />
-              <Switch>
-                <Route path="/" component={Home} exact />
-                <Route path="/my-account" component={MyAccount} />
-                <Route path="/email" component={Email}></Route>
-                <Route path="/group-home" component={GroupHome}></Route>
-                <Route path="/groups/:id" component={Groups}/>
-                <Route path="/login" component={Login}></Route>
+              <main>
+                <NavBar />
+                <Switch>
+                  <Route path="/" component={PublicHomePage} exact />
+                  <Route path="/my-account" component={MyAccount} />
+                  <Route path="/email" component={Email}></Route>
+                  <Route path="/group-home" component={GroupHome}></Route>
+                  <Route path="/groups/:id" component={Groups} />
+                  <Route path="/login" component={Login} exact></Route>
+                  <Route path="/login/loginform" component={LoginForm} exact ></Route>
 
-                {/* Admin routes */}
-                <Route path="/admin" component={AdminHome} exact/>        
-                <Route path="/admin/users" component={AdminUsers} exact/>
-                <Route path="/admin/groups" component={AdminGroups} exact/>
-                <Route path="/admin/ca" component={AdminCA} exact/>
-                <Route path="/admin/post" component={AdminPost} exact/>
+                  {/* Admin routes */}
+                  <Route path="/admin" component={AdminHome} exact />
+                  <Route path="/admin/users" component={AdminUsers} exact />
+                  <Route path="/admin/groups" component={AdminGroups} exact />
+                  <Route path="/admin/ca" component={AdminCA} exact />
+                  <Route path="/admin/post" component={AdminPost} exact />
 
-                {/* Condo association routes */}
-                <Route path="/condo-association" component={CondoHome} exact/>   
-                <Route path="/condo-association/discussions/new" component={PostDiscussion} exact/>
-                <Route path="/condo-association/discussions/:id/edit" component={EditDiscussion} exact/>
-                <Route path="/condo-association/discussions/:id" component={Discussion} exact/>
-                <Route path="/condo-association/discussions" component={Discussions} exact/>
+                  {/* Condo association routes */}
+                  <Route path="/condo-association" component={CondoHome} exact />
+                  <Route path="/condo-association/discussions/new" component={PostDiscussion} exact />
+                  <Route path="/condo-association/discussions/:id/edit" component={EditDiscussion} exact />
+                  <Route path="/condo-association/discussions/:id" component={Discussion} exact />
+                  <Route path="/condo-association/discussions" component={Discussions} exact />
 
-                <Route path="/condo-association/ads/new" component={PostAd} />
-                <Route path="/condo-association/ads/:id/edit" component={EditAd} />
-                <Route path="/condo-association/ads/:id" component={Ad} />
-                <Route path="/condo-association/ads" component={Ads} />
+                  <Route path="/condo-association/ads/new" component={PostAd} />
+                  <Route path="/condo-association/ads/:id/edit" component={EditAd} />
+                  <Route path="/condo-association/ads/:id" component={Ad} />
+                  <Route path="/condo-association/ads" component={Ads} />
 
-                <Route path="/condo-association/meetings" component={CondoMeetings} exact/>
-                <Route path="/condo-association/meetings/new" component={PostMeeting} />
-                <Route path="/condo-association/meetings/:id" component={Meeting} exact/>
-                <Route path="/condo-association/meetings/:id/edit" component={EditMeeting} />
+                  <Route path="/condo-association/meetings" component={CondoMeetings} exact />
+                  <Route path="/condo-association/meetings/new" component={PostMeeting} />
+                  <Route path="/condo-association/meetings/:id" component={Meeting} exact />
+                  <Route path="/condo-association/meetings/:id/edit" component={EditMeeting} />
 
-                <Route path="/condo-association/votes" component={CondoVotes} exact/>
+                  <Route path="/condo-association/votes" component={CondoVotes} exact />
 
-              </Switch>
-            </main>
+                </Switch>
+              </main>
             </GroupsProvider>
           </EmailProvider>
         </CondoAssociationProvider>
       </AccountProvider>
-    </AuthenticationProvider>
+    </AuthenticationProvider >
   );
 }
 
