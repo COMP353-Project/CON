@@ -21,7 +21,7 @@
 }
 
 .post-btn.del {
-  background-color:rgb(195, 0, 0);
+  background-color: rgb(195, 0, 0);
 }
 
 .details-button {
@@ -82,7 +82,8 @@
   margin-right: 20px;
 }
 
-.card-author, .card-duration {
+.card-author,
+.card-duration {
   margin-right: 20px;
   font-size: 15px;
   font-weight: 500;
@@ -111,4 +112,29 @@
 
 .is-success {
   color: blue;
+}
+
+/* SPACING STYLES */
+.vertical-separator .small {
+  margin-bottom: 10px;
+}
+
+.vertical-separator .medium {
+  margin-bottom: 15px;
+}
+
+.vertical-separator .large {
+  margin-bottom: 20px;
+}
+
+.horizontal-separator .small {
+  margin-right: 10px;
+}
+
+.horizontal-separator .medium {
+  margin-right: 15px;
+}
+
+.horizontal-separator .large {
+  margin-right: 20px;
 }

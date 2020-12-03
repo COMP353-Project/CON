@@ -27,6 +27,10 @@ import Meeting from './Components/CondoAssociation/Meetings/pages/Meeting';
 import PostMeeting from './Components/CondoAssociation/Meetings/pages/PostMeeting';
 import EditMeeting from './Components/CondoAssociation/Meetings/pages/EditMeeting';
 import CondoVotes from './Components/CondoAssociation/CondoVotes';
+import PostPoll from './Components/CondoAssociation/Votes/pages/PostPoll';
+import PostElection from './Components/CondoAssociation/Votes/pages/PostElection';
+import Vote from './Components/CondoAssociation/Votes/pages/Vote';
+import EditVote from './Components/CondoAssociation/Votes/pages/EditVote';
 
 // Importing Providers
 import { Provider as AccountProvider } from './context/AccountContext';
@@ -78,8 +82,11 @@ function App () {
                   <Route path="/condo-association/meetings/:id" component={Meeting} exact />
                   <Route path="/condo-association/meetings/:id/edit" component={EditMeeting} />
 
+                  <Route path="/condo-association/votes/new-poll" component={PostPoll} />
+                  <Route path="/condo-association/votes/new-election" component={PostElection} />
+                  <Route path="/condo-association/votes/:id/edit" component={EditVote} />
+                  <Route path="/condo-association/votes/:id" component={Vote} />
                   <Route path="/condo-association/votes" component={CondoVotes} exact />
-
                 </Switch>
               </main>
             </GroupsProvider>

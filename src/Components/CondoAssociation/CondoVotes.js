@@ -1,13 +1,14 @@
-import Nav from './CondoNav.js';
+import React from 'react';
+import Votes from './Votes/pages/Votes';
+import Nav from './CondoNav';
 
-function CondoVotes () {
-    return (
-        <div>
-            <Nav />
-            <p>Condo Association Votes</p>
-        </div>
-
-    );
-}
+const CondoVotes = () => {
+	return (
+		<>
+			<Nav />
+			<Votes />
+		</>
+	);
+};
 
 export default CondoVotes;
