@@ -1,5 +1,6 @@
 import createDataContext from './createDataContext';
 import axios from 'axios';
+import history from '../navigation/history';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -76,8 +77,8 @@ const createGroup = dispatch => async ({ name, description }) => {
 
   try {
     const { data } = await axios.post('', { name, description }); // POST groups URL
-
-    return data.id;
+    
+    history.push(`/mygroups/${data.id}`);
   } catch (e) {
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });
@@ -109,6 +110,8 @@ const editGroup = dispatch => async ({ groupId, title, description }) => {
 
   try {
     await axios.put('', { groupId, title, description }); // PUT group URL
+
+    history.push(`/groups/${groupId}`);
   } catch (e) {
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });
@@ -123,6 +126,8 @@ const leaveGroup = dispatch => async ({ groupId }) => {
 
   try {
     await axios.delete('', { groupId }); // DELETE group_member URL
+
+    history.push('/mygroups/');
   } catch (e) {
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });
@@ -169,8 +174,8 @@ const createPost = dispatch => async ({ groupId, title, content, type }) => {
 
   try {
     const { data } = await axios.post('', { groupId, title, content, type }); // POST post URL
-
-    return data.id;
+    
+    history.push(`groups/${groupId}/posts/${data.id}`);
   } catch (e) {
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });
@@ -179,12 +184,14 @@ const createPost = dispatch => async ({ groupId, title, content, type }) => {
 
 // Edit Post
 
-const editPost = dispatch => async ({ postId, title, content }) => {
+const editPost = dispatch => async ({ groupId, postId, title, content }) => {
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
 
   try {
     await axios.put('', { postId, title, content }); // PUT post URL
+
+    history.push(`/groups/${groupId}/posts/${postId}`);
   } catch (e) {
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });
@@ -193,12 +200,14 @@ const editPost = dispatch => async ({ postId, title, content }) => {
 
 // Delete Post
 
-const deletePost = dispatch => async ({ postId }) => {
+const deletePost = dispatch => async ({ groupId, postId }) => {
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
 
   try {
     await axios.delete('', { postId });
+
+    history.push(`groups/${groupId}/posts`);
   } catch (e) {
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });
@@ -287,7 +296,7 @@ const handleRequest = dispatch => async ({ groupId, userId, accept }) => {
   }
 };
 
-export const { Context, Provider } = createDataContext(reducer, {
+export default createDataContext(reducer, {
   fetchAllGroups, requestGroup, fetchMyGroups, createGroup, fetchGroup, editGroup, leaveGroup, fetchPosts, fetchPost,
   createPost, editPost, deletePost, addComment, fetchChatMessages, sendChatMessage, fetchRequests, handleRequest
 }, {

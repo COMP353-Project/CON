@@ -1,5 +1,6 @@
 import createDataContext from './createDataContext';
 import axios from 'axios';
+import history from '../navigation/history';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -89,8 +90,9 @@ const createConversation = dispatch => async ({ subject, recipients, content }) 
 
   try {
     const { data } = await axios.post('', { subject, recipients, content }); // POST conversation URL
+    const conversationId = data.id;
 
-    return data.id;
+    history.push(`/conversations/${conversationId}`);
   } catch (e) {
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });
@@ -113,6 +115,6 @@ const leaveConversation = dispatch => async ({ conversationId }) => {
   }
 };
 
-export const { Context, Provider } = createDataContext(reducer, {
-  fetchConversations, fetchConversation, fetchSent, sendEmail, createConversation, leaveConversation
+export default createDataContext(reducer, {
+  fetchConversations, fetchConversation, sendEmail, createConversation, leaveConversation
 }, { conversations: [], sentMessages: [], conversation: null, isLoading: false, error: '' });

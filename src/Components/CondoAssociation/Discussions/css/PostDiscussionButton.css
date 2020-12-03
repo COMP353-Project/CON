@@ -1,9 +1,0 @@
-.button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
-  background-color: rgb(57, 168, 149);
-  color: white;
-  cursor: pointer;
-}

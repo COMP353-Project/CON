@@ -1,12 +1,11 @@
-import React from 'react';
-import DiscussionsNav from './Discussions/pages/DiscussionsNav';
-import AdsNav from './Ads/pages/AdsNav';
-import CondoNav from '../MyAccount/pages/CondoNav';
 
-const CondoAssociation = () => {
-	return (
-		<CondoNav />
-	);
-};
+function CondoAssociation () {
+    return (
+        <div>
+            <p>Condo Association page</p>
+        </div>
+
+    );
+}
 
 export default CondoAssociation;

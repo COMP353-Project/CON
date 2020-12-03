@@ -1,7 +1,8 @@
 import { Accordion, Button, OutlinedInput, Card, Container } from '@material-ui/core';
 import { render } from '@testing-library/react';
 import axios from 'axios';
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import { Route } from 'react-router-dom';
 import Post from './Post';
 import '../../css/GroupsStyle.css'
 import clsx from 'clsx';
@@ -146,7 +147,7 @@ function Groups () {
             setPosts(newPosts)
             setPostText("")
         } else alert("Text field cannot be empty!")
-
+        
     }
 
     const handleChatPost = (text, user) => {
@@ -166,18 +167,16 @@ function Groups () {
 
     const handleChatTextChange = ({target}) => {
         setChatText(target.value)
-
     }
 
-    const handleFileUpload = ({ target }) => {
-        try {
+    const handleFileUpload = ({target}) => {
+        try{
             setImageURL(URL.createObjectURL(target.files[0]))
-        } catch (err) {
+        } catch (err){
             console.log("image empty")
         }
-
+        
     }
-
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -187,7 +186,6 @@ function Groups () {
         setOpen(false);
     };
      return (
-
         <div>
             <div className={classes.root}>
       <CssBaseline />
@@ -255,7 +253,7 @@ function Groups () {
       </main>
     </div>
             <div class="post-container">
-                {posts.map(post => {
+                {posts.map(post =>{
                     return (
                         <Post text={post.text} imagePath={post.imagePath} date={post.date} user={post.user}/>
                     );
@@ -263,7 +261,7 @@ function Groups () {
                 )}
             </div>
             <div class="groupsInput">
-                <label>Attach images and text here!</label>
+                <label>Attach images and text here!</label> 
                 <div class="post-input-wrapper">
                     <OutlinedInput type="text" placeholder="Write a post..." fullWidth="true" multiline="true" rows="5" value ={postTextInput} onChange={handlePostTextChange}/>
                     <input type="file" accept=".jpg,.png,.gif" onChange={handleFileUpload}></input>

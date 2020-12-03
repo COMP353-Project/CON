@@ -1,14 +1,11 @@
-import React from 'react';
-import Navbar from './components/Navbar';
-import MyAccountNav from './pages/MyAccountNav';
 
-const MyAccount = () => {
-	return (
-		<div>
-			<Navbar />
-			<MyAccountNav />
-		</div>
-	);
-};
+function MyAccount () {
+    return (
+        <div>
+            <p>My account page</p>
+        </div>
+
+    );
+}
 
 export default MyAccount;
