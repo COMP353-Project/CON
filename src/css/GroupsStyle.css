@@ -46,3 +46,8 @@ span.date {
 .reply-input-wrapper {
   padding-left: 60px;
 }
+
+.chat-wrapper {
+  position: absolute;
+  right: 0;
+}

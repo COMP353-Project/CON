@@ -1,4 +1,4 @@
-import { Accordion, Button, OutlinedInput, Card, Container } from '@material-ui/core';
+import { Accordion, Button, OutlinedInput, Card, Container, Checkbox } from '@material-ui/core';
 import { render } from '@testing-library/react';
 import axios from 'axios';
 import React from 'react';
@@ -7,42 +7,22 @@ import '../../css/GroupsStyle.css'
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import { ChatBubble } from '@material-ui/icons';
+import GroupsNav from './GroupsNav.js'
+import MyGroupNav from './MyGroupNav.js'
 
 const drawerWidth = 500;
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-  },
-  appBar: {
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  appBarShift: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -61,7 +41,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'right',
     padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
     ...theme.mixins.toolbar,
     justifyContent: 'flex-end',
   },
@@ -87,14 +66,13 @@ function Groups () {
     const classes = useStyles();
     const theme = useTheme();
 
-    const [dataSent, setDataSent] = React.useState(false);
     const [currentUser, setCurrentUser] = React.useState("Ziad");
-    const [posts, setPosts] = React.useState(() => [{text: "I want this apt", imagePath:"h", date: "24-12-2010  12:22", user: currentUser}, {text: "How much is this", imagePath:"h", date: "24-11-2010  9:56", user:currentUser}]);
+    const [posts, setPosts] = React.useState(() => [{text: "I want this apt", imagePath:"h", date: "24-12-2010  12:22", user: currentUser, viewOnly: true}, {text: "How much is this", imagePath:"h", date: "24-11-2010  9:56", user:currentUser, viewOnly: false}]);
     const [chats, setChats] = React.useState(() => [{text: "Hey guys", date: "24-12-2010  12:22", user: currentUser}, {text: "Hola", date: "24-11-2010  9:56", user:currentUser}]);
     const [postTextInput, setPostText] = React.useState("");
     const [chatTextInput, setChatText] = React.useState("");
     const [imageInput, setImageURL] = React.useState(0);
-
+    const [viewOnly, setViewOnly] = React.useState(false);
     const [open, setOpen] = React.useState(false);
     
     //useEffect(() => console.log("posts changed"), [posts])
@@ -118,31 +96,12 @@ function Groups () {
 
         return (day + "-" + month + "-" + year + "  " + hours + ":" + minutes)
     }
-    const handleClick = () => {
-        axios({
-            method: 'post',
-            url: 'http://localhost/con-master/api/example.php',
-            headers: {
-                'content-type': 'application/json',
-            },
-            data: data
-        })
-            .then(result => {
-                console.log(result.data)
-                setDataSent(result.data.sent)
-                console.log(dataSent)
-                console.log('hey im here!')
-            })
-            .catch(error => setDataSent({
-                error: error.message
-            }));
-    }
 
     const handlePost = (text, imagePath, user) => {
         if(postTextInput.length > 0){
             console.log("Received: " + text + imagePath)
             var newPosts = posts
-            newPosts.push({text: text, imagePath: imagePath, date: getDate(), user: user})
+            newPosts.push({text: text, imagePath: imagePath, date: getDate(), user: user, viewOnly: viewOnly})
             setPosts(newPosts)
             setPostText("")
         } else alert("Text field cannot be empty!")
@@ -178,6 +137,12 @@ function Groups () {
 
     }
 
+    const handleShareCheckbox = () => {
+      if(viewOnly)
+        setViewOnly(false)
+      else setViewOnly(true)
+    }
+
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -185,53 +150,31 @@ function Groups () {
     
       const handleDrawerClose = () => {
         setOpen(false);
+    
     };
      return (
 
         <div>
+          <GroupsNav/>
+          <MyGroupNav/>
             <div className={classes.root}>
-      <CssBaseline />
-      <AppBar
-        position="static"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
-      >
-        <Toolbar>
-        <Typography variant="h6" noWrap>
-            Group
-          </Typography>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            className={clsx(classes.menuButton, open && classes.hide)}
-          >
-            <ChatBubble />Chats
-          </IconButton>
-          
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        className={classes.drawer}
-        variant="persistent"
-        anchor="left"
-        open={open}
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-      >
-        <div className={classes.drawerHeader}>
-        
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-          </IconButton>
-        </div>
-        <Typography variant="h6" noWrap>
-            Chat
-          </Typography>
-        <Divider />
-        {chats.map(chat =>{
+          <h1>Group Page</h1>
+          <div class="chat-wrapper">
+            <IconButton edge="end" color="inherit" aria-label="open drawer" onClick={handleDrawerOpen} className={clsx(classes.menuButton, open && classes.hide)}>
+              <ChatBubble />Chats
+            </IconButton>
+          </div>
+          <Drawer className={classes.drawer} variant="persistent" anchor="right" open={open} classes={{paper: classes.drawerPaper}}>
+            <div className={classes.drawerHeader}>
+            <IconButton onClick={handleDrawerClose}>
+              {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+            </IconButton>
+            </div>
+            <Typography variant="h6" noWrap>
+              Chat
+            </Typography>
+            <Divider />
+            {chats.map(chat =>{
                     return (
                         <div>
                             <Card  variant="outlined">
@@ -242,36 +185,29 @@ function Groups () {
                         </div>
                     );
                 }
-        )}
-        <OutlinedInput type="text"  class="postText" value ={chatTextInput} placeholder="Write a reply..." fullWidth="true" multiline="true" rows="2" onChange={handleChatTextChange}/>
-        <Button type ="submit" variant="outlined" onClick={() => handleChatPost(chatTextInput, currentUser)}>Send</Button>
-      </Drawer>
-      <main
-        className={clsx(classes.content, {
-          [classes.contentShift]: open,
-        })}
-      >
-        <div className={classes.drawerHeader} />
-      </main>
-    </div>
-            <div class="post-container">
-                {posts.map(post => {
-                    return (
-                        <Post text={post.text} imagePath={post.imagePath} date={post.date} user={post.user}/>
-                    );
-                }
-                )}
-            </div>
-            <div class="groupsInput">
-                <label>Attach images and text here!</label>
-                <div class="post-input-wrapper">
-                    <OutlinedInput type="text" placeholder="Write a post..." fullWidth="true" multiline="true" rows="5" value ={postTextInput} onChange={handlePostTextChange}/>
-                    <input type="file" accept=".jpg,.png,.gif" onChange={handleFileUpload}></input>
-                    <Button type ="submit" variant="outlined" onClick={() => handlePost(postTextInput, imageInput, currentUser)}>Post</Button>
-                </div>
-            </div>
-            <Button onClick={handleClick}>Click me!</Button>
+            )}
+            <OutlinedInput type="text"  class="postText" value ={chatTextInput} placeholder="Write a reply..." fullWidth="true" multiline="true" rows="2" onChange={handleChatTextChange}/>
+            <Button type ="submit" variant="outlined" onClick={() => handleChatPost(chatTextInput, currentUser)}>Send</Button>
+          </Drawer>
         </div>
+        <div class="post-container">
+          {posts.map(post => {
+             return (
+               <Post text={post.text} imagePath={post.imagePath} date={post.date} user={post.user} viewOnly={post.viewOnly}/>
+              );
+            }
+          )}
+        </div>
+        <div class="groupsInput">
+          <label>Attach images and text here!</label>
+          <div class="post-input-wrapper">
+             <OutlinedInput type="text" placeholder="Write a post..." fullWidth="true" multiline="true" rows="5" value ={postTextInput} onChange={handlePostTextChange}/>
+              <Button type ="submit" variant="outlined" onClick={() => handlePost(postTextInput, imageInput, currentUser)}>Post</Button>
+              <input type="file" accept=".jpg,.png,.gif" onChange={handleFileUpload}></input>
+              <label>View only</label><Checkbox checked={viewOnly} onChange={handleShareCheckbox}></Checkbox>
+           </div>
+        </div>
+     </div>
 
     );
 }
