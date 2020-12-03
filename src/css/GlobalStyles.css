@@ -1,0 +1,114 @@
+.breadcrumb {
+  margin: 15px 0;
+}
+
+.back-button {
+  cursor: pointer;
+  color: rgb(57, 169, 149);
+  font-weight: 700;
+}
+
+.post-btn {
+  display: flex;
+  border: 1px solid black;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(57, 168, 149);
+  padding: 10px 15px;
+  color: white;
+  cursor: pointer;
+  max-width: 150px;
+}
+
+.post-btn.del {
+  background-color:rgb(195, 0, 0);
+}
+
+.details-button {
+  color: rgb(57, 168, 149);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.details-button:hover {
+  text-decoration: underline;
+}
+
+.selected {
+  font-weight: bold !important;
+  text-decoration: underline !important;
+}
+
+/* PAGE STYLES */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+/* CARD STYLES */
+.page-container {
+  padding: 30px;
+}
+
+.card {
+  background-color: #e0e0e0;
+  padding: 20px;
+  box-shadow: 2px 5px 2px #aaaaaa;
+  margin-bottom: 20px;
+}
+
+.card-comment {
+  border-top: 1px solid grey;
+  padding-top: 10px;
+}
+
+.card-comment .card-info {
+  margin-bottom: 10px;
+}
+
+.card-comment .card-author {
+  color: rgb(57, 168, 149);
+  font-weight: 600;
+}
+
+.card-info {
+  display: flex;
+  align-items: baseline;
+}
+
+.card-title {
+  font-size: 20px;
+  margin-right: 20px;
+}
+
+.card-author, .card-duration {
+  margin-right: 20px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #565656;
+}
+
+.card-date {
+  margin-right: 20px;
+  font-style: italic;
+}
+
+.card-price {
+  margin-right: 20px;
+  font-weight: 500;
+  color: rgb(57, 168, 149);
+}
+
+.card-description {
+  margin-bottom: 15px;
+}
+
+/* STATUS STYLES */
+.is-error {
+  color: red;
+}
+
+.is-success {
+  color: blue;
+}
