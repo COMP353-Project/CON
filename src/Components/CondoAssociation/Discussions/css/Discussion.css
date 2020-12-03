@@ -1,0 +1,54 @@
+.title-box {
+  display: flex;
+  flex-direction: row;
+}
+
+.title-text {
+  font-size: 25px;
+  font-weight: 500;
+  color: black;
+}
+
+.author {
+  color: rgb(57, 168, 149);
+}
+
+.date {
+  color: #757575;
+  font-weight: 600;
+}
+
+.comment-button {
+  background-color: rgb(57, 168, 149);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: white;
+  cursor: pointer;
+  margin-left: 15px;
+}
+
+textarea {
+  flex: 1;
+}
+
+.comment-form {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.edit-button {
+  color: rgb(57, 168, 149);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.edit-button:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,17 @@
+.delete-button {
+  background-color: red;
+  color: white;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: row;
+}

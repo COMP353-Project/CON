@@ -1,0 +1,12 @@
+.select-menu {
+  display: flex;
+}
+
+.header-button {
+  font-size: 18px;
+  color: rgb(57, 168, 149);
+}
+
+.header-button:first-child {
+  margin-right: 5px
+}

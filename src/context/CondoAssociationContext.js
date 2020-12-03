@@ -1,6 +1,5 @@
 import createDataContext from './createDataContext';
 import axios from 'axios';
-import history from '../navigation/history';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -102,8 +101,8 @@ const createDiscussion = dispatch => async ({ condoAssociationId, title, isPubli
 
   try {
     const { data } = await axios.post('', { condoAssociationId, title, isPublic, content }); // POST discussion URL
-    
-    history.push(`/condoAssociations/${condoAssociationId}/discussions/${data.id}`);
+
+    return data.id;
   } catch (e) {
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message }); 
@@ -112,14 +111,12 @@ const createDiscussion = dispatch => async ({ condoAssociationId, title, isPubli
 
 // Update Discussion
 
-const updateDiscussion = dispatch => async ({ discussionId, title, isPublic, content }) => {
+const updateDiscussion = dispatch => async ({ discussionId, condoAssociationId, title, isPublic, content }) => {
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
 
   try {
     await axios.put('', { discussionId, title, isPublic, content }); // PUT discussion URL
-
-    history.push(`/condoAssociations/${condoAssociationId}/discussions/${discussionId}`);
   } catch (e) {
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message }); 
@@ -128,14 +125,12 @@ const updateDiscussion = dispatch => async ({ discussionId, title, isPublic, con
 
 // Delete Discussion
 
-const deleteDiscussion = dispatch => async ({ condoAssociationId, discussionId }) => {
+const deleteDiscussion = dispatch => async ({ discussionId }) => {
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
 
   try {
     await axios.delete('', { discussionId }); // DELETE discussion URL
-
-    history.push(`/condoAssociations/${condoAssociationId}/discussions`);
   } catch (e) {
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message }); 
@@ -200,8 +195,8 @@ const createAd = dispatch => async ({ condoAssociationId, title, contactNumber, 
 
   try {
     const { data } = await axios.post('', { condoAssociationId, title, contactNumber, price, isPublic, description }); // POST ad URL
-    
-    history.push(`/condoAssociations/${condoAssociationId}/ads/${data.id}`);
+
+    return data.id;
   } catch (e) {
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message }); 
@@ -210,14 +205,12 @@ const createAd = dispatch => async ({ condoAssociationId, title, contactNumber, 
 
 // Update Ad
 
-const udpdateAd = dispatch => async ({ adId, title, contactNumber, price, isPublic, description }) => {
+const udpdateAd = dispatch => async ({ adId, condoAssociationId, title, contactNumber, price, isPublic, description }) => {
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
 
   try {
     await axios.put('', { adId, title, contactNumber, price, isPublic, description }); // PUT ad URL
-
-    history.push(`/condoAssociations/${condoAssociationId}/ads/${adId}`);
   } catch (e) {
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message }); 
@@ -226,14 +219,12 @@ const udpdateAd = dispatch => async ({ adId, title, contactNumber, price, isPubl
 
 // Delete Ad
 
-const deleteAd = dispatch => async ({ condoAssociationId, adId }) => {
+const deleteAd = dispatch => async ({ adId }) => {
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
 
   try {
     await axios.delete('', { adId }); // DELETE ad URL
-
-    history.push(`/condoAssociations/${condoAssociationId}/ads`);
   } catch (e) {
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message }); 
@@ -408,7 +399,7 @@ const voteElection = dispatch => async ({ electionId, candidateId }) => {
   }
 };
 
-export default createDataContext(reducer, {
+export const { Context, Provider } = createDataContext(reducer, {
   fetchCondoAssociations, fetchCondoAssociation, fetchDiscussions, fetchDiscussion, createDiscussion, updateDiscussion,
   deleteDiscussion, addComment, fetchAds, fetchAd, createAd, udpdateAd, deleteAd, fetchAdminMeetings, fetchAdminMeeting,
   fetchGeneralMeetings, fetchGeneralMeeting, fetchPolls, fetchPoll, votePoll, fetchElections, fetchElection, voteElection
