@@ -29,7 +29,7 @@ function NavBar (props) {
     const classes = useStyles();
     const { signout } = useContext(AuthenticationContext);
 
-    const PrivateNavBar = () => {
+    const AdminNavBar = () => {
         const handleLogout = () => {
             props.history.push('/');
             signout();
@@ -43,6 +43,33 @@ function NavBar (props) {
                     </Typography>
                         <div style={{ display: 'flex' }}>
                             <Button component={Link} to='/admin' color="inherit" className={classes.test} >Admin</Button>
+                            <Button component={Link} to='/condo-association' color="inherit" className={classes.test}>Condo Association</Button>
+                            <Button component={Link} to='/group-home' color="inherit" className={classes.test} >Groups</Button>
+                            <Button component={Link} to='/email' color="inherit" className={classes.test} >Email</Button>
+                            <Button component={Link} to='/my-account' color="inherit" className={classes.test} >My account</Button>
+                            <Button color="inherit" className={classes.test} onClick={handleLogout}>Logout</Button>
+
+                        </div>
+                    </Toolbar>
+                </AppBar>
+            </div>
+        );
+
+    }
+
+    const PrivateNavBar = () => {
+        const handleLogout = () => {
+            props.history.push('/');
+            signout();
+        }
+        return (
+            <div className={classes.root}>
+                <AppBar position="static">
+                    <Toolbar style={{ backgroundColor: '#32a895' }}>
+                        <Typography variant="h6" className={classes.title}>
+                            CONSys
+                    </Typography>
+                        <div style={{ display: 'flex' }}>
                             <Button component={Link} to='/condo-association' color="inherit" className={classes.test}>Condo Association</Button>
                             <Button component={Link} to='/group-home' color="inherit" className={classes.test} >Groups</Button>
                             <Button component={Link} to='/email' color="inherit" className={classes.test} >Email</Button>
@@ -72,11 +99,17 @@ function NavBar (props) {
                         </div>
                     </Toolbar>
                 </AppBar>
-            </div >
+            </div>
         );
     }
 
-    if (localStorage.getItem('user') !== null) {
+    if (localStorage.getItem('user') !== null && localStorage.getItem('admin') === "1") {
+        return (
+            <AdminNavBar />
+        );
+    }
+
+    else if (localStorage.getItem('user') !== null) {
         return (
             <PrivateNavBar />
         );

@@ -17,7 +17,7 @@ function LoginFormWithContext (props) {
      * Handles clicking on the 'sign in' button
      * @param {*} event 
      */
-    const handleClick = async () => {
+    const handleClick = async (e) => {
         const data = await signin({ email: email, password: password });
         if (data) {
             setError(false);

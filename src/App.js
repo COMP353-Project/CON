@@ -86,7 +86,7 @@ function App () {
           </EmailProvider>
         </CondoAssociationProvider>
       </AccountProvider>
-    </AuthenticationProvider >
+    </AuthenticationProvider>
   );
 }
 
