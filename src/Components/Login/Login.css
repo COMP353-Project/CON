@@ -1,3 +1,15 @@
+.login-form .MuiInput-underline::after {
+  border-color: white !important;
+}
+
+.login-form .MuiFormLabel-root {
+  color: white !important;
+}
+
+.login-form .MuiInputBase-input {
+  font-size: 16px !important;
+}
+
 .login-form {
   display: flex;
   flex-direction: column;

@@ -2,18 +2,6 @@
   --header-height: 101px;
 }
 
-.MuiInput-underline::after {
-  border-color: white !important;
-}
-
-.MuiFormLabel-root {
-  color: white !important;
-}
-
-.MuiInputBase-input {
-  font-size: 16px !important;
-}
-
 .logo {
   width: 85px;
 }
