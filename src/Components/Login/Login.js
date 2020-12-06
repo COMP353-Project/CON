@@ -59,7 +59,7 @@ function LoginFormWithContext (props) {
                     >Sign in</Button>
                 </div>
 
-                {error && <p className="is-error">Your email or password is invalid. Please try again.</p>}
+                {error && <p className="is-error secondary">Your email or password is invalid. Please try again.</p>}
             </form>
           </div>
         </div>

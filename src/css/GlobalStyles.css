@@ -123,8 +123,13 @@
 }
 
 /* STATUS STYLES */
-.is-error {
+.is-error.primary {
   color: red;
+}
+
+/* STATUS STYLES */
+.is-error.secondary {
+  color: #ffdd76;
 }
 
 .is-success {
