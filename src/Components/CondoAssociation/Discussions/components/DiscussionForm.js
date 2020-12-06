@@ -1,5 +1,4 @@
 import '../css/DiscussionForm.css';
-import '../../../../css/GlobalStyles.css';
 import React from 'react';
 import PostDiscussionButton from './PostDiscussionButton';
 import BackButton from '../../../Global/BackButton';
@@ -16,11 +15,11 @@ const PostDiscussion = ({ isEdit, id, title, isPrivate, content }) => {
         <div className="page-header">
           <h1>{isEdit ? 'Edit Discussion' : 'Post Discussion'}</h1>
           {isEdit
-          ? <div className="buttons-container">
-            <div className="delete-button">Delete Discussion</div>
-            <PostDiscussionButton title="Edit Discussion" />
-          </div>
-          : <PostDiscussionButton />}
+            ? <div className="buttons-container">
+              <div className="delete-button">Delete Discussion</div>
+              <PostDiscussionButton title="Edit Discussion" />
+            </div>
+            : <PostDiscussionButton />}
         </div>
         <form className="ui form">
           <div className="field">

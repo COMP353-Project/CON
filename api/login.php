@@ -8,7 +8,7 @@ header("Content-Type: application/json; charset=UTF-8");
 
 $rest_json = file_get_contents("php://input");
 $_POST = json_decode($rest_json, true);
-$conn = mysqli_connect("localhost", "root", "", "con");
+$conn = mysqli_connect("localhost", "root", "mysql", "con");
 $table_name = 'Users';
 
 $email = $_POST['email'];
@@ -34,13 +34,11 @@ if($row) {
 
         $secret_key = $key; // TODO: change this later
         $issuer_claim = "localhost";
-        // $audience_claim = "THE_AUDIENCE";
         $issuedat_claim = time(); // issued at
         $notbefore_claim = $issuedat_claim + 10; //not before in seconds
         $expire_claim = $issuedat_claim + 60; // expire time in seconds
         $token = array(
             "iss" => $issuer_claim,
-            // "aud" => $audience_claim,
             "iat" => $issuedat_claim,
             "nbf" => $notbefore_claim,
             "data" => array(
@@ -53,7 +51,6 @@ if($row) {
         ));
  
         $jwt = JWT::encode($token, $secret_key);
-        // echo $jwt;
         echo json_encode(
             [
                 "message" => "Successful login.",

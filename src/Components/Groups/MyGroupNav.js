@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
-import '../../css/GlobalStyles.css';
 
 function MyGroupNav (id) {
   id = 1;

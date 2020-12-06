@@ -4,8 +4,8 @@ import './AdminStyles.css';
 import TextField from '@material-ui/core/TextField';
 import { Context as AuthenticationContext } from '../../context/AuthenticationContext';
 
-function AdminUsers (props) {
-  const [firstName, setFirstName] = React.useState("");  
+function AdminUsers () {
+  const [firstName, setFirstName] = React.useState("");
   const [lastName, setLastName] = React.useState("");
   const [regEmail, setRegEmail] = React.useState("");
   const [regAddress, setRegAddress] = React.useState("");
@@ -13,18 +13,30 @@ function AdminUsers (props) {
   const [promoteEmail, setPromoteEmail] = React.useState("")
   const [delEmail, setDelEmail] = React.useState("")
   const [error, setError] = React.useState(false);
-
+  const [success, setSuccess] = React.useState(false);
   const { register } = React.useContext(AuthenticationContext);
 
-  const handleClick = async (e) => {
+  /**
+   * Function that handles user registration
+   * @param {*} e 
+   */
+  const handleRegister = async (e) => {
     e.preventDefault();
-    const data = await register({ first_name: firstName, last_name: lastName, email: regEmail, password: regPassword, address: regAddress});
-    if (data) {
-        setError(false);
-        props.history.push('/admin/users');
+
+    const info = {
+      first_name: firstName,
+      last_name: lastName,
+      email: regEmail,
+      address: regAddress,
+      password: regPassword
+    }
+
+    const response = await register(info);
+    if (response) {
+      setSuccess(true);
     }
     else {
-        setError(true);
+      setError(true);
     }
   }
 
@@ -90,9 +102,10 @@ function AdminUsers (props) {
             />
           </div>
           <div className="btn-container">
-            <button className="post-btn" onClick={handleClick}>REGISTER</button>
+            <button className="post-btn" onClick={handleRegister}>REGISTER</button>
           </div>
           {error && <p className="is-error">Error creating user!</p>}
+          {success && <p className="is-success">User was registred!</p>}
         </form>
       </div>
       <div className="container--admin">
@@ -106,7 +119,7 @@ function AdminUsers (props) {
               variant="outlined"
               value={promoteEmail}
               required
-              onChange={ e => setPromoteEmail(e.target.value) }
+              onChange={e => setPromoteEmail(e.target.value)}
             />
           </div>
           <div className="btn-container">

@@ -2,7 +2,6 @@ import '../css/DiscussionCard.css';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Box from '../../../Global/Box';
-import '../../../../css/GlobalStyles.css';
 
 const DiscussionCard = ({ id, title, author, date, description, commentsLength }) => {
   const renderDescription = () => {

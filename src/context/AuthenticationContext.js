@@ -10,51 +10,36 @@ const reducer = (state, action) => {
     case 'register': return { ...state, user: action.payload };
     case 'signin': return { ...state, user: action.payload };
     case 'signout': return { ...state, user: null };
+    case 'register': return { ...state, user: action.payload }
     default: return state;
   }
 };
 
 // Register
 
-const register = dispatch => async ({ first_name, last_name, email, password, address }) => {
-  const REGISTER_ENDPOINT = 'http://localhost:8080/con/api/register.php'
+const register = dispatch => async (data) => {
+  const REGISTER_ENDPOINT = 'http://localhost/con/CON/api/register.php'
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
 
   try {
-    const response = await axios.post(
-      REGISTER_ENDPOINT,
-      { first_name, last_name, email, password, address }
-      // {headers : {'X-Requested-With': 'XMLHttpRequest'} }
-    );
-    console.log(response);
-    if (response.status === 200){
-      dispatch({ type: 'stop_loading' });
-      return response;
-    }
-
-  } catch (e) {
+    const response = await axios({
+      method: 'post',
+      url: REGISTER_ENDPOINT,
+      headers: {
+        'content-type': 'application/json'
+      },
+      data: data
+    });
+    return response;
+  }
+  catch (e) {
     console.log(e.message)
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });
   }
 };
 
-// const register = async (data) => {
-//   const REGISTER_ENDPOINT = 'http://localhost/con/CON/api/register.php';
-
-//   try {
-//       let response = await axios({
-//           method: 'post',
-//           responseType: 'json',
-//           url: REGISTER_ENDPOINT,
-//           data: data
-//       });
-//   } catch (e) {
-//       console.log(e);
-//       console.log('registration error');
-//   }
-// }
 
 // Sign In
 
