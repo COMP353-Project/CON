@@ -9,9 +9,36 @@ const reducer = (state, action) => {
     case 'reset_error': return { ...state, error: '' };
     case 'signin': return { ...state, user: action.payload };
     case 'signout': return { ...state, user: null };
+    case 'register': return { ...state, user: action.payload }
     default: return state;
   }
 };
+
+// Register
+
+const register = dispatch => async (data) => {
+  const REGISTER_ENDPOINT = 'http://localhost/con/CON/api/register.php'
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    const response = await axios({
+      method: 'post',
+      url: REGISTER_ENDPOINT,
+      headers: {
+        'content-type': 'application/json'
+      },
+      data: data
+    });
+    return response;
+  }
+  catch (e) {
+    console.log(e.message)
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: e.message });
+  }
+};
+
 
 // Sign In
 
@@ -63,5 +90,5 @@ const signout = dispatch => async () => {
 };
 
 export const { Context, Provider } = createDataContext(reducer, {
-  signin, editProfile, signout
+  register, signin, editProfile, signout
 }, { isLoading: false, error: '', user: null });

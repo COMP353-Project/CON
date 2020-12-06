@@ -2,15 +2,44 @@ import React from 'react';
 import Nav from './AdminNav';
 import './AdminStyles.css';
 import TextField from '@material-ui/core/TextField';
+import { Context as AuthenticationContext } from '../../context/AuthenticationContext';
 
 function AdminUsers () {
-  const [firstName, setFirstName] = React.useState("");  
+  const [firstName, setFirstName] = React.useState("");
   const [lastName, setLastName] = React.useState("");
-  const [regEmail, setRegEmail] = React.useState("")
+  const [regEmail, setRegEmail] = React.useState("");
+  const [regAddress, setRegAddress] = React.useState("");
+  const [regPassword, setRegPassword] = React.useState("")
   const [promoteEmail, setPromoteEmail] = React.useState("")
   const [delEmail, setDelEmail] = React.useState("")
-  // const [success, setSuccessMessage] = React.useState("")
-  // const [error, setError] = React.useState(false);
+  const [error, setError] = React.useState(false);
+  const [success, setSuccess] = React.useState(false);
+  const { register } = React.useContext(AuthenticationContext);
+
+  /**
+   * Function that handles user registration
+   * @param {*} e 
+   */
+  const handleRegister = async (e) => {
+    e.preventDefault();
+
+    const info = {
+      first_name: firstName,
+      last_name: lastName,
+      email: regEmail,
+      address: regAddress,
+      password: regPassword
+    }
+
+    const response = await register(info);
+    if (response) {
+      setSuccess(true);
+    }
+    else {
+      setError(true);
+    }
+  }
+
   return (
     <div>
       <Nav />
@@ -51,9 +80,32 @@ function AdminUsers () {
               onChange={e => setRegEmail(e.target.value)}
             />
           </div>
-          <div className="btn-container">
-            <button className="post-btn" /**onClick={handleClick}**/>REGISTER</button>
+          <div className="form__field">
+            <TextField
+              id="register-user-address"
+              label="Address"
+              type="text"
+              variant="outlined"
+              value={regAddress}
+              onChange={e => setRegAddress(e.target.value)}
+            />
           </div>
+          <div className="form__field">
+            <TextField
+              id="register-user-password"
+              label="Password"
+              type="password"
+              variant="outlined"
+              value={regPassword}
+              required
+              onChange={e => setRegPassword(e.target.value)}
+            />
+          </div>
+          <div className="btn-container">
+            <button className="post-btn" onClick={handleRegister}>REGISTER</button>
+          </div>
+          {error && <p className="is-error">Error creating user!</p>}
+          {success && <p className="is-success">User was registred!</p>}
         </form>
       </div>
       <div className="container--admin">
@@ -67,14 +119,13 @@ function AdminUsers () {
               variant="outlined"
               value={promoteEmail}
               required
-              onChange={ e => setPromoteEmail(e.target.value) }
+              onChange={e => setPromoteEmail(e.target.value)}
             />
           </div>
           <div className="btn-container">
             <button className="post-btn" /*onClick={handleClick}*/>PROMOTE</button>
           </div>
-          {/* {error && <p className="is-error">No such user exists!</p>}
-          {!error && <p className="is-success">{success}</p>} */}
+
         </form>
       </div>
       <div className="container--admin">

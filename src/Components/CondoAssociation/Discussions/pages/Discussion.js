@@ -1,5 +1,4 @@
 import '../css/Discussion.css';
-import '../../../../css/GlobalStyles.css';
 import React, { Fragment } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import BackButton from '../../../Global/BackButton';
@@ -70,12 +69,12 @@ const Discussion = () => {
           <div className="card-description">Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book</div>
           <div className="card-description">Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book</div>
           <div className="card-description">Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book</div>
-        <h3 className="card-title">Comments</h3>
+          <h3 className="card-title">Comments</h3>
           {renderComments()}
-        <div className="field comment-form">
-          <textarea rows="2" cols="2" placeholder="Add Comment" />
-          <div className="comment-button">Post</div>
-        </div>
+          <div className="field comment-form">
+            <textarea rows="2" cols="2" placeholder="Add Comment" />
+            <div className="comment-button">Post</div>
+          </div>
         </Box>
       </div>
     </>
