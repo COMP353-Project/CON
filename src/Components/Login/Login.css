@@ -1,26 +1,48 @@
-@import url('https://fonts.googleapis.com/css2?family=Arimo&family=Yantramanav:wght@100;300&display=swap');
-.container {
-    height: 100vh;
+.form {
+  display: flex;
+  flex-direction: column;
 }
 
-.container2 {
-    display: flex;
-    height: 50vh;
-    align-items: center;
-    justify-content: center;
+.login-container {
+  display: flex;
+  width: 100%;
+  height: calc(100vh - var(--header-height));
+  background: url("/src/assets/condo.jpg") no-repeat;
+  justify-content: center;
+  align-items: center;
+}
+  
+.login-title {
+  color: white;
+  text-align: center;
+  font-size: 30px;
+}
+  
+.signin-btn {
+  background-color: white !important;
+  color: black !important;
+}
+  
+.login-form-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #57958b;
+  max-width: 300px;
+  height: 400px;
+  align-items: center;
+  opacity: 1;
+  border-radius: 5px;
+  border: 1px solid white;
+  box-shadow: 0px 0px 7px white;
+}
+  
+.login-image-container {
+  width: 100%;
 }
 
-.button-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    min-height: 20vh;
-}
 
-.title {
-    text-align: center;
-    color: #32a895;
-    font-family: 'Yantramanav', sans-serif;
-    font-size: 50px;
+.btn-container {
+  margin-top: 40px;
 }

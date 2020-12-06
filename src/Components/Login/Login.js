@@ -1,9 +1,8 @@
 import { Button } from '@material-ui/core';
 import React, { useState, useContext } from 'react';
 import TextField from '@material-ui/core/TextField';
-import condo from '../../assets/condo.jpg'
-import './LoginForm.css';
 import { Context as AuthenticationContext } from '../../context/AuthenticationContext';
+import './Login.css'
 
 function LoginFormWithContext (props) {
     const { signin } = useContext(AuthenticationContext);
@@ -49,7 +48,7 @@ function LoginFormWithContext (props) {
                     value={password}
                     onChange={e => setPassword(e.target.value)}
                 />
-                <div>
+                <div className="btn-container">
                     <Button
                         className="signin-btn"
                         variant="contained"
