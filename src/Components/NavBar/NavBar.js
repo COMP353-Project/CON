@@ -52,7 +52,6 @@ function NavBar (props) {
                             <Button component={Link} to='/email' color="inherit" className="nav-link" >Email</Button>
                             <Button component={Link} to='/my-account' color="inherit" className="nav-link" >My account</Button>
                             <Button color="inherit" className="nav-link" onClick={handleLogout}>Logout</Button>
-
                         </div>
                     </Toolbar>
                 </AppBar>
