@@ -32,9 +32,10 @@ function LoginFormWithContext (props) {
           <div className="login-form-container">
             <h1 className="login-title">Login</h1>
 
-            <form className="form">
+            <form className="login-form">
                 <TextField
                     id="outlined-password-input"
+                    className="login-form__field"
                     label="Email"
                     type="email"
                     value={email}
@@ -42,6 +43,7 @@ function LoginFormWithContext (props) {
                 />
                 <TextField className="input"
                     id="outlined-password-input"
+                    className="login-form__field"
                     label="Password"
                     type="password"
                     autoComplete="current-password"

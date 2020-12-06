@@ -1,15 +1,21 @@
-.form {
+.login-form {
   display: flex;
   flex-direction: column;
+}
+
+.login-form__field {
+  margin-top: 15px !important;
 }
 
 .login-container {
   display: flex;
   width: 100%;
   height: calc(100vh - var(--header-height));
-  background: url("/src/assets/condo.jpg") no-repeat;
+  background: url("/src/assets/condo.png") no-repeat;
   justify-content: center;
   align-items: center;
+  background-size: cover;
+  background-position: center;
 }
   
 .login-title {
@@ -27,22 +33,26 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
   background: #57958b;
   max-width: 300px;
   height: 400px;
-  align-items: center;
-  opacity: 1;
   border-radius: 5px;
-  border: 1px solid white;
-  box-shadow: 0px 0px 7px white;
+  border: 1px solid #fff;
+  box-shadow: 0 0 7px #fff;
+  padding: 10px 20px;
 }
   
 .login-image-container {
   width: 100%;
 }
 
-
 .btn-container {
   margin-top: 40px;
+}
+
+.is-error {
+  color: #ffdd76;
+  margin-top: 20px;
+  text-align: center;
 }
