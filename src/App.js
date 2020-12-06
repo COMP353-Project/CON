@@ -57,12 +57,12 @@ function App () {
                   <Route path="/login/loginform" component={LoginForm} exact ></Route>
                   
                   {/* Group routes */}
-                  <Route path="/groups-home" component={GroupsLanding} exact></Route>
+                  <Route path="/groups" component={GroupsLanding} exact></Route>
                   <Route path="/groups/:id/home" component={GroupsHome} exact />
                   <Route path="/groups/:id/posts" component={Groups} exact />
                   <Route path="/groups/:id/requests" component={GroupsRequests} exact />
-                  <Route path="/groups-home/my-groups" component={MyGroups} exact></Route>
-                  <Route path="/groups-home/all-groups" component={AllGroups} exact/>
+                  <Route path="/groups/my-groups" component={MyGroups} exact></Route>
+                  <Route path="/groups/all-groups" component={AllGroups} exact/>
 
                   {/* Admin routes */}
                   <Route path="/admin" component={AdminHome} exact />
