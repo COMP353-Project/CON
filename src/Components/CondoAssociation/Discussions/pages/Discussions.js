@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import DiscussionCard from '../components/DiscussionCard';
 import PostDiscussionButton from '../components/PostDiscussionButton';
 import CondoNav from '../../CondoNav';
-import '../../../../css/GlobalStyles.css';
 
 const discussions = [
   {
@@ -58,7 +57,7 @@ const Discussions = () => {
       );
     });
   };
-  
+
   return (
     <>
       <CondoNav />
