@@ -1,5 +1,3 @@
-import { Button, ListItem, ListItemText, List, Container } from '@material-ui/core';
-import { PinDropSharp } from '@material-ui/icons';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../css/GroupsStyle.css'

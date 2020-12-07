@@ -3,7 +3,6 @@ require "../vendor/autoload.php";
 use \Firebase\JWT\JWT;
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
-// header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, X-Requested-With, X-Auth-Token, Authorization");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 header("Content-Type: application/json; charset=UTF-8");
 
@@ -15,17 +14,20 @@ $table_name = 'Users';
 $email = $_POST['email'];
 $password = $_POST['password'];
 
-$query = "SELECT id, first_name, last_name, password FROM " . $table_name . " WHERE email = '$email' LIMIT 0, 1";
+$query = "SELECT * FROM " . $table_name . " WHERE email = '$email' LIMIT 0, 1";
 
 $result = mysqli_query($conn, $query);
 
 $row = @mysqli_fetch_assoc($result);
 
 if($row) {
-    $id= $row['id'];
+    $id = $row['id'];
+    $is_admin = $row['is_admin'];
     $firstname = $row['first_name'];
     $lastname = $row['last_name'];
+    $email = $row['email'];    
     $password_hash = $row['password'];
+    $address = $row['address'];
     $key = md5(microtime().rand());
 
     if(password_verify($password, $password_hash)) {
@@ -41,9 +43,11 @@ if($row) {
             "nbf" => $notbefore_claim,
             "data" => array(
                 "id" => $id,
+                "admin" => $is_admin,
                 "firstname" => $firstname,
                 "lastname" => $lastname,
-                "email" => $email
+                "email" => $email,
+                "address" => $address
         ));
  
         $jwt = JWT::encode($token, $secret_key);
@@ -51,6 +55,7 @@ if($row) {
             [
                 "message" => "Successful login.",
                 "jwt" => $jwt,
+                "admin" => $is_admin,
                 "email" => $email,
                 "expireAt" => $expire_claim
             ]       

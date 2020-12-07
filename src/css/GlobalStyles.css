@@ -1,3 +1,21 @@
+:root {
+  --header-height: 101px;
+}
+
+.logo {
+  width: 85px;
+}
+
+.logo-wrapper {
+  margin-right: auto;
+}
+
+.nav-link {
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+}
+
 .breadcrumb {
   margin: 15px 0;
 }
@@ -105,8 +123,13 @@
 }
 
 /* STATUS STYLES */
-.is-error {
+.is-error.primary {
   color: red;
+}
+
+/* STATUS STYLES */
+.is-error.secondary {
+  color: #ffdd76;
 }
 
 .is-success {

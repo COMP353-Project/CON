@@ -104,7 +104,7 @@ function AdminUsers () {
           <div className="btn-container">
             <button className="post-btn" onClick={handleRegister}>REGISTER</button>
           </div>
-          {error && <p className="is-error">Error creating user!</p>}
+          {error && <p className="is-error primary">Error creating user!</p>}
           {success && <p className="is-success">User was registred!</p>}
         </form>
       </div>

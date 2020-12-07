@@ -11,7 +11,6 @@ import Groups from './Components/Groups/Groups';
 import AllGroups from './Components/Groups/AllGroups'
 import MyGroups from './Components/Groups/MyGroups'
 import Login from './Components/Login/Login';
-import LoginForm from './Components/Login/LoginForm';
 import AdminHome from './Components/AdminDashboard/AdminHome';
 import AdminUsers from './Components/AdminDashboard/AdminUsers';
 import AdminPost from './Components/AdminDashboard/AdminPost';
@@ -54,7 +53,6 @@ function App () {
                   <Route path="/my-account" component={MyAccount} />
                   <Route path="/email" component={Email}></Route>
                   <Route path="/login" component={Login} exact></Route>
-                  <Route path="/login/loginform" component={LoginForm} exact ></Route>
                   
                   {/* Group routes */}
                   <Route path="/groups" component={GroupsLanding} exact></Route>
@@ -96,7 +94,7 @@ function App () {
           </EmailProvider>
         </CondoAssociationProvider>
       </AccountProvider>
-    </AuthenticationProvider >
+    </AuthenticationProvider>
   );
 }
 
