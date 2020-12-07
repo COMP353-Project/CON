@@ -1,5 +1,4 @@
 import '../css/Ad.css';
-import '../../../../css/GlobalStyles.css';
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import BackButton from '../../../Global/BackButton';
@@ -13,7 +12,7 @@ const Ad = () => {
     <>
       <CondoNav />
       <div className="page-container">
-          <BackButton />
+        <BackButton />
         <Box>
           <div className="header-container">
             <div className="card-info">

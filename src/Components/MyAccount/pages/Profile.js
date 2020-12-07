@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import Button from '../components/Button';
 import DiscussionCard from '../../CondoAssociation/Discussions/components/DiscussionCard';
 import AdCard from '../../CondoAssociation/Ads/components/AdCard';
-import '../../../css/GlobalStyles.css';
 
 const user = {
   id: 0,

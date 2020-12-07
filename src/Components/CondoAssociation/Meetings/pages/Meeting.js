@@ -1,4 +1,3 @@
-import '../../../../css/GlobalStyles.css';
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import BackButton from '../../../Global/BackButton';
@@ -12,7 +11,7 @@ const Meeting = () => {
     <>
       <CondoNav />
       <div className="page-container">
-          <BackButton />
+        <BackButton />
         <Box>
           <div className="header-container">
             <div className="card-info">
@@ -21,7 +20,7 @@ const Meeting = () => {
               <div className="card-date">January 12th, 2020</div>
             </div>
             <Link to={`/condo-association/meetings/${id}/edit`}>
-                <div className="details-button">Edit</div>
+              <div className="details-button">Edit</div>
             </Link>
           </div>
           <div className="card-description">
