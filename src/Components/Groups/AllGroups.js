@@ -17,11 +17,11 @@ function AllGroups () {
         <div>
             <GroupsNav/>
             <h1>All Groups</h1>
-            <div class="groups-container">
+            <div className="groups-container">
                 <List>
                     {groups.map(group => {
                         return (
-                            <Container class="groupList" maxwidth="sm">
+                            <Container className="groupList" maxwidth="sm">
                                 <ListItem>
                                     <Button 
                                         component={Link} 

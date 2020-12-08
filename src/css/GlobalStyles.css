@@ -124,16 +124,21 @@
 }
 
 /* STATUS STYLES */
+
+.is-error {
+  margin-top: 20px;
+}
+
 .is-error.primary {
   color: red;
 }
 
-/* STATUS STYLES */
 .is-error.secondary {
   color: #ffdd76;
 }
 
 .is-success {
+  margin-top: 20px;  
   color: blue;
 }
 
