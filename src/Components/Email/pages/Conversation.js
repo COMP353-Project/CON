@@ -1,50 +1,30 @@
 import '../css/Conversation.css';
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useContext, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import ConversationMessage from '../components/ConversationMessage';
-
-const messages = [
-  {
-    id: 0,
-    from: 'Person Name',
-    date: 'January 12th, 2020',
-    message: 'empor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat'
-  },
-  {
-    id: 1,
-    from: 'Person Name',
-    date: 'January 12th, 2020',
-    message: 'empor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat'
-  },
-  {
-    id: 2,
-    from: 'Person Name',
-    date: 'January 12th, 2020',
-    message: 'empor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat'
-  },
-  {
-    id: 3,
-    from: 'Person Name',
-    date: 'January 12th, 2020',
-    message: 'empor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat'
-  },
-  {
-    id: 4,
-    from: 'Person Name',
-    date: 'January 12th, 2020',
-    message: 'empor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat'
-  },
-];
+import { Context as EmailContext } from '../../../context/EmailContext';
+import Spinner from '../../Global/Spinner';
 
 const Conversation = () => {
+  const { id } = useParams();
+  const { state: { messages, isLoading, error }, fetchConversation, sendEmail } = useContext(EmailContext);
+  const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    fetchConversation({ conversationId: id });
+  }, []);
+
   const renderConversationMessages = () => {
-    return messages.map(({ id, from, date, message }) => {
+    if (!messages) return null;
+
+    return messages.map(({ id, first_name, last_name, created_at, content }) => {
+      const from = first_name + ' ' + last_name;
       return (
         <ConversationMessage
           key={id}
           from={from}
-          date={date}
-          message={message}
+          date={created_at}
+          message={content}
         />
       );
     })
@@ -57,19 +37,34 @@ const Conversation = () => {
       </div>
       <div className="box-container">
         <div className="header">
-          <span style={{ fontWeight: 'bold' }}>Subject:</span> Subject Title
+          <span style={{ fontWeight: 'bold' }}>Subject:</span> Subject title
+          {isLoading ? <Spinner /> : null}
         </div>
         <div className="body">
           {renderConversationMessages()}
+          <div style={{ height: '10px' }} />
+          {error ? <p style={{ color: 'red' }}>{error}</p> : null}
+          <div style={{ height: '10px' }} />
           <form className="ui form">
             <div className="field message-form">
               <textarea
+                value={message}
+                onChange={e => setMessage(e.target.value)}
                 type="paragraph_text"
                 cols="500"
                 rows="8"
                 placeholder="Write your email here..."
               />
-              <div className="submit-button">Send</div>
+              <div
+                className="submit-button"
+                onClick={async () => {
+                  setMessage('');
+                  await sendEmail({ conversationId: id, content: message });
+                  fetchConversation({ conversationId: id });
+                }}
+              >
+                Send
+              </div>
             </div>
           </form>
         </div>

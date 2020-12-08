@@ -55,6 +55,7 @@ if($row) {
             [
                 "message" => "Successful login.",
                 "jwt" => $jwt,
+                "id" => $id,
                 "admin" => $is_admin,
                 "email" => $email,
                 "expireAt" => $expire_claim

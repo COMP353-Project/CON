@@ -12,7 +12,6 @@ const reducer = (state, action) => {
     case 'register': return { ...state, user: action.payload };
     case 'signin': return { ...state, user: action.payload };
     case 'signout': return { ...state, user: null };
-    case 'register': return { ...state, user: action.payload }
     default: return state;
   }
 };
@@ -21,7 +20,7 @@ const reducer = (state, action) => {
 //======================= USERS =======================//
 // Register
 const registerUser = dispatch => async (data) => {
-  const REGISTER_ENDPOINT = 'http://localhost:8080/con/api/users/register.php';
+  const REGISTER_ENDPOINT = 'http://localhost:8080/CON/api/users/register.php';
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'reset_success' });
   dispatch({ type: 'start_loading' });
@@ -47,7 +46,7 @@ const registerUser = dispatch => async (data) => {
 
 // Promote
 const promote = dispatch => async (data) => {
-  const PROMOTE_ENDPOINT = 'http://localhost:8080/con/api/users/promote.php';
+  const PROMOTE_ENDPOINT = 'http://localhost:8080/CON/api/users/promote.php';
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'reset_success' });
   dispatch({ type: 'start_loading' });
@@ -73,7 +72,7 @@ const promote = dispatch => async (data) => {
 
 // Delete
 const deleteUser = dispatch => async (data) => {
-  const DELETE_ENDPOINT = 'http://localhost:8080/con/api/users/delete.php';
+  const DELETE_ENDPOINT = 'http://localhost:8080/CON/api/users/delete.php';
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'reset_success' });
   dispatch({ type: 'start_loading' });
@@ -87,6 +86,7 @@ const deleteUser = dispatch => async (data) => {
       },
       data: data
     });
+    console.log('user deleted');
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_success', payload: 'deleteUser' });
     return response;
@@ -99,13 +99,13 @@ const deleteUser = dispatch => async (data) => {
 
 // Sign In
 const signin = dispatch => async ({ email, password }) => {
-  const LOGIN_ENDPOINT = 'http://localhost:8080/con/api/users/login.php'
+  const LOGIN_ENDPOINT = 'http://localhost:8080/CON/api/users/login.php'
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
 
   try {
-    console.log('hello')
     const response = await axios.post(LOGIN_ENDPOINT, { email, password }); // POST Sign In URL
+    console.log(response);
 
     if (response.status === 200 && response.data.jwt && response.data.expireAt) {
       dispatch({ type: 'signin', payload: response.data });
@@ -151,7 +151,7 @@ const signout = dispatch => async () => {
 // Delete Group
 
 const deleteGroup = dispatch => async (data) => {
-  const DELETE_ENDPOINT = 'http://localhost:8080/con/api/groups/delete.php';
+  const DELETE_ENDPOINT = 'http://localhost:8080/CON/api/groups/delete.php';
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'reset_success' });
   dispatch({ type: 'start_loading' });
@@ -180,7 +180,7 @@ const deleteGroup = dispatch => async (data) => {
 // Register Condo Association
 
 const registerCA = dispatch => async (data) => {
-  const REGISTER_ENDPOINT = 'http://localhost:8080/con/api/associations/register.php';
+  const REGISTER_ENDPOINT = 'http://localhost:8080/CON/api/associations/register.php';
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'reset_success' });
   dispatch({ type: 'start_loading' });
@@ -207,7 +207,7 @@ const registerCA = dispatch => async (data) => {
 // Register User to Condo Association
 
 const assignUser = dispatch => async (data) => {
-  const ASSIGNMENT_ENDPOINT = 'http://localhost:8080/con/api/associations/assign.php';
+  const ASSIGNMENT_ENDPOINT = 'http://localhost:8080/CON/api/associations/assign.php';
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'reset_success' });
   dispatch({ type: 'start_loading' });
@@ -234,7 +234,7 @@ const assignUser = dispatch => async (data) => {
 // Delete Condo Association
 
 const deleteCA = dispatch => async (data) => {
-  const DELETE_ENDPOINT = 'http://localhost:8080/con/api/associations/delete.php';
+  const DELETE_ENDPOINT = 'http://localhost:8080/CON/api/associations/delete.php';
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'reset_success' });
   dispatch({ type: 'start_loading' });
