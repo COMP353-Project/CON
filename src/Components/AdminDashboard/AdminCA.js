@@ -3,10 +3,10 @@ import Nav from './AdminNav';
 import './AdminStyles.css';
 import TextField from '@material-ui/core/TextField';
 import Spinner from '../Global/Spinner';
-import { Context as AuthenticationContext } from '../../context/AuthenticationContext';
+import { Context as AdminContext } from '../../context/AdminContext';
 
 function AdminCA () {
-  const { registerCA, assignUser, deleteCA, state:{ error, success, isLoading } } = React.useContext(AuthenticationContext);
+  const { registerCA, assignUser, deleteCA, state:{ error, success, isLoading } } = React.useContext(AdminContext);
 
   // Form field states
   const [email, setEmail] = React.useState("");

@@ -3,10 +3,10 @@ import './AdminStyles.css';
 import Nav from './AdminNav';
 import Spinner from '../Global/Spinner';
 import TextField from '@material-ui/core/TextField';
-import { Context as AuthenticationContext } from '../../context/AuthenticationContext';
+import { Context as AdminContext } from '../../context/AdminContext';
 
 function AdminGroups () {
-  const { deleteGroup , state:{ error, success, isLoading } } = React.useContext(AuthenticationContext);
+  const { deleteGroup , state:{ error, success, isLoading } } = React.useContext(AdminContext);
   const [name, setName] = React.useState("");
 
     /**

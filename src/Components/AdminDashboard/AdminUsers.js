@@ -3,10 +3,10 @@ import Nav from './AdminNav';
 import './AdminStyles.css';
 import TextField from '@material-ui/core/TextField';
 import Spinner from '../Global/Spinner';
-import { Context as AuthenticationContext } from '../../context/AuthenticationContext';
+import { Context as AdminContext } from '../../context/AdminContext';
 
 function AdminUsers () {
-  const { registerUser, promote, deleteUser, state:{ error, success, isLoading } } = React.useContext(AuthenticationContext);
+  const { registerUser, promoteUser, deleteUser, state:{ error, success, isLoading } } = React.useContext(AdminContext);
 
   const [firstName, setFirstName] = React.useState("");
   const [lastName, setLastName] = React.useState("");
@@ -50,7 +50,7 @@ function AdminUsers () {
     const info = {
       email: promoteEmail
     }
-    promote(info);
+    promoteUser(info);
 
     // Reset form values
     setPromoteEmail('');
@@ -157,8 +157,8 @@ function AdminUsers () {
           <div className="btn-container">
             {isLoading ? <Spinner/> : <input type="submit" value="PROMOTE" className="post-btn"/>}
           </div>
-          {error === "promotionUser" && <p className="is-error primary">User either does not exists or is already admin</p>}
-          {success === "promotionUser" && <p className="is-success">User was promoted</p>}
+          {error === "promoteUser" && <p className="is-error primary">User either does not exists or is already admin</p>}
+          {success === "promoteUser" && <p className="is-success">User was promoted</p>}
         </form>
       </div>
       <div className="container--admin">
