@@ -18,7 +18,7 @@ const reducer = (state, action) => {
 // Register
 
 const register = dispatch => async (data) => {
-  const REGISTER_ENDPOINT = 'http://localhost/con/CON/api/register.php'
+  const REGISTER_ENDPOINT = 'http://localhost:8080/CON/api/register.php'
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
 
@@ -34,7 +34,6 @@ const register = dispatch => async (data) => {
     return response;
   }
   catch (e) {
-    console.log(e.message)
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });
   }
@@ -44,11 +43,12 @@ const register = dispatch => async (data) => {
 // Sign In
 
 const signin = dispatch => async ({ email, password }) => {
-  const LOGIN_ENDPOINT = 'http://localhost:8080/con/api/login.php'
+  const LOGIN_ENDPOINT = 'http://localhost:8080/CON/api/login.php';
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
 
   try {
+    console.log('hello')
     const response = await axios.post(LOGIN_ENDPOINT, { email, password }); // POST Sign In URL
 
     if (response.status === 200 && response.data.jwt && response.data.expireAt) {
