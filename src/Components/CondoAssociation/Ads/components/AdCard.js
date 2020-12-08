@@ -11,6 +11,8 @@ const AdCard = ({ condo_assoc_post_id, title, description, price, contact_number
     return description.substr(0, 250) + '...';
   };
 
+  console.log(condo_assoc_post_id);
+
   return (
     <div>
       <Box>

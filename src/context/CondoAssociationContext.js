@@ -95,17 +95,28 @@ const fetchDiscussion = dispatch => async ({ discussionId }) => {
 
 // Create Discussion
 
-const createDiscussion = dispatch => async ({ condoAssociationId, title, isPublic, content }) => {
+const createDiscussion = dispatch => async ({ user_id, id, title, content, is_public }) => {
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
 
+  // try {
+  //   const { data } = await axios.post('http://localhost/con/CON/api/discussions/addDiscussion.php', { condoAssociationId, title, isPublic, content }); // POST discussion URL
   try {
-    const { data } = await axios.post('', { condoAssociationId, title, isPublic, content }); // POST discussion URL
-
-    return data.id;
-  } catch (e) {
+    const response = await axios({
+      method: 'post',
+      url: 'http://localhost/con/CON/api/discussions/addDiscussion.php',
+      headers: {
+        'content-type': 'application/json'
+      },
+      data: { user_id, id, title, content, is_public } // add condo_assoc title
+    });
+    console.log(response);
+    return response;
+  }
+  // return data.id;
+  catch (e) {
     dispatch({ type: 'stop_loading' });
-    dispatch({ type: 'set_error', payload: e.message }); 
+    dispatch({ type: 'set_error', payload: e.message });
   }
 };
 
@@ -119,7 +130,7 @@ const updateDiscussion = dispatch => async ({ discussionId, condoAssociationId, 
     await axios.put('', { discussionId, title, isPublic, content }); // PUT discussion URL
   } catch (e) {
     dispatch({ type: 'stop_loading' });
-    dispatch({ type: 'set_error', payload: e.message }); 
+    dispatch({ type: 'set_error', payload: e.message });
   }
 };
 
@@ -133,7 +144,7 @@ const deleteDiscussion = dispatch => async ({ discussionId }) => {
     await axios.delete('', { discussionId }); // DELETE discussion URL
   } catch (e) {
     dispatch({ type: 'stop_loading' });
-    dispatch({ type: 'set_error', payload: e.message }); 
+    dispatch({ type: 'set_error', payload: e.message });
   }
 };
 
@@ -149,41 +160,47 @@ const addComment = dispatch => async ({ discussionId, content }) => {
     fetchDiscussion({ discussionId });
   } catch (e) {
     dispatch({ type: 'stop_loading' });
-    dispatch({ type: 'set_error', payload: e.message }); 
+    dispatch({ type: 'set_error', payload: e.message });
   }
 };
 
 // Fetch Ads
 
-const fetchAds = dispatch => async ({ condoAssociationId }) => {
+// const fetchAds = dispatch => async ({ condoAssociationId }) => {
+const fetchAds = dispatch => async () => {
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
 
   try {
-    const { data } = await axios.get('', { params: { condoAssociationId } }); // GET ads URL
-    dispatch({ type: 'fetch_ads', payload: data });
-
+    const response = await axios.get('http://localhost/con/CON/api/ads/getAds.php'); // GET ads URL
+    dispatch({ type: 'fetch_ads', payload: response.data });
     dispatch({ type: 'stop_loading' });
+    console.log(response.data);
+    return response.data;
   } catch (e) {
     dispatch({ type: 'stop_loading' });
-    dispatch({ type: 'set_error', payload: e.message }); 
+    dispatch({ type: 'set_error', payload: e.message });
   }
 };
 
 // Fetch Ad
 
-const fetchAd = dispatch => async ({ adId }) => {
+const fetchAd = dispatch => async ({ condo_assoc_post_id }) => {
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
 
   try {
-    const { data } = await axios.get('', { params: { adId } }); // GET ad URL
-    dispatch({ type: 'fetch_ad', payload: data });
+    const response = await axios.get('http://localhost/con/CON/api/ads/getAd.php', { params: { condo_assoc_post_id } }); // GET ad URL
+    // const response = await axios.get('http://localhost/con/CON/api/ads/getAd.php'); // GET ad URL
+    dispatch({ type: 'fetch_ad', payload: response.data });
 
     dispatch({ type: 'stop_loading' });
+    console.log(response);
+    return response.data;
+
   } catch (e) {
     dispatch({ type: 'stop_loading' });
-    dispatch({ type: 'set_error', payload: e.message }); 
+    dispatch({ type: 'set_error', payload: e.message });
   }
 };
 
@@ -199,7 +216,7 @@ const createAd = dispatch => async ({ condoAssociationId, title, contactNumber, 
     return data.id;
   } catch (e) {
     dispatch({ type: 'stop_loading' });
-    dispatch({ type: 'set_error', payload: e.message }); 
+    dispatch({ type: 'set_error', payload: e.message });
   }
 };
 
@@ -213,7 +230,7 @@ const udpdateAd = dispatch => async ({ adId, condoAssociationId, title, contactN
     await axios.put('', { adId, title, contactNumber, price, isPublic, description }); // PUT ad URL
   } catch (e) {
     dispatch({ type: 'stop_loading' });
-    dispatch({ type: 'set_error', payload: e.message }); 
+    dispatch({ type: 'set_error', payload: e.message });
   }
 };
 
@@ -227,7 +244,7 @@ const deleteAd = dispatch => async ({ adId }) => {
     await axios.delete('', { adId }); // DELETE ad URL
   } catch (e) {
     dispatch({ type: 'stop_loading' });
-    dispatch({ type: 'set_error', payload: e.message }); 
+    dispatch({ type: 'set_error', payload: e.message });
   }
 };
 
@@ -244,7 +261,7 @@ const fetchAdminMeetings = dispatch => async ({ condoAssociationId }) => {
     dispatch({ type: 'stop_loading' });
   } catch (e) {
     dispatch({ type: 'stop_loading' });
-    dispatch({ type: 'set_error', payload: e.message }); 
+    dispatch({ type: 'set_error', payload: e.message });
   }
 };
 
@@ -295,7 +312,7 @@ const fetchGeneralMeeting = dispatch => async ({ generalMeetingId }) => {
     dispatch({ type: 'stop_loading' });
   } catch (e) {
     dispatch({ type: 'stop_loading' });
-    dispatch({ type: 'set_error', payload: e.message }); 
+    dispatch({ type: 'set_error', payload: e.message });
   }
 };
 
@@ -312,7 +329,7 @@ const fetchPolls = dispatch => async ({ condoAssociationId }) => {
     dispatch({ type: 'stop_loading' });
   } catch (e) {
     dispatch({ type: 'stop_loading' });
-    dispatch({ type: 'set_error', payload: e.message }); 
+    dispatch({ type: 'set_error', payload: e.message });
   }
 };
 
@@ -329,7 +346,7 @@ const fetchPoll = dispatch => async ({ pollId }) => {
     dispatch({ type: 'stop_loading' });
   } catch (e) {
     dispatch({ type: 'stop_loading' });
-    dispatch({ type: 'set_error', payload: e.message }); 
+    dispatch({ type: 'set_error', payload: e.message });
   }
 };
 
@@ -345,7 +362,7 @@ const votePoll = dispatch => async ({ pollId, optionId }) => {
     fetchPoll({ pollId });
   } catch (e) {
     dispatch({ type: 'stop_loading' });
-    dispatch({ type: 'set_error', payload: e.message }); 
+    dispatch({ type: 'set_error', payload: e.message });
   }
 };
 
@@ -362,7 +379,7 @@ const fetchElections = dispatch => async ({ condoAssociationId }) => {
     dispatch({ type: 'stop_loading' });
   } catch (e) {
     dispatch({ type: 'stop_loading' });
-    dispatch({ type: 'set_error', payload: e.message }); 
+    dispatch({ type: 'set_error', payload: e.message });
   }
 };
 
@@ -379,7 +396,7 @@ const fetchElection = dispatch => async ({ electionId }) => {
     dispatch({ type: 'stop_loading' });
   } catch (e) {
     dispatch({ type: 'stop_loading' });
-    dispatch({ type: 'set_error', payload: e.message }); 
+    dispatch({ type: 'set_error', payload: e.message });
   }
 };
 
@@ -395,7 +412,7 @@ const voteElection = dispatch => async ({ electionId, candidateId }) => {
     fetchElection({ electionId });
   } catch (e) {
     dispatch({ type: 'stop_loading' });
-    dispatch({ type: 'set_error', payload: e.message }); 
+    dispatch({ type: 'set_error', payload: e.message });
   }
 };
 
