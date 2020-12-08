@@ -7,6 +7,8 @@ const reducer = (state, action) => {
     case 'stop_loading': return { ...state, isLoading: false };
     case 'set_error': return { ...state, error: action.payload };
     case 'reset_error': return { ...state, error: '' };
+    case 'set_success': return { ...state, success: action.payload };
+    case 'reset_success': return { ...state, success: '' };
     case 'register': return { ...state, user: action.payload };
     case 'signin': return { ...state, user: action.payload };
     case 'signout': return { ...state, user: null };
@@ -15,36 +17,9 @@ const reducer = (state, action) => {
   }
 };
 
-// Register
-
-const register = dispatch => async (data) => {
-  const REGISTER_ENDPOINT = 'http://localhost/con/CON/api/users/register.php'
-  dispatch({ type: 'reset_error' });
-  dispatch({ type: 'start_loading' });
-
-  try {
-    const response = await axios({
-      method: 'post',
-      url: REGISTER_ENDPOINT,
-      headers: {
-        'content-type': 'application/json'
-      },
-      data: data
-    });
-    return response;
-  }
-  catch (e) {
-    console.log(e.message)
-    dispatch({ type: 'stop_loading' });
-    dispatch({ type: 'set_error', payload: e.message });
-  }
-};
-
-
 // Sign In
-
 const signin = dispatch => async ({ email, password }) => {
-  const LOGIN_ENDPOINT = 'http://localhost/con/CON/api/users/login.php'
+  const LOGIN_ENDPOINT = 'http://localhost:8080/con/api/users/login.php'
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
 
@@ -68,7 +43,6 @@ const signin = dispatch => async ({ email, password }) => {
 };
 
 // Edit Profile
-
 const editProfile = dispatch => async ({ firstName, lastName, address, password }) => {
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
@@ -93,5 +67,5 @@ const signout = dispatch => async () => {
 };
 
 export const { Context, Provider } = createDataContext(reducer, {
-  register, signin, editProfile, signout
-}, { isLoading: false, error: '', user: null });
+  signin, editProfile, signout
+}, { isLoading: false, error: '', success: '', user: null });

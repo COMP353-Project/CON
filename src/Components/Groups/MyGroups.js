@@ -19,11 +19,11 @@ function MyGroups () {
             <GroupsNav/>
             <h1>My Groups</h1>
             <Button>Create Group</Button>
-            <div class="groups-container">
+            <div className="groups-container">
                 <List>
                     {groups.map(group => {
                         return (
-                            <Container class="groupList" maxwidth="sm">
+                            <Container className="groupList" maxwidth="sm">
                                 <ListItem>
                                     <Button component={Link} to={"/groups/" + group.id +"/home"}>
                                         <ListItemText primary={"Click this to go to group " + group.id} />

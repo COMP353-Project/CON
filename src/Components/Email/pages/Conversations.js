@@ -11,8 +11,8 @@ const Conversations = () => {
 
   return (
     <div>
-      <div class="page-header">
-        <div class="select-menu">
+      <div className="page-header">
+        <div className="select-menu">
           <Link
             to="/email/"
             className="header-button"

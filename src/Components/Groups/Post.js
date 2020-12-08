@@ -25,10 +25,10 @@ function Post (props) {
   const [replies, setReplies] = React.useState([{ comment: "i agree", user: "John", date: "24-12-2010  12:22" }, { comment: "pineapple", user: "Bob", date: "24-12-2010  12:22" }])
 
   return (
-    <div class="group-post">
+    <div className="group-post">
       <Container fixed>
         <Card variant="outlined">
-          <img class="postedImage" src={imagePath} alt="" />
+          <img className="postedImage" src={imagePath} alt="" />
           <ListItem>
             <ListItemText inset="false" secondary={"Posted by: " + user + " at " + date} primary={text} />
           </ListItem>

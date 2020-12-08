@@ -6,7 +6,7 @@ header("Content-Type: application/json; charset=UTF-8");
 
 $rest_json = file_get_contents("php://input");
 $_POST = json_decode($rest_json, true);
-$conn = mysqli_connect("localhost", "root", "mysql", "con");
+$conn = mysqli_connect("localhost", "root", "", "con");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = $_POST['password'];
