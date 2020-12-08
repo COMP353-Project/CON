@@ -166,7 +166,6 @@ const addComment = dispatch => async ({ discussionId, content }) => {
 
 // Fetch Ads
 
-// const fetchAds = dispatch => async ({ condoAssociationId }) => {
 const fetchAds = dispatch => async () => {
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
@@ -175,7 +174,6 @@ const fetchAds = dispatch => async () => {
     const response = await axios.get('http://localhost/con/CON/api/ads/getAds.php'); // GET ads URL
     dispatch({ type: 'fetch_ads', payload: response.data });
     dispatch({ type: 'stop_loading' });
-    console.log(response.data);
     return response.data;
   } catch (e) {
     dispatch({ type: 'stop_loading' });
@@ -190,12 +188,14 @@ const fetchAd = dispatch => async ({ condo_assoc_post_id }) => {
   dispatch({ type: 'start_loading' });
 
   try {
-    const response = await axios.get('http://localhost/con/CON/api/ads/getAd.php', { params: { condo_assoc_post_id } }); // GET ad URL
-    // const response = await axios.get('http://localhost/con/CON/api/ads/getAd.php'); // GET ad URL
-    dispatch({ type: 'fetch_ad', payload: response.data });
 
+    const response = await axios({
+      method: 'get',
+      url: `http://localhost/con/CON/api/ads/getAd.php?condo_assoc_post_id=${condo_assoc_post_id}`,
+    });
+
+    dispatch({ type: 'fetch_ad', payload: response.data });
     dispatch({ type: 'stop_loading' });
-    console.log(response);
     return response.data;
 
   } catch (e) {

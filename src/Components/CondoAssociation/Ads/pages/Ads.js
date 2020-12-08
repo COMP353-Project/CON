@@ -22,7 +22,7 @@ const Ads = () => {
       return (
         <Fragment key={condo_assoc_post_id}>
           <AdCard
-            id={condo_assoc_post_id}
+            condo_assoc_post_id={condo_assoc_post_id}
             title={title}
             price={price}
             first_name={first_name + ' ' + last_name}
@@ -36,7 +36,6 @@ const Ads = () => {
 
   React.useEffect(() => {
     getAds();
-    console.log(ads);
   }, []);
 
   return (

@@ -5,13 +5,11 @@ import Box from '../../../Global/Box';
 
 const AdCard = ({ condo_assoc_post_id, title, description, price, contact_number, first_name, last_name, created_at }) => {
 
-  const renderDescription = () => {
+  const RenderDescription = () => {
     if (description.length < 250) return description;
 
     return description.substr(0, 250) + '...';
   };
-
-  console.log(condo_assoc_post_id);
 
   return (
     <div>
@@ -22,7 +20,7 @@ const AdCard = ({ condo_assoc_post_id, title, description, price, contact_number
           <div className="card-author">{first_name}</div>
           <div className="card-date">{created_at}</div>
         </div>
-        <div className="card-description">{renderDescription()}</div>
+        <div className="card-description"><RenderDescription /></div>
         <Link to={`/condo-association/ads/${condo_assoc_post_id}`}>
           <div className="details-button">View Details</div>
         </Link>
