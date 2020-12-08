@@ -6,17 +6,16 @@ import './Login.css'
 
 function LoginFormWithContext (props) {
     const { signin } = useContext(AuthenticationContext);
-    // const { isLoading, error } = state;
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
+    const [error, setError] = useState(false);
 
 
     /**
      * Handles clicking on the 'sign in' button
      * @param {*} event 
      */
-    const handleClick = async (e) => {
+    const handleLogin = async (e) => {
         const data = await signin({ email: email, password: password });
         if (data) {
             setError(false);
@@ -55,11 +54,11 @@ function LoginFormWithContext (props) {
                         className="signin-btn"
                         variant="contained"
                         color="secondary" container
-                        onClick={handleClick}
+                        onClick={handleLogin}
                     >Sign in</Button>
                 </div>
 
-                {error && <p className="is-error secondary">Your email or password is invalid. Please try again.</p>}
+                {error && <p className="is-error center secondary">Your email or password is invalid. Please try again.</p>}
             </form>
           </div>
         </div>

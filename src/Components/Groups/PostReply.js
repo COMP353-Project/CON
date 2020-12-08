@@ -52,7 +52,7 @@ const handleTextChange = ({target}) => {
 }
       return (
         <Container fixed>
-              <Accordion className ={classes.root} class="replies-accordion">
+              <Accordion className ={classes.root} className="replies-accordion">
                 <AccordionSummary>
                   <ListItem>View Replies: ({props.replies.length})</ListItem>
                 </AccordionSummary>
@@ -71,8 +71,8 @@ const handleTextChange = ({target}) => {
                       );
                     }
                   )}</List>
-                  <div class="reply-input-wrapper">
-                    <OutlinedInput type="text" className ={classes.reply} class="postText" value ={textInput} placeholder="Write a reply..." fullWidth="true" multiline="true" rows="2" onChange={handleTextChange} />
+                  <div className="reply-input-wrapper">
+                    <OutlinedInput type="text" className ={classes.reply} className="postText" value ={textInput} placeholder="Write a reply..." fullWidth="true" multiline="true" rows="2" onChange={handleTextChange} />
                     <Button type ="submit" variant="outlined" onClick={() => handleReply(textInput, props.user)}>Reply</Button>
                   </div>
                   </div>

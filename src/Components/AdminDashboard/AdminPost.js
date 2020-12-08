@@ -37,7 +37,7 @@ function AdminPost () {
             />          
           </div>
           <div className="form__field">
-            <label for="admin-post-attachments">Attachments</label> 
+            <label>Attachments</label> 
             <input type="file" id="admin-post-attachments" accept=".jpg,.png,.gif"></input>
           </div>
           <div className="btn-container">
