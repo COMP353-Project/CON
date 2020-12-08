@@ -1,32 +1,68 @@
-@import url('https://fonts.googleapis.com/css2?family=Arimo&family=Yantramanav:wght@100;300&display=swap');
-.container {
-    height: 100vh;
+.login-form .MuiInput-underline::after {
+  border-color: white !important;
 }
 
-.container2 {
-    display: flex;
-    height: 50vh;
-    align-items: center;
-    justify-content: center;
+.login-form .MuiFormLabel-root {
+  color: white !important;
 }
 
-.img {
-    height: 100vh;
-    width: 60vw;
-    float: right;
+.login-form .MuiInputBase-input {
+  font-size: 16px !important;
 }
 
-.button-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    min-height: 20vh;
+.login-form {
+  display: flex;
+  flex-direction: column;
 }
 
-.title {
-    text-align: center;
-    color: #32a895;
-    font-family: 'Yantramanav', sans-serif;
-    font-size: 50px;
+.login-form__field {
+  margin-top: 15px !important;
+}
+
+.login-container {
+  display: flex;
+  width: 100%;
+  height: calc(100vh - var(--header-height));
+  background: url("/src/assets/condo.png") no-repeat;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+}
+  
+.login-title {
+  color: white;
+  text-align: center;
+  font-size: 30px;
+}
+  
+.signin-btn {
+  background-color: white !important;
+  color: black !important;
+}
+  
+.login-form-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  background: #57958b;
+  max-width: 300px;
+  height: 400px;
+  border-radius: 5px;
+  border: 1px solid #fff;
+  box-shadow: 0 0 7px #fff;
+  padding: 10px 20px;
+}
+  
+.login-image-container {
+  width: 100%;
+}
+
+.btn-container {
+  margin-top: 40px;
+}
+
+.is-error.center{
+  text-align: center;
 }

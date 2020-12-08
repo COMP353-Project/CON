@@ -2,24 +2,34 @@ import { Button, ListItem, ListItemText, List, Container } from '@material-ui/co
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../css/GroupsStyle.css'
+import GroupsNav from './GroupsNav.js'
 
-function GroupHome () {
+function MyGroups () {
 
     const [groups, setGroups] = React.useState(() => [{ id: 1 }, { id: 2 }])
 
+    const isAdmin = true;
+
+    const onDelete = () => {
+
+    }
+
     return (
         <div>
-            <h1>Groups Home Page</h1>
-            <div class="groups-container">
+            <GroupsNav/>
+            <h1>My Groups</h1>
+            <Button>Create Group</Button>
+            <div className="groups-container">
                 <List>
                     {groups.map(group => {
                         return (
-                            <Container class="groupList" maxwidth="sm">
+                            <Container className="groupList" maxwidth="sm">
                                 <ListItem>
-                                    <Button component={Link} to={"/groups/" + group.id}>
+                                    <Button component={Link} to={"/groups/" + group.id +"/home"}>
                                         <ListItemText primary={"Click this to go to group " + group.id} />
                                     </Button>
                                     <div>Users go here</div>
+                                    {isAdmin ? <Button>Delete</Button> : <div></div>}
                                 </ListItem>
                             </Container>
                         );
@@ -32,4 +42,4 @@ function GroupHome () {
     );
 }
 
-export default GroupHome;
+export default MyGroups;

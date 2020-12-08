@@ -1,7 +1,6 @@
 import React from 'react';
 import Button from '../components/Button';
 import BackButton from '../../Global/BackButton';
-import '../../../css/GlobalStyles.css';
 
 const EditProfile = () => {
   return (

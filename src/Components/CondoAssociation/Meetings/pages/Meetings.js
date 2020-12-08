@@ -5,7 +5,6 @@ import { Button } from '@material-ui/core';
 import MeetingCard from '../components/MeetingCard';
 import PostMeetingButton from '../components/PostMeetingButton'
 import '../css/MeetingStyles.css';
-import '../../../../css/GlobalStyles.css';
 
 const meetings = [
   {
@@ -50,7 +49,7 @@ const meetings = [
   }
 ];
 
-function CondoMeetings() {
+function CondoMeetings () {
   const [adminSelected, setAdminSelected] = useState(true);
 
   const selectAdmin = () => {
@@ -81,7 +80,7 @@ function CondoMeetings() {
     <div>
       <Nav />
 
-      <div className={adminSelected ? 'page-container admin': 'page-container general'}>
+      <div className={adminSelected ? 'page-container admin' : 'page-container general'}>
         <div className="page-header">
           <h1>Meetings</h1>
           <Link to="/condo-association/meetings/new">
@@ -89,7 +88,7 @@ function CondoMeetings() {
           </Link>
         </div>
         <div className="subnav">
-          <Button color="inherit" onClick={selectAdmin} className={adminSelected ? 'selected': 'hidden'}>Admin Meetings</Button>
+          <Button color="inherit" onClick={selectAdmin} className={adminSelected ? 'selected' : 'hidden'}>Admin Meetings</Button>
           <Button color="inherit" onClick={selectGeneral} className={adminSelected ? 'hidden' : 'selected'}>General Meetings</Button>
         </div>
         {renderMeetings()}

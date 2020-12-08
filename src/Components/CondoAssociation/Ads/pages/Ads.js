@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import AdCard from '../components/AdCard';
 import PostAdButton from '../components/PostAdButton';
 import CondoNav from '../../CondoNav';
-import '../../../../css/GlobalStyles.css';
 
 const ads = [
   {

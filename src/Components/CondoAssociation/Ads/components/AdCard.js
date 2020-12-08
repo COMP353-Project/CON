@@ -2,7 +2,6 @@ import '../css/AdCard.css';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Box from '../../../Global/Box';
-import '../../../../css/GlobalStyles.css';
 
 const AdCard = ({ id, title, author, price, date, description }) => {
 
