@@ -1,5 +1,5 @@
 <?php
-require "../vendor/autoload.php";
+require "../../vendor/autoload.php";
 use \Firebase\JWT\JWT;
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
@@ -17,6 +17,7 @@ $password = $_POST['password'];
 $query = "SELECT * FROM " . $table_name . " WHERE email = '$email' LIMIT 0, 1";
 
 $result = mysqli_query($conn, $query);
+$user_id = mysqli_insert_id($conn);
 
 $row = @mysqli_fetch_assoc($result);
 
@@ -57,7 +58,8 @@ if($row) {
                 "jwt" => $jwt,
                 "admin" => $is_admin,
                 "email" => $email,
-                "expireAt" => $expire_claim
+                "expireAt" => $expire_claim,
+                "id" => $id
             ]       
             );
 

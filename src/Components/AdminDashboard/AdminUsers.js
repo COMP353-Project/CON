@@ -20,9 +20,7 @@ function AdminUsers () {
    * Function that handles user registration
    * @param {*} e 
    */
-  const handleRegister = async (e) => {
-    e.preventDefault();
-
+  const handleRegister = async () => {
     const info = {
       first_name: firstName,
       last_name: lastName,
@@ -32,6 +30,7 @@ function AdminUsers () {
     }
 
     const response = await register(info);
+    console.log(response);
     if (response) {
       setSuccess(true);
     }
@@ -87,6 +86,7 @@ function AdminUsers () {
               type="text"
               variant="outlined"
               value={regAddress}
+              required
               onChange={e => setRegAddress(e.target.value)}
             />
           </div>
