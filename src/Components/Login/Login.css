@@ -63,7 +63,6 @@
   margin-top: 40px;
 }
 
-.is-error {
-  margin-top: 20px;
+.is-error.center{
   text-align: center;
 }

@@ -159,7 +159,7 @@ function Groups () {
           <MyGroupNav/>
             <div className={classes.root}>
           <h1>Group Page</h1>
-          <div class="chat-wrapper">
+          <div className="chat-wrapper">
             <IconButton edge="end" color="inherit" aria-label="open drawer" onClick={handleDrawerOpen} className={clsx(classes.menuButton, open && classes.hide)}>
               <ChatBubble />Chats
             </IconButton>
@@ -186,11 +186,11 @@ function Groups () {
                     );
                 }
             )}
-            <OutlinedInput type="text"  class="postText" value ={chatTextInput} placeholder="Write a reply..." fullWidth="true" multiline="true" rows="2" onChange={handleChatTextChange}/>
+            <OutlinedInput type="text"  className="postText" value ={chatTextInput} placeholder="Write a reply..." fullWidth="true" multiline="true" rows="2" onChange={handleChatTextChange}/>
             <Button type ="submit" variant="outlined" onClick={() => handleChatPost(chatTextInput, currentUser)}>Send</Button>
           </Drawer>
         </div>
-        <div class="post-container">
+        <div className="post-container">
           {posts.map(post => {
              return (
                <Post text={post.text} imagePath={post.imagePath} date={post.date} user={post.user} viewOnly={post.viewOnly}/>
@@ -198,9 +198,9 @@ function Groups () {
             }
           )}
         </div>
-        <div class="groupsInput">
+        <div className="groupsInput">
           <label>Attach images and text here!</label>
-          <div class="post-input-wrapper">
+          <div className="post-input-wrapper">
              <OutlinedInput type="text" placeholder="Write a post..." fullWidth="true" multiline="true" rows="5" value ={postTextInput} onChange={handlePostTextChange}/>
               <Button type ="submit" variant="outlined" onClick={() => handlePost(postTextInput, imageInput, currentUser)}>Post</Button>
               <input type="file" accept=".jpg,.png,.gif" onChange={handleFileUpload}></input>
