@@ -3,7 +3,6 @@ import { Switch, Route } from 'react-router-dom';
 import Conversation from './pages/Conversation';
 import Compose from './pages/Compose';
 import Conversations from './pages/Conversations';
-import '../../css/GlobalStyles.css'
 
 const Email = () => {
 	return (
