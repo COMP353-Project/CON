@@ -16,6 +16,7 @@ const reducer = (state, action) => {
   }
 };
 
+<<<<<<< HEAD
 
 //======================= USERS =======================//
 // Register
@@ -97,6 +98,8 @@ const deleteUser = dispatch => async (data) => {
   }
 };
 
+=======
+>>>>>>> develop
 // Sign In
 const signin = dispatch => async ({ email, password }) => {
   const LOGIN_ENDPOINT = 'http://localhost:8080/CON/api/users/login.php'
@@ -147,6 +150,7 @@ const signout = dispatch => async () => {
   localStorage.removeItem('user');
 };
 
+<<<<<<< HEAD
 //======================= GROUPS =======================//
 // Delete Group
 
@@ -259,6 +263,8 @@ const deleteCA = dispatch => async (data) => {
 };
 
 
+=======
+>>>>>>> develop
 export const { Context, Provider } = createDataContext(reducer, {
-  registerUser, promote, deleteUser, signin, editProfile, deleteGroup, registerCA, assignUser, deleteCA, signout
+  signin, editProfile, signout
 }, { isLoading: false, error: '', success: '', user: null });
