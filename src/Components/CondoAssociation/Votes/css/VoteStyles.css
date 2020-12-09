@@ -1,0 +1,16 @@
+
+.subnav {
+    display: flex;
+    color: #32a895;
+    margin: 10px 0;
+    padding-left: 30px;
+}
+
+.page-container.poll .card.election{
+    display: none;
+}
+
+.page-container.election .card.poll {
+    display: none;
+}
+

@@ -1,5 +1,6 @@
 import './App.css';
 import { Route, Switch } from 'react-router-dom';
+import '../src/css/GlobalStyles.css';
 import NavBar from './Components/NavBar/NavBar';
 import GroupsLanding from './Components/Groups/GroupsLanding';
 import GroupsHome from './Components/Groups/GroupsHome'
@@ -29,10 +30,9 @@ import CondoMeetings from './Components/CondoAssociation/Meetings/pages/Meetings
 import Meeting from './Components/CondoAssociation/Meetings/pages/Meeting';
 import PostMeeting from './Components/CondoAssociation/Meetings/pages/PostMeeting';
 import EditMeeting from './Components/CondoAssociation/Meetings/pages/EditMeeting';
-import CondoVotes from './Components/CondoAssociation/CondoVotes';
-import PostPoll from './Components/CondoAssociation/Votes/pages/PostPoll';
-import PostElection from './Components/CondoAssociation/Votes/pages/PostElection';
+import CondoVotes from './Components/CondoAssociation/Votes/pages/Votes';
 import Vote from './Components/CondoAssociation/Votes/pages/Vote';
+import PostVote from './Components/CondoAssociation/Votes/pages/PostVote';
 import EditVote from './Components/CondoAssociation/Votes/pages/EditVote';
 
 // Importing Providers
@@ -91,6 +91,11 @@ function App () {
                     <Route path="/condo-association/meetings/new" component={PostMeeting} />
                     <Route path="/condo-association/meetings/:id" component={Meeting} exact />
                     <Route path="/condo-association/meetings/:id/edit" component={EditMeeting} />
+
+                    <Route path="/condo-association/votes" component={CondoVotes} exact />
+                    <Route path="/condo-association/votes/new" component={PostVote} />
+                    <Route path="/condo-association/votes/:id" component={Vote} exact />
+                    <Route path="/condo-association/votes/:id/edit" component={EditVote} />
 
                     <Route path="/condo-association/votes" component={CondoVotes} exact />
 

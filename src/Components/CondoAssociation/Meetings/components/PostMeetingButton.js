@@ -1,4 +1,3 @@
-import '../../../../css/GlobalStyles.css'
 import React from 'react';
 
 const PostMeetingButton = ({ title }) => {

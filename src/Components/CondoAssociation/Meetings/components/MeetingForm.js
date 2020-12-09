@@ -1,4 +1,3 @@
-import '../../../../css/GlobalStyles.css'
 import React from 'react';
 import PostMeetingButton from './PostMeetingButton';
 import BackButton from '../../../Global/BackButton';

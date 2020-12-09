@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import '../../../../css/GlobalStyles.css';
 import '../css/VotesStyles.css';
 import React from 'react';
@@ -25,6 +26,16 @@ const EditVote = () => {
       </div>
     </>
   );
+=======
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import VoteForm from '../components/VoteForm';
+
+const EditVote = () => {
+  const { id } = useParams();
+
+  return <VoteForm isEdit id={id} />;
+>>>>>>> develop
 };
 
 export default EditVote;

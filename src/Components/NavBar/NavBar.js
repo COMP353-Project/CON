@@ -24,7 +24,7 @@ function NavBar (props) {
                         <div style={{ display: 'flex' }}>
                             <Button component={Link} to='/admin' color="inherit" className="nav-link" >Admin</Button>
                             <Button component={Link} to='/condo-association' color="inherit" className="nav-link">Condo Association</Button>
-                            <Button component={Link} to='/group-home' color="inherit" className="nav-link" >Groups</Button>
+                            <Button component={Link} to='/groups' color="inherit" className="nav-link" >Groups</Button>
                             <Button component={Link} to='/email' color="inherit" className="nav-link" >Email</Button>
                             <Button component={Link} to='/my-account' color="inherit" className="nav-link" >My account</Button>
                             <Button color="inherit" className="nav-link" onClick={handleLogout}>Logout</Button>
@@ -48,7 +48,7 @@ function NavBar (props) {
                     <Link className="logo-wrapper" to='/'><img className="logo" src={condoLogo} alt="condo"></img></Link>
                         <div style={{ display: 'flex' }}>
                             <Button component={Link} to='/condo-association' color="inherit" className="nav-link">Condo Association</Button>
-                            <Button component={Link} to='/group-home' color="inherit" className="nav-link" >Groups</Button>
+                            <Button component={Link} to='/groups' color="inherit" className="nav-link" >Groups</Button>
                             <Button component={Link} to='/email' color="inherit" className="nav-link" >Email</Button>
                             <Button component={Link} to='/my-account' color="inherit" className="nav-link" >My account</Button>
                             <Button color="inherit" className="nav-link" onClick={handleLogout}>Logout</Button>
