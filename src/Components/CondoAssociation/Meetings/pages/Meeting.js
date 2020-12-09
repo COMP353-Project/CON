@@ -3,9 +3,26 @@ import { Link, useParams } from 'react-router-dom';
 import BackButton from '../../../Global/BackButton';
 import Box from '../../../Global/Box';
 import CondoNav from '../../CondoNav';
+import { Context as CondoAssociationContext } from '../../../../context/CondoAssociationContext';
 
 const Meeting = () => {
   const { id } = useParams();
+  console.log(id);
+  const [generalMeeting, setGeneralMeeting] = React.useState([]);
+  const { fetchGeneralMeeting } = React.useContext(CondoAssociationContext);
+
+  /**
+     * Function that fetches a general meeting by id
+     */
+  const getGeneralMeeting = async () => {
+    setGeneralMeeting(await fetchGeneralMeeting({ id }));
+    // setAdminSelected(false);
+    console.log(generalMeeting);
+  };
+
+  React.useEffect(() => {
+    getGeneralMeeting();
+  }, []);
 
   return (
     <>
@@ -15,18 +32,24 @@ const Meeting = () => {
         <Box>
           <div className="header-container">
             <div className="card-info">
-              <h3 className="card-title">Meeting Title</h3>
-              <div className="card-duration">Duration: 1:30</div>
-              <div className="card-date">January 12th, 2020</div>
+              <h3 className="card-title">{generalMeeting.title}</h3>
+              {/* <div className="card-duration">Duration: 1:30</div> */}
+              <div className="card-date">{generalMeeting.created_at}</div>
             </div>
             <Link to={`/condo-association/meetings/${id}/edit`}>
               <div className="details-button">Edit</div>
             </Link>
           </div>
           <div className="card-description">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            {generalMeeting.description}
+          </div>
+          <div className="card-description">
+            <h3>Agenda:</h3>
+            {generalMeeting.agenda}
+          </div>
+          <div className="card-description">
+            <h3>Resolution:</h3>
+            {generalMeeting.resolution}
           </div>
         </Box>
       </div>
