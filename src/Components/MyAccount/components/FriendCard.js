@@ -4,13 +4,13 @@ import Button from './Button';
 
 const FriendCard = ({ friendName, date }) => {
   return (
-    <Box style={{ padding: '10px' }}>
-      <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div style={{ display: 'flex', flexDirection: 'row' }}>
-          <div>{friendName}</div>
+    <Box>
+      <div className="card-info">
+        <div className="friend-info">
+          <div className="friend-name">{friendName}</div>
           <div className="date">{date}</div>
         </div>
-        <Button title="Remove" color="#696969" />
+        <Button title="Remove" className="post-btn del" />
       </div>
     </Box>
   );

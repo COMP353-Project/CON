@@ -36,6 +36,7 @@
   color: white;
   cursor: pointer;
   max-width: 150px;
+  min-width: max-content;
 }
 
 .post-btn.del {

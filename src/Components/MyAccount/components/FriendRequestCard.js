@@ -2,17 +2,17 @@ import React from 'react';
 import Box from '../../Global/Box';
 import Button from './Button';
 
-const FriendRequestCard = ({ from, date }) => {
+const FriendRequestCard = ({ requesterName, date }) => {
   return (
-    <Box style={{ padding: '10px' }}>
-      <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div style={{ display: 'flex', flexDirection: 'row' }}>
-          <div>{from}</div>
-          <div className="date">{date}</div>
+    <Box>
+      <div className="card-info">
+        <div className="friend-info">
+          <div className="friend-name">{requesterName}</div>
+          <div className="card-date">{date}</div>
         </div>
-        <div style={{ display: 'flex', flexDirection: 'row' }}>
-          <Button title="Accept" />
-          <Button title="Reject" color="#696969" />
+        <div className="friend-actions">
+          <Button title="Accept" className="post-btn" />
+          <Button title="Reject" className="post-btn del" />
         </div>
       </div>
     </Box>

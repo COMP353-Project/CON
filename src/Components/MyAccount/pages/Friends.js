@@ -1,12 +1,14 @@
 import React, { Fragment } from 'react';
-import Button from '../components/Button';
+import Spinner from '../../Global/Spinner'
 import FriendRequestCard from '../components/FriendRequestCard';
 import FriendCard from '../components/FriendCard';
+import '../css/Friends.css'
+import { Context as AccountContext } from '../../../context/AccountContext';
 
 const friendRequests = [
-  { id: 0, from: 'Person Name', date: 'January 12th 2020' },
-  { id: 1, from: 'Person Name', date: 'January 12th 2020' },
-  { id: 2, from: 'Person Name', date: 'January 12th 2020' },
+  { id: 0, requesterName: 'John Gerts', date: 'January 1th 2020' },
+  { id: 1, requesterName: 'Rachel Vicker', date: 'January 7th 2020' },
+  { id: 2, requesterName: 'Samuel Tolloni', date: 'January 12th 2020' },
 ];
 
 const friends = [
@@ -18,13 +20,29 @@ const friends = [
 ];
 
 const Friends = () => {
+  const [email, setEmail] = React.useState("");
+  const { sendFriendReq, state:{ error, success, isLoading } } = React.useContext(AccountContext);
+
+  const handleFriendReq = async (e) => {
+    e.preventDefault();
+
+    sendFriendReq({
+      senderID: localStorage.getItem('userid'),
+      receiverEmail: email
+    });
+
+    // Reset form values
+    setEmail('');
+  }
+
+
   const renderFriendRequests = () => {
-    return friendRequests.map(({ id, from, date }) => {
+    return friendRequests.map(({ id, requesterName, date }) => {
       return (
         <Fragment key={id}>
           <FriendRequestCard
             id={id}
-            from={from}
+            requesterName={requesterName}
             date={date}
           />
         </Fragment>
@@ -48,16 +66,28 @@ const Friends = () => {
 
   return (
     <div>
-      <div className="field" style={{ display: 'flex', flexDirection: 'row' }}>
-        <input type="text" placeholder="Enter User Email" style={{
-          flex: 1, border: 'none', backgroundColor: '#EAEAEA', paddingLeft: '10px', paddingRight: '10px'
-        }} />
-        <Button title="Add Friend" />
+      <form className="friend-add" onSubmit={handleFriendReq}>
+        <input type="text"
+          id="send-friend-req"
+          class="friend-field"
+          placeholder="Enter User Email"
+          onChange={e => setEmail(e.target.value)}
+        />
+        {isLoading ? <Spinner/> : <input type="submit" value="Add Friend" className="post-btn"/>}
+      </form>
+      {error === "sendFriendReq" && <p className="is-error primary">Error sending request</p>}
+      {success === "sendFriendReq" && <p className="is-success">Friend request sent</p>}
+      <div className="friend-manage">
+        <div>
+          <h2>Requests</h2>
+          {renderFriendRequests()}
+        </div>
+        <div>
+          <h2>Friends</h2>
+          {renderFriends()}
+        </div>
       </div>
-      <h2>Requests</h2>
-      {renderFriendRequests()}
-      <h2>Friends</h2>
-      {renderFriends()}
+
     </div>
   );
 };
