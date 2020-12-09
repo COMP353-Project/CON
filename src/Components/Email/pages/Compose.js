@@ -1,5 +1,4 @@
 import '../css/Compose.css'
-import '../../../css/GlobalStyles.css'
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ComposeButton from '../components/ComposeButton';

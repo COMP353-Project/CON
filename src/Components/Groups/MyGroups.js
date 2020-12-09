@@ -2,6 +2,7 @@ import { Button, ListItem, ListItemText, List, Container } from '@material-ui/co
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../css/GroupsStyle.css'
+import CreateGroupButton from './CreateGroupBtn';
 import GroupsNav from './GroupsNav.js'
 
 function MyGroups () {
@@ -15,30 +16,32 @@ function MyGroups () {
     }
 
     return (
-        <div>
-            <GroupsNav/>
+      <div>
+        <GroupsNav/>
+        <div className="page-container">
+          <div className="page-header">
             <h1>My Groups</h1>
-            <Button>Create Group</Button>
-            <div className="groups-container">
-                <List>
-                    {groups.map(group => {
-                        return (
-                            <Container className="groupList" maxwidth="sm">
-                                <ListItem>
-                                    <Button component={Link} to={"/groups/" + group.id +"/home"}>
-                                        <ListItemText primary={"Click this to go to group " + group.id} />
-                                    </Button>
-                                    <div>Users go here</div>
-                                    {isAdmin ? <Button>Delete</Button> : <div></div>}
-                                </ListItem>
-                            </Container>
-                        );
-                    }
-                    )}
-                </List>
-            </div>
+            <CreateGroupButton />
+          </div>
+          <div className="groups-container">
+              { groups.map(group => {
+                return (
+                  <div className="group-container">
+                      <Button component={Link} 
+                          to={{
+                              pathname: "/groups/" + group.id +"/home",
+                              state: { id: group.id}
+                          }}>
+                          <p>{"Click this to go to group " + group.id}</p>
+                      </Button>
+                      <div>Users go here</div>
+                      {isAdmin ? <Button>Delete</Button> : <div></div>}
+                  </div>
+                );
+              })}
+          </div>
         </div>
-
+      </div>
     );
 }
 
