@@ -6,24 +6,29 @@ import BackButton from '../../../Global/BackButton';
 import CondoNav from '../../CondoNav';
 import { useParams } from 'react-router-dom';
 import { Context as CondoAssociationContext } from '../../../../context/CondoAssociationContext';
+import { withRouter } from 'react-router-dom';
 
-
-const AdForm = ({ isEdit, id }) => {
+const AdForm = (props) => {
   const { deleteAd } = React.useContext(CondoAssociationContext);
   const { condo_assoc_post_id } = useParams();
   console.log(condo_assoc_post_id)
+  const [success, setSuccess] = React.useState(false);
+  console.log(condo_assoc_post_id)
 
   /**
-   * Function that deletes an ad
+   * Function that deletes an ad and redirects the user to the ads page
    */
   const deleteAnAd = async () => {
-    await deleteAd({ condo_assoc_post_id });
-  };
+    const response = await deleteAd({ condo_assoc_post_id });
+    console.log(response);
+    if (response) {
+      setSuccess(true);
+      setTimeout(() => {
+        props.history.push('/condo-association/ads');
+      }, 3000);
 
-  React.useEffect(() => {
-    deleteAnAd();
-  }, []);
-
+    };
+  }
 
   return (
     <>
@@ -31,10 +36,10 @@ const AdForm = ({ isEdit, id }) => {
       <div className="page-container">
         <BackButton />
         <div className="page-header">
-          <div className="title-text">{isEdit ? 'Edit Ad' : 'Post Ad'}</div>
-          {isEdit
+          <div className="title-text">{props.isEdit ? 'Edit Ad' : 'Post Ad'}</div>
+          {props.isEdit
             ? <div className="buttons-container">
-              <div onClick={deleteAnAd} className="delete">Delete Ad</div>
+              <button onClick={deleteAnAd} className="delete">Delete Ad</button>
               <PostAdButton title="Edit Ad" />
             </div>
             : <PostAdButton />}
@@ -63,9 +68,10 @@ const AdForm = ({ isEdit, id }) => {
             <textarea rows="10" cols="2" placeholder="Ad Description" />
           </div>
         </form>
+        {success && <p className='is-success'>Ad was deleted successfully!</p>}
       </div>
     </>
   );
 };
 
-export default AdForm;
+export default withRouter(AdForm);

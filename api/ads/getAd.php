@@ -6,6 +6,7 @@ header("Content-Type: application/json; charset=UTF-8");
 
 $conn = mysqli_connect("localhost", "root", "mysql", "con");
 
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 $condo_assoc_post_id = $_GET['condo_assoc_post_id'];
     
 $query = "SELECT CA.condo_assoc_post_id, CA.title, CA.description, CA.price, CA.contact_number, U.first_name, U.last_name, P.created_at
@@ -44,4 +45,4 @@ if ($row) {
     echo json_encode(array("message" => "Unable to fetch ad"));
 }
 
-
+}
