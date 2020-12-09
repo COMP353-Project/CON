@@ -7,9 +7,9 @@ header("Content-Type: application/json; charset=UTF-8");
 $conn = mysqli_connect("localhost", "root", "", "con");
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-$query = "SELECT Meetings.*, General_meetings.resolution
-from Meetings, General_meetings 
-Where Meetings.id = General_meetings.meeting_id";
+$query = "SELECT Meetings.*, Admin_meetings.minutes
+from Meetings, Admin_meetings 
+Where Meetings.id = Admin_meetings.meeting_id";
 
 $result = @mysqli_query($conn, $query);
 

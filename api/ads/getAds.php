@@ -4,7 +4,7 @@ header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, X-Requested-With");
 header("Content-Type: application/json; charset=UTF-8");
 
-$conn = mysqli_connect("localhost", "root", "mysql", "con");
+$conn = mysqli_connect("localhost", "root", "", "con");
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 $query = "SELECT CA.condo_assoc_post_id, CA.title, CA.description, CA.price, CA.contact_number, U.first_name, U.last_name, P.created_at
@@ -26,5 +26,4 @@ if ($result->num_rows > 0) {
     echo json_encode(array("message" => "Unable to fetch ads"));
 }
 }
-
 

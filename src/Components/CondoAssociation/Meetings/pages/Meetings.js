@@ -19,17 +19,17 @@ function CondoMeetings () {
    */
   const getGeneralMeetings = async () => {
     setGeneralMeetings(await fetchGeneralMeetings());
-    setAdminSelected(false);
+    // setAdminSelected(false);
   };
 
-  // const getAdminMeetings = async () => {
-  //   setAdminMeetings(await fetchAdminMeetings());
-  //   setAdminSelected(true);
-  // };
+  const getAdminMeetings = async () => {
+    setAdminMeetings(await fetchAdminMeetings());
+    // setAdminSelected(true);
+  };
 
   useEffect(() => {
     getGeneralMeetings();
-    // getAdminMeetings();
+    getAdminMeetings();
   }, []);
 
 
@@ -58,19 +58,42 @@ function CondoMeetings () {
   // };
 
 
-  const RenderMeetings = () => {
+  const RenderGeneralMeetings = () => {
     if (generalMeetings) {
-      return generalMeetings.map(({ id, admin, title, created_at, description, agenda }) => {
+      return generalMeetings.map(({ id, title, created_at, description, agenda, resolution }) => {
         return (
           <Fragment key={id}>
             <MeetingCard
               id={id}
-              admin={admin}
               title={title}
               created_at={created_at}
               // duration={duration}
               description={description}
               agenda={agenda}
+              resolution={resolution}
+            />
+          </Fragment>
+        );
+      });
+    }
+    else {
+      <div>No meetings to show!</div>
+    }
+  };
+
+  const RenderAdminMeetings = () => {
+    if (adminMeetings) {
+      return adminMeetings.map(({ id, title, created_at, description, agenda, minutes }) => {
+        return (
+          <Fragment key={id}>
+            <MeetingCard
+              id={id}
+              title={title}
+              created_at={created_at}
+              // duration={duration}
+              description={description}
+              agenda={agenda}
+              minutes={minutes}
             />
           </Fragment>
         );
@@ -96,7 +119,8 @@ function CondoMeetings () {
           <Button color="inherit" onClick={selectAdmin} className={adminSelected ? 'selected' : 'hidden'}>Admin Meetings</Button>
           <Button color="inherit" onClick={selectGeneral} className={adminSelected ? 'hidden' : 'selected'}>General Meetings</Button>
         </div>
-        <RenderMeetings />
+        {!adminSelected && <RenderGeneralMeetings />}
+        {adminSelected && <RenderAdminMeetings />}
       </div>
     </div>
   );

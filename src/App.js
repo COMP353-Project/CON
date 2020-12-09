@@ -30,6 +30,8 @@ import Meeting from './Components/CondoAssociation/Meetings/pages/Meeting';
 import PostMeeting from './Components/CondoAssociation/Meetings/pages/PostMeeting';
 import EditMeeting from './Components/CondoAssociation/Meetings/pages/EditMeeting';
 import CondoVotes from './Components/CondoAssociation/CondoVotes';
+import GeneralMeeting from './Components/CondoAssociation/Meetings/pages/GeneralMeeting';
+import AdminMeeting from './Components/CondoAssociation/Meetings/pages/AdminMeeting';
 
 // Importing Providers
 import { Provider as AccountProvider } from './context/AccountContext';
@@ -85,7 +87,9 @@ function App () {
 
                     <Route path="/condo-association/meetings" component={CondoMeetings} exact />
                     <Route path="/condo-association/meetings/new" component={PostMeeting} />
-                    <Route path="/condo-association/meetings/:id" component={Meeting} exact />
+
+                    <Route path="/condo-association/meetings-admin/:id" component={AdminMeeting} exact />
+                    <Route path="/condo-association/meetings-general/:id" component={GeneralMeeting} exact />
                     <Route path="/condo-association/meetings/:id/edit" component={EditMeeting} />
 
                     <Route path="/condo-association/votes" component={CondoVotes} exact />

@@ -6,12 +6,12 @@ header("Content-Type: application/json; charset=UTF-8");
 
 $conn = mysqli_connect("localhost", "root", "", "con");
 
-if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+// if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 $id = $_GET['id'];
 
-$query = "SELECT Meetings.*, General_meetings.resolution
-from Meetings, General_meetings 
-Where Meetings.id = '$id' and Meetings.id = General_meetings.meeting_id";
+$query = "SELECT Meetings.*, Admin_meetings.minutes
+from Meetings, Admin_meetings 
+Where Meetings.id = '$id' and Meetings.id = Admin_meetings.meeting_id";
 
 $result = @mysqli_query($conn, $query);
 $row = @mysqli_fetch_assoc($result);
@@ -22,7 +22,7 @@ if ($row) {
     $description = $row['description'];
     $agenda = $row['agenda'];
     $created_at =$row['created_at'];
-    $resolution = $row['resolution'];    
+    $minutes = $row['minutes'];    
 
     echo json_encode(
             [
@@ -30,7 +30,7 @@ if ($row) {
                 "title" => $title,
                 "description" => $description,
                 "agenda" => $agenda,
-                "resolution" => $resolution,
+                "minutes" => $minutes,
                 "created_at" => $created_at
             ]       
             );
@@ -39,6 +39,5 @@ if ($row) {
  else {
     http_response_code(400);
     echo json_encode(array("message" => "Unable to fetch meeting"));
-}
 }
 
