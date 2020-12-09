@@ -5,23 +5,28 @@ import FriendCard from '../components/FriendCard';
 import '../css/Friends.css'
 import { Context as AccountContext } from '../../../context/AccountContext';
 
-const friendRequests = [
-  { id: 0, requesterName: 'John Gerts', date: 'January 1th 2020' },
-  { id: 1, requesterName: 'Rachel Vicker', date: 'January 7th 2020' },
-  { id: 2, requesterName: 'Samuel Tolloni', date: 'January 12th 2020' },
-];
-
-const friends = [
-  { id: 0, friendName: 'Person Name', date: 'January 12th 2020' },
-  { id: 1, friendName: 'Person Name', date: 'January 12th 2020' },
-  { id: 2, friendName: 'Person Name', date: 'January 12th 2020' },
-  { id: 3, friendName: 'Person Name', date: 'January 12th 2020' },
-  { id: 4, friendName: 'Person Name', date: 'January 12th 2020' },
-];
-
 const Friends = () => {
   const [email, setEmail] = React.useState("");
-  const { sendFriendReq, state:{ error, success, isLoading } } = React.useContext(AccountContext);
+  const [requests, setRequests] = React.useState([]);
+  const [friends, setFriends] = React.useState([]);
+
+  const { sendFriendReq, fetchRequests, fetchFriends, state:{ error, success, isLoading } } = React.useContext(AccountContext);
+
+
+  const getRequests = async () => {
+    setRequests(await fetchRequests({ receiver_id: localStorage.getItem('userid') }
+    ));
+  };
+
+  const getFriends = async () => {
+    setFriends(await fetchFriends({ receiver_id: localStorage.getItem('userid') }
+    ));
+  };
+
+  React.useEffect(() => {
+    getRequests();
+    getFriends();
+  }, []);
 
   const handleFriendReq = async (e) => {
     e.preventDefault();
@@ -35,33 +40,47 @@ const Friends = () => {
     setEmail('');
   }
 
-
-  const renderFriendRequests = () => {
-    return friendRequests.map(({ id, requesterName, date }) => {
+  const renderRequests = () => {
+    if(requests) {
+      return requests.map(({ id, first_name, last_name, created_at }) => {
+        return (
+          <Fragment key={id}>
+            <FriendRequestCard
+              requesterFName={first_name}
+              requesterLName={last_name}
+              date={created_at}
+            />
+          </Fragment>
+        );
+      });
+    }
+    else {
       return (
-        <Fragment key={id}>
-          <FriendRequestCard
-            id={id}
-            requesterName={requesterName}
-            date={date}
-          />
-        </Fragment>
+        <div>No friend requests!</div>
       );
-    });
+    }
   };
 
   const renderFriends = () => {
-    return friends.map(({ id, friendName, date }) => {
+    if(friends) {
+      return friends.map(({ id, first_name, last_name, created_at }) => {
+        return (
+          <Fragment key={id}>
+            <FriendCard
+              friendFName={first_name}
+              friendLName={last_name}
+              date={created_at}
+            />
+          </Fragment>
+        );
+      });
+    }
+    else {
       return (
-        <Fragment key={id}>
-          <FriendCard
-            id={id}
-            friendName={friendName}
-            date={date}
-          />
-        </Fragment>
-      );
-    });
+        <div>No friends!</div>
+      );     
+    }
+
   };
 
   return (
@@ -69,7 +88,7 @@ const Friends = () => {
       <form className="friend-add" onSubmit={handleFriendReq}>
         <input type="text"
           id="send-friend-req"
-          class="friend-field"
+          className="friend-field"
           placeholder="Enter User Email"
           onChange={e => setEmail(e.target.value)}
         />
@@ -80,7 +99,7 @@ const Friends = () => {
       <div className="friend-manage">
         <div>
           <h2>Requests</h2>
-          {renderFriendRequests()}
+          {renderRequests()}
         </div>
         <div>
           <h2>Friends</h2>
@@ -93,3 +112,30 @@ const Friends = () => {
 };
 
 export default Friends;
+
+
+// const RenderAds = () => {
+//   return ads.map(({ condo_assoc_post_id, title, description, price, contact_number, first_name, last_name, created_at }) => {
+//     return (
+//       <Fragment key={id}>
+//       <Fragment key={condo_assoc_post_id}>
+//         <AdCard
+//           id={id}
+//           condo_assoc_post_id={condo_assoc_post_id}
+//           title={title}
+//           price={price}
+//           author={author}
+//           date={date}
+//           first_name={first_name + ' ' + last_name}
+//           created_at={created_at}
+//           description={description}
+//         />
+//       </Fragment>
+//     );
+//   });
+// };
+// }
+
+// React.useEffect(() => {
+//   getAds();
+// }, []);

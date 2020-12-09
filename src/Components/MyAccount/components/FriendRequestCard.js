@@ -2,13 +2,13 @@ import React from 'react';
 import Box from '../../Global/Box';
 import Button from './Button';
 
-const FriendRequestCard = ({ requesterName, date }) => {
+const FriendRequestCard = ({ requesterFName, requesterLName, date }) => {
   return (
     <Box>
       <div className="card-info">
         <div className="friend-info">
-          <div className="friend-name">{requesterName}</div>
-          <div className="card-date">{date}</div>
+          <div className="friend-name">{requesterFName + ' ' + requesterLName}</div>
+          <div className="date">{date}</div>
         </div>
         <div className="friend-actions">
           <Button title="Accept" className="post-btn" />

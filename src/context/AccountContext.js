@@ -36,20 +36,53 @@ const fetchPosts = dispatch => async () => {
   }
 };
 
-// Fetch Friends + Requests
-
-const fetchFriends = dispatch => async () => {
+// Fetch Requests
+const fetchRequests = dispatch => async ({ receiver_id }) => {
+  const REQUESTS_ENDPOINT = 'http://localhost:8080/con/api/account/friends/getRequests.php'
   dispatch({ type: 'reset_error' });
+  dispatch({ type: 'reset_success' });
   dispatch({ type: 'start_loading' });
 
   try {
-    const { data } = await axios.get(''); // GET friends URL
-    dispatch({ type: 'fetch_friends', payload: data });
-
+    const response = await axios({
+      method: 'post',
+      url: REQUESTS_ENDPOINT,
+      headers: {
+        'content-type': 'application/json'
+      },
+      data: {receiver_id}
+    });
+    dispatch({ type: 'set_error' , payload: 'fetchRequests'});
     dispatch({ type: 'stop_loading' });
+    return response.data;
   } catch (e) {
     dispatch({ type: 'stop_loading' });
-    dispatch({ type: 'set_error', payload: e.message });
+    dispatch({ type: 'set_error', payload: 'fetchRequests' });
+  }
+};
+
+// Fetch Friends
+const fetchFriends = dispatch => async ({ receiver_id }) => {
+  const FRIENDS_ENDPOINT = 'http://localhost:8080/con/api/account/friends/getFriends.php'
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'reset_success' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    const response = await axios({
+      method: 'post',
+      url: FRIENDS_ENDPOINT,
+      headers: {
+        'content-type': 'application/json'
+      },
+      data: {receiver_id}
+    });
+    dispatch({ type: 'set_error' , payload: 'fetchFriends'});
+    dispatch({ type: 'stop_loading' });
+    return response.data;
+  } catch (e) {
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: 'fetchFriends' });
   }
 };
 
@@ -183,6 +216,6 @@ const fetchCondo = dispatch => async ({ condoId }) => {
 
 export const { Context, Provider } = createDataContext(
   reducer,
-  { fetchPosts, fetchFriends, handleRequest, sendFriendReq, deleteFriend, fetchPayments, payPayment, fetchCondos, fetchCondo },
-  { posts: [], friends: [], payments: [], condos: [], parkingSpots: [], storageRooms: [], isLoading: false, error: '', error:'' }
+  { fetchPosts, fetchRequests, fetchFriends, handleRequest, sendFriendReq, deleteFriend, fetchPayments, payPayment, fetchCondos, fetchCondo },
+  { posts: [], friends: [], payments: [], condos: [], parkingSpots: [], storageRooms: [], isLoading: false, error: '', success:'' }
 );
