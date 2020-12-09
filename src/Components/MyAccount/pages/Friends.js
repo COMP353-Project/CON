@@ -146,30 +146,3 @@ const Friends = () => {
 };
 
 export default Friends;
-
-
-// const RenderAds = () => {
-//   return ads.map(({ condo_assoc_post_id, title, description, price, contact_number, first_name, last_name, created_at }) => {
-//     return (
-//       <Fragment key={id}>
-//       <Fragment key={condo_assoc_post_id}>
-//         <AdCard
-//           id={id}
-//           condo_assoc_post_id={condo_assoc_post_id}
-//           title={title}
-//           price={price}
-//           author={author}
-//           date={date}
-//           first_name={first_name + ' ' + last_name}
-//           created_at={created_at}
-//           description={description}
-//         />
-//       </Fragment>
-//     );
-//   });
-// };
-// }
-
-// React.useEffect(() => {
-//   getAds();
-// }, []);
