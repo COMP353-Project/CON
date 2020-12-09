@@ -19,12 +19,10 @@ function CondoMeetings () {
    */
   const getGeneralMeetings = async () => {
     setGeneralMeetings(await fetchGeneralMeetings());
-    // setAdminSelected(false);
   };
 
   const getAdminMeetings = async () => {
     setAdminMeetings(await fetchAdminMeetings());
-    // setAdminSelected(true);
   };
 
   useEffect(() => {
@@ -40,24 +38,6 @@ function CondoMeetings () {
     setAdminSelected(false)
   }
 
-  // const renderMeetings = () => {
-  //   return meetings.map(({ id, admin, title, date, duration, description }) => {
-  //     return (
-  //       <Fragment key={id}>
-  //         <MeetingCard
-  //           id={id}
-  //           admin={admin}
-  //           title={title}
-  //           date={date}
-  //           // duration={duration}
-  //           description={description}
-  //         />
-  //       </Fragment>
-  //     );
-  //   });
-  // };
-
-
   const RenderGeneralMeetings = () => {
     if (generalMeetings) {
       return generalMeetings.map(({ id, title, created_at, description, agenda, resolution }) => {
@@ -67,7 +47,6 @@ function CondoMeetings () {
               id={id}
               title={title}
               created_at={created_at}
-              // duration={duration}
               description={description}
               agenda={agenda}
               resolution={resolution}
@@ -90,7 +69,6 @@ function CondoMeetings () {
               id={id}
               title={title}
               created_at={created_at}
-              // duration={duration}
               description={description}
               agenda={agenda}
               minutes={minutes}

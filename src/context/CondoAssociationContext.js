@@ -99,8 +99,6 @@ const createDiscussion = dispatch => async ({ user_id, id, title, content, is_pu
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
 
-  // try {
-  //   const { data } = await axios.post('http://localhost/con/CON/api/discussions/addDiscussion.php', { condoAssociationId, title, isPublic, content }); // POST discussion URL
   try {
     const response = await axios({
       method: 'post',
@@ -110,10 +108,8 @@ const createDiscussion = dispatch => async ({ user_id, id, title, content, is_pu
       },
       data: { user_id, id, title, content, is_public } // add condo_assoc title
     });
-    console.log(response);
     return response;
   }
-  // return data.id;
   catch (e) {
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });
@@ -237,7 +233,6 @@ const udpdateAd = dispatch => async ({ adId, condoAssociationId, title, contactN
 // Delete Ad
 
 const deleteAd = dispatch => async ({ condo_assoc_post_id }) => {
-  console.log(condo_assoc_post_id);
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
   try {
@@ -249,7 +244,6 @@ const deleteAd = dispatch => async ({ condo_assoc_post_id }) => {
       },
       data: { condo_assoc_post_id, user_id: localStorage.getItem('userid') } // add condo_assoc title
     });
-    console.log(response);
     return response;
   } catch (e) {
     dispatch({ type: 'stop_loading' });

@@ -10,16 +10,13 @@ import { withRouter } from 'react-router-dom';
 const AdForm = (props) => {
   const { deleteAd } = React.useContext(CondoAssociationContext);
   const { condo_assoc_post_id } = useParams();
-  console.log(condo_assoc_post_id)
   const [success, setSuccess] = React.useState(false);
-  console.log(condo_assoc_post_id)
 
   /**
    * Function that deletes an ad and redirects the user to the ads page
    */
   const deleteAnAd = async () => {
     const response = await deleteAd({ condo_assoc_post_id });
-    console.log(response);
     if (response) {
       setSuccess(true);
       setTimeout(() => {

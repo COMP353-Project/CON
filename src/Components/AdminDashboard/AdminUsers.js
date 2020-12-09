@@ -20,7 +20,8 @@ function AdminUsers () {
    * Function that handles user registration
    * @param {*} e 
    */
-  const handleRegister = async () => {
+  const handleRegister = async (e) => {
+    e.preventDefault();
     const info = {
       first_name: firstName,
       last_name: lastName,
