@@ -1,16 +1,17 @@
 import '../css/Profile.css';
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
 import DiscussionCard from '../../CondoAssociation/Discussions/components/DiscussionCard';
 import AdCard from '../../CondoAssociation/Ads/components/AdCard';
+import { Context as AccountContext } from '../../../context/AccountContext';
 
-const user = {
-  id: 0,
-  name: 'User Name',
-  email: 'email@email.com',
-  address: '1111 Street, City, State, Country'
-};
+// const user = {
+//   id: 0,
+//   name: 'User Name',
+//   email: 'email@email.com',
+//   address: '1111 Street, City, State, Country'
+// };
 
 const discussions = [
   {
@@ -51,6 +52,8 @@ const ads = [
 ];
 
 const Profile = () => {
+  const { fetchUser, state: { user } } = useContext(AccountContext);
+
   const renderDiscussions = () => {
     return discussions.map(({ id, title, author, date, description, commentsLength }) => {
       return (
@@ -85,10 +88,14 @@ const Profile = () => {
     });
   };
 
+  useEffect(() => {
+    fetchUser()
+  }, []);
+
   return (
     <div>
       <div className="page-header">
-        <h1>{user.name}</h1>
+        <h1>{user.first_name} {user.last_name}</h1>
         <div className="buttons-box">
           <Link to="/my-account/edit">
             <Button title="Edit Profile" />

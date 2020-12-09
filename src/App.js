@@ -92,20 +92,6 @@ function App () {
                     <Route path="/condo-association/meetings/:id" component={Meeting} exact />
                     <Route path="/condo-association/meetings/:id/edit" component={EditMeeting} />
 
-<<<<<<< HEAD
-                  <Route path="/condo-association/votes/new-poll" component={PostPoll} />
-                  <Route path="/condo-association/votes/new-election" component={PostElection} />
-                  <Route path="/condo-association/votes/:id/edit" component={EditVote} />
-                  <Route path="/condo-association/votes/:id" component={Vote} />
-                  <Route path="/condo-association/votes" component={CondoVotes} exact />
-                </Switch>
-              </main>
-            </GroupsProvider>
-          </EmailProvider>
-        </CondoAssociationProvider>
-      </AccountProvider>
-    </AuthenticationProvider>
-=======
                     <Route path="/condo-association/votes" component={CondoVotes} exact />
 
                   </Switch>
@@ -116,7 +102,6 @@ function App () {
         </AccountProvider>
       </AuthenticationProvider>
     </AdminProvider>
->>>>>>> develop
   );
 }
 

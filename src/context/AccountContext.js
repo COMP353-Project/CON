@@ -13,7 +13,69 @@ const reducer = (state, action) => {
     case 'fetch_condos': return { ...state, condos: action.payload };
     case 'fetch_parking_spots': return { ...state, parkingSpots: action.payload };
     case 'fetch_storage_rooms': return { ...state, storageRooms: action.payload };
+    case 'fetch_user': return { ...state, user: action.payload };
     default: return state;
+  }
+};
+
+// Fetch User
+
+const fetchUser = dispatch => async () => {
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    const { data } = await axios.get(`http://localhost:8080/CON/api/account/get_user.php?id=${localStorage.getItem('userid')}`);
+    dispatch({ type: 'fetch_user', payload: data });
+
+    dispatch({ type: 'stop_loading' });
+  } catch (e) {
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: e.message });
+  }
+};
+
+// Update Profile
+
+const updateProfile = dispatch => async ({ firstName, lastName, email, address }) => {
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    await axios.put(
+      'http://localhost:8080/CON/api/account/update_profile.php',
+      { first_name: firstName, last_name: lastName, email, address, id: localStorage.getItem('userid') }
+    );
+
+    dispatch({ type: 'stop_loading' });
+  } catch (e) {
+    console.log(e.message);
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: e.message });
+  }
+};
+
+// Update Password
+
+const updatePassword = dispatch => async ({ currentPassword, newPassword, confirmNewPassword }) => {
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    if (newPassword !== confirmNewPassword) throw new Error('Passwords must match');
+
+    const response = await axios.put(
+      'http://localhost:8080/CON/api/account/update_password.php',
+      { id: localStorage.getItem('userid'), current_password: currentPassword, new_password: newPassword }
+    );
+
+    console.log(response);
+
+    dispatch({ type: 'stop_loading' });
+  } catch (e) {
+    console.log(e.message);
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: e.message });
   }
 };
 
@@ -170,6 +232,7 @@ const fetchCondo = dispatch => async ({ condoId }) => {
 
 export const { Context, Provider } = createDataContext(
   reducer,
-  { fetchPosts, fetchFriends, handleRequest, addFriend, deleteFriend, fetchPayments, payPayment, fetchCondos, fetchCondo },
-  { posts: [], friends: [], payments: [], condos: [], parkingSpots: [], storageRooms: [], isLoading: false, error: '' }
+  { fetchPosts, fetchFriends, handleRequest, addFriend, deleteFriend, fetchPayments, payPayment, fetchCondos,
+    fetchCondo, fetchUser, updateProfile, updatePassword },
+  { posts: [], friends: [], payments: [], condos: [], parkingSpots: [], storageRooms: [], isLoading: false, error: '', user: {} }
 );
