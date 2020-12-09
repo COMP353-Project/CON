@@ -7,7 +7,7 @@ import CondoNav from './CondoNav';
 
 const MyAccountNav = () => {
   return (
-    <div style={{ padding: '20px' }}>
+    <div className="page-container">
       <Switch>
         <Route path="/my-account/friends" component={Friends} />
         <Route path="/my-account/financial-status" component={FinancialStatus} />

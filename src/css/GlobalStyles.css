@@ -36,6 +36,7 @@
   color: white;
   cursor: pointer;
   max-width: 150px;
+  min-width: max-content;
 }
 
 .post-btn.del {
@@ -139,4 +140,12 @@
 .is-success {
   margin-top: 20px;  
   color: blue;
+}
+
+.is-success.secondary {
+  color: #ff6408;
+}
+
+.is-error.bold, is-success.bold {
+  font-weight: 800;
 }
