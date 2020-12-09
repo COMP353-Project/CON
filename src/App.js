@@ -29,7 +29,6 @@ import EditAd from './Components/CondoAssociation/Ads/pages/EditAd';
 import CondoMeetings from './Components/CondoAssociation/Meetings/pages/Meetings';
 import PostMeeting from './Components/CondoAssociation/Meetings/pages/PostMeeting';
 import EditMeeting from './Components/CondoAssociation/Meetings/pages/EditMeeting';
-import CondoVotes from './Components/CondoAssociation/CondoVotes';
 import GeneralMeeting from './Components/CondoAssociation/Meetings/pages/GeneralMeeting';
 import AdminMeeting from './Components/CondoAssociation/Meetings/pages/AdminMeeting';
 import CondoVotes from './Components/CondoAssociation/Votes/pages/Votes';
