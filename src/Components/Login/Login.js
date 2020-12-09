@@ -28,39 +28,39 @@ function LoginFormWithContext (props) {
 
     return (
         <div className="login-container">
-          <div className="login-form-container">
-            <h1 className="login-title">Login</h1>
+            <div className="login-form-container">
+                <h1 className="login-title">Login</h1>
 
-            <form className="login-form">
-                <TextField
-                    id="outlined-password-input"
-                    className="login-form__field"
-                    label="Email"
-                    type="email"
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
-                />
-                <TextField className="input"
-                    id="outlined-password-input"
-                    className="login-form__field"
-                    label="Password"
-                    type="password"
-                    autoComplete="current-password"
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
-                />
-                <div className="btn-container">
-                    <Button
-                        className="signin-btn"
-                        variant="contained"
-                        color="secondary" container
-                        onClick={handleLogin}
-                    >Sign in</Button>
-                </div>
+                <form className="login-form">
+                    <TextField
+                        id="outlined-password-input"
+                        className="login-form__field"
+                        label="Email"
+                        type="email"
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
+                    />
+                    <TextField className="input"
+                        id="outlined-password-input"
+                        className="login-form__field"
+                        label="Password"
+                        type="password"
+                        autoComplete="current-password"
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+                    />
+                    <div className="btn-container">
+                        <Button
+                            className="signin-btn"
+                            variant="contained"
+                            color="secondary" container
+                            onClick={handleLogin}
+                        >Sign in</Button>
+                    </div>
 
-                {error && <p className="is-error center secondary">Your email or password is invalid. Please try again.</p>}
-            </form>
-          </div>
+                    {error && <p className="is-error center secondary">Your email or password is invalid. Please try again.</p>}
+                </form>
+            </div>
         </div>
     );
 }
