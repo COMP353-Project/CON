@@ -6,7 +6,7 @@ import Spinner from '../Global/Spinner';
 import { Context as AdminContext } from '../../context/AdminContext';
 
 function AdminUsers () {
-  const { registerUser, promoteUser, deleteUser, state:{ error, success, isLoading } } = React.useContext(AdminContext);
+  const { registerUser, promoteUser, deleteUser, state: { error, success, isLoading } } = React.useContext(AdminContext);
 
   const [firstName, setFirstName] = React.useState("");
   const [lastName, setLastName] = React.useState("");
@@ -22,7 +22,6 @@ function AdminUsers () {
    */
   const handleRegister = async (e) => {
     e.preventDefault();
-
     const info = {
       first_name: firstName,
       last_name: lastName,
@@ -118,6 +117,7 @@ function AdminUsers () {
               type="text"
               variant="outlined"
               value={regAddress}
+              required
               onChange={e => setRegAddress(e.target.value)}
             />
           </div>
@@ -132,9 +132,9 @@ function AdminUsers () {
               onChange={e => setRegPassword(e.target.value)}
             />
           </div>
-          
+
           <div className="btn-container">
-            {isLoading ? <Spinner/> : <input type="submit" value="REGISTER" className="post-btn"/>}
+            {isLoading ? <Spinner /> : <input type="submit" value="REGISTER" className="post-btn" />}
           </div>
           {error === "registerUser" && <p className="is-error primary">Couldn't register user</p>}
           {success === "registerUser" && <p className="is-success">User was registered</p>}
@@ -155,7 +155,7 @@ function AdminUsers () {
             />
           </div>
           <div className="btn-container">
-            {isLoading ? <Spinner/> : <input type="submit" value="PROMOTE" className="post-btn"/>}
+            {isLoading ? <Spinner /> : <input type="submit" value="PROMOTE" className="post-btn" />}
           </div>
           {error === "promoteUser" && <p className="is-error primary">User either does not exists or is already admin</p>}
           {success === "promoteUser" && <p className="is-success">User was promoted</p>}
@@ -176,7 +176,7 @@ function AdminUsers () {
             />
           </div>
           <div className="btn-container">
-            {isLoading ? <Spinner/> : <input type="submit" value="DELETE" className="post-btn del"/>}
+            {isLoading ? <Spinner /> : <input type="submit" value="DELETE" className="post-btn del" />}
           </div>
           {error === "deleteUser" && <p className="is-error primary">Error deleting user</p>}
           {success === "deleteUser" && <p className="is-success">User was deleted</p>}

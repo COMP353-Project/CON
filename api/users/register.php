@@ -9,19 +9,27 @@ $_POST = json_decode($rest_json, true);
 $conn = mysqli_connect("localhost", "root", "", "con");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  $password = $_POST['password'];
-  $password_hash = password_hash($password, PASSWORD_DEFAULT);
-  $query="INSERT INTO Users (first_name, last_name, email, password, address)
-          VALUES('".$_POST["first_name"]."','".$_POST["last_name"]."','".$_POST["email"]."','".$password_hash."','".$_POST["address"]."')";
+    $password = $_POST['password'];
+$password_hash = password_hash($password, PASSWORD_DEFAULT);
 
-  $result = @mysqli_query($conn, $query);
-  echo(json_encode($result));
+$query = "insert into Users (first_name,last_name, email, password, address)
+values(
+    '" . $_POST['first_name'] . "',
+    '" . $_POST['last_name'] . "',
+    '" . $_POST['email'] . "',
+    '" . $password_hash . "',
+    '" . $_POST['address'] . "'
+)";
 
-  if ($result) {
-      http_response_code(200);
-      echo json_encode(array("message" => "User was successfully registered."));
-  } else {
-      http_response_code(400);
-      echo json_encode(array("message" => "Unable to register the user."));
-  }
+$result = @mysqli_query($conn, $query);
+echo(json_encode($result));
+
+if ($result) {
+    http_response_code(200);
+    echo json_encode(array("message" => "User was successfully registered."));
+} else {
+    http_response_code(400);
+    echo json_encode(array("message" => "Unable to register the user."));
 }
+}
+

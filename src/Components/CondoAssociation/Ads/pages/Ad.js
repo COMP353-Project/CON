@@ -1,12 +1,27 @@
 import '../css/Ad.css';
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import BackButton from '../../../Global/BackButton';
 import Box from '../../../Global/Box';
 import CondoNav from '../../CondoNav';
+import { Context as CondoAssociationContext } from '../../../../context/CondoAssociationContext';
 
 const Ad = () => {
-  const { id } = useParams();
+  const { condo_assoc_post_id } = useParams();
+  const { fetchAd } = useContext(CondoAssociationContext);
+  const [ad, setAd] = React.useState([]);
+
+  /**
+   * Function that fetches a specific ad given an id
+   */
+  const getAd = async () => {
+    setAd(await fetchAd({ condo_assoc_post_id }));
+  };
+
+  React.useEffect(() => {
+    getAd();
+  }, []);
+
 
   return (
     <>
@@ -16,23 +31,20 @@ const Ad = () => {
         <Box>
           <div className="header-container">
             <div className="card-info">
-              <h3 className="card-title">Ad Title</h3>
-              <div className="card-author">Author Name</div>
-              <div className="card-price">199$</div>
-              <div className="card-date">January 12th 2020</div>
+              <h3 className="card-title">{ad.title}</h3>
+              <div className="card-author">{ad.first_name + ' ' + ad.last_name}</div>
+              <div className="card-price">{ad.price}$</div>
+              <div className="card-date">{ad.created_at}</div>
             </div>
-            <Link to={`/condo-association/ads/${id}/edit`}>
+            <Link to={`/condo-association/ads/${condo_assoc_post_id}/edit`}>
               <div className="edit">Edit</div>
             </Link>
           </div>
           <div className="card-description">
-            Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book.
-            Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book.
-            Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book.
-            Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book.
+            {ad.description}
           </div>
           <div className="contact">
-            Contact Detail: +1 (514) 111-2222
+            {ad.contact_number}
           </div>
         </Box>
       </div>

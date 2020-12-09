@@ -27,9 +27,10 @@ import PostAd from './Components/CondoAssociation/Ads/pages/PostAd';
 import Ad from './Components/CondoAssociation/Ads/pages/Ad';
 import EditAd from './Components/CondoAssociation/Ads/pages/EditAd';
 import CondoMeetings from './Components/CondoAssociation/Meetings/pages/Meetings';
-import Meeting from './Components/CondoAssociation/Meetings/pages/Meeting';
 import PostMeeting from './Components/CondoAssociation/Meetings/pages/PostMeeting';
 import EditMeeting from './Components/CondoAssociation/Meetings/pages/EditMeeting';
+import GeneralMeeting from './Components/CondoAssociation/Meetings/pages/GeneralMeeting';
+import AdminMeeting from './Components/CondoAssociation/Meetings/pages/AdminMeeting';
 import CondoVotes from './Components/CondoAssociation/Votes/pages/Votes';
 import Vote from './Components/CondoAssociation/Votes/pages/Vote';
 import PostVote from './Components/CondoAssociation/Votes/pages/PostVote';
@@ -59,14 +60,14 @@ function App () {
                     <Route path="/my-account" component={MyAccount} />
                     <Route path="/email" component={Email}></Route>
                     <Route path="/login" component={Login} exact></Route>
-                    
+
                     {/* Group routes */}
                     <Route path="/groups" component={GroupsLanding} exact></Route>
                     <Route path="/groups/:id/home" component={GroupsHome} exact />
                     <Route path="/groups/:id/posts" component={Groups} exact />
                     <Route path="/groups/:id/requests" component={GroupsRequests} exact />
                     <Route path="/groups/my-groups" component={MyGroups} exact></Route>
-                    <Route path="/groups/all-groups" component={AllGroups} exact/>
+                    <Route path="/groups/all-groups" component={AllGroups} exact />
 
                     {/* Admin routes */}
                     <Route path="/admin" component={AdminHome} exact />
@@ -83,13 +84,15 @@ function App () {
                     <Route path="/condo-association/discussions" component={Discussions} exact />
 
                     <Route path="/condo-association/ads/new" component={PostAd} />
-                    <Route path="/condo-association/ads/:id/edit" component={EditAd} />
-                    <Route path="/condo-association/ads/:id" component={Ad} />
+                    <Route path="/condo-association/ads/:condo_assoc_post_id/edit" component={EditAd} />
+                    <Route path="/condo-association/ads/:condo_assoc_post_id" component={Ad} />
                     <Route path="/condo-association/ads" component={Ads} />
 
                     <Route path="/condo-association/meetings" component={CondoMeetings} exact />
                     <Route path="/condo-association/meetings/new" component={PostMeeting} />
-                    <Route path="/condo-association/meetings/:id" component={Meeting} exact />
+
+                    <Route path="/condo-association/meetings-admin/:id" component={AdminMeeting} exact />
+                    <Route path="/condo-association/meetings-general/:id" component={GeneralMeeting} exact />
                     <Route path="/condo-association/meetings/:id/edit" component={EditMeeting} />
 
                     <Route path="/condo-association/votes" component={CondoVotes} exact />

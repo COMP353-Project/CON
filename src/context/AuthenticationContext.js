@@ -19,7 +19,7 @@ const reducer = (state, action) => {
 
 // Sign In
 const signin = dispatch => async ({ email, password }) => {
-  const LOGIN_ENDPOINT = 'http://localhost:8080/con/api/users/login.php'
+  const LOGIN_ENDPOINT = 'http://localhost/CON/con/api/users/login.php'
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
 
