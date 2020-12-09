@@ -12,7 +12,6 @@ const reducer = (state, action) => {
     case 'register': return { ...state, user: action.payload };
     case 'signin': return { ...state, user: action.payload };
     case 'signout': return { ...state, user: null };
-    case 'register': return { ...state, user: action.payload }
     default: return state;
   }
 };

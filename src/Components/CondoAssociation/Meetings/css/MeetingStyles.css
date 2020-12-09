@@ -1,16 +1,14 @@
-
 .subnav {
-    display: flex;
-    color: #32a895;
-    margin: 10px 0;
-    padding-left: 30px;
+  display: flex;
+  color: #32a895;
+  margin: 10px 0;
+  padding-left: 30px;
 }
 
-.page-container.admin .card.general{
-    display: none;
+.page-container.admin .card.general {
+  display: none;
 }
 
 .page-container.general .card.admin {
-    display: none;
+  display: none;
 }
-

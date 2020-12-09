@@ -40,7 +40,7 @@
 }
 
 .post-btn.del {
-  background-color:rgb(195, 0, 0);
+  background-color: rgb(195, 0, 0);
 }
 
 .details-button {
@@ -101,7 +101,8 @@
   margin-right: 20px;
 }
 
-.card-author, .card-duration {
+.card-author,
+.card-duration {
   margin-right: 20px;
   font-size: 15px;
   font-weight: 500;
@@ -138,14 +139,36 @@
 }
 
 .is-success {
-  margin-top: 20px;  
+  margin-top: 20px;
   color: blue;
 }
 
-.is-success.secondary {
-  color: #ff6408;
+/* SPACING STYLES */
+.vertical-separator .small {
+  margin-bottom: 10px;
 }
 
-.is-error.bold, is-success.bold {
+.vertical-separator .medium {
+  margin-bottom: 15px;
+}
+
+.vertical-separator .large {
+  margin-bottom: 20px;
+}
+
+.horizontal-separator .small {
+  margin-right: 10px;
+}
+
+.horizontal-separator .medium {
+  margin-right: 15px;
+}
+
+.horizontal-separator .large {
+  margin-right: 20px;
+}
+
+.is-error.bold,
+is-success.bold {
   font-weight: 800;
 }

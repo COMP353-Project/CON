@@ -1,0 +1,41 @@
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.info-label {
+  font-weight: 600;
+  margin-right: 6px;
+}
+
+.subnav {
+  display: flex;
+  color: #32a895;
+  margin: 10px 0;
+  padding-left: 30px;
+}
+
+.option-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin-top: 10px;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.option-name {
+  font-weight: 500;
+}
+
+.option-description {
+  color: #606060;
+}
+
+.delete-option-icon {
+  color: rgb(195, 0, 0);
+  font-weight: bold;
+  cursor: pointer;
+}
