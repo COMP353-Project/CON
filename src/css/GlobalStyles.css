@@ -141,3 +141,11 @@
   margin-top: 20px;  
   color: blue;
 }
+
+.is-success.secondary {
+  color: #ff6408;
+}
+
+.is-error.bold, is-success.bold {
+  font-weight: 800;
+}

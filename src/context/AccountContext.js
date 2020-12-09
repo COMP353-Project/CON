@@ -19,8 +19,7 @@ const reducer = (state, action) => {
   }
 };
 
-// Fetch Posts
-
+// Fetch Post
 const fetchPosts = dispatch => async () => {
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
@@ -33,6 +32,32 @@ const fetchPosts = dispatch => async () => {
   } catch (e) {
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });
+  }
+};
+
+// Add Friend
+const sendFriendReq = dispatch => async ({ senderID, receiverEmail }) => {
+  const REQUEST_ENDPOINT = 'http://localhost:8080/con/api/account/friends/sendRequest.php';
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'reset_success' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    const response = await axios({
+      method: 'post',
+      url: REQUEST_ENDPOINT,
+      headers: {
+        'content-type': 'application/json'
+      },
+      data: { senderID, receiverEmail }
+    });
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_success', payload: 'sendFriendReq' });
+    return response;
+  }
+  catch (e) {
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: 'sendFriendReq' });
   }
 };
 
@@ -77,7 +102,7 @@ const fetchFriends = dispatch => async ({ receiver_id }) => {
       },
       data: {receiver_id}
     });
-    dispatch({ type: 'set_error' , payload: 'fetchFriends'});
+    dispatch({ type: 'set_success' , payload: 'fetchFriends'});
     dispatch({ type: 'stop_loading' });
     return response.data;
   } catch (e) {
@@ -86,67 +111,55 @@ const fetchFriends = dispatch => async ({ receiver_id }) => {
   }
 };
 
-// Friend Request Action
-
-const handleRequest = dispatch => async ({ requestSenderId, accept }) => {
+// Accept Friend Request
+const acceptRequest = dispatch => async ({ sender_id, receiver_id }) => {
+  const ACCEPT_ENDPOINT = 'http://localhost:8080/con/api/account/friends/accept.php'
   dispatch({ type: 'reset_error' });
-  dispatch({ type: 'start_loading' });
-
-  try {
-    await axios.put('', { requestSenderId, accept }); // PUT friend_request URL
-    
-    fetchFriends();
-  } catch (e) {
-    dispatch({ type: 'stop_loading' });
-    dispatch({ type: 'set_error', payload: e.message });
-  }
-};
-
-// Add Friend
-
-const sendFriendReq = dispatch => async ({ senderID, receiverEmail }) => {
-  const REQUEST_ENDPOINT = 'http://localhost:8080/con/api/account/friends/sendRequest.php';
-  dispatch({ type: 'reset_error' });
-  dispatch({ type: 'reset_success' });
   dispatch({ type: 'start_loading' });
 
   try {
     const response = await axios({
-      method: 'post',
-      url: REQUEST_ENDPOINT,
+      method: 'put',
+      url: ACCEPT_ENDPOINT,
       headers: {
         'content-type': 'application/json'
       },
-      data: { senderID, receiverEmail }
+      data: {sender_id, receiver_id }
     });
+    dispatch({ type: 'set_success' , payload: 'acceptFriendRequest'});
     dispatch({ type: 'stop_loading' });
-    dispatch({ type: 'set_success', payload: 'sendFriendReq' });
-    return response;
-  }
-  catch (e) {
+    return response.data;
+  } catch (e) {
     dispatch({ type: 'stop_loading' });
-    dispatch({ type: 'set_error', payload: 'sendFriendReq' });
+    dispatch({ type: 'set_error', payload: 'acceptFriendRequest' });
   }
 };
 
-// Delete Friend
-
-const deleteFriend = dispatch => async ({ friendId }) => {
+// Delete Friend or Friend Request
+const deleteFriend = dispatch => async ({ sender_id, receiver_id }) => {
+  const DELETE_ENDPOINT = 'http://localhost:8080/con/api/account/friends/delete.php'
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
 
   try {
-    await axios.delete('', { friendId }); // DELETE friend URL
-
-    fetchFriends();
+    const response = await axios({
+      method: 'delete',
+      url: DELETE_ENDPOINT,
+      headers: {
+        'content-type': 'application/json'
+      },
+      data: {sender_id, receiver_id }
+    });
+    dispatch({ type: 'set_success' , payload: 'deleteFriend'});
+    dispatch({ type: 'stop_loading' });
+    return response.data;
   } catch (e) {
     dispatch({ type: 'stop_loading' });
-    dispatch({ type: 'set_error', payload: e.message });
+    dispatch({ type: 'set_error', payload: 'deleteFriend' });
   }
 };
 
 // Fetch Payments
-
 const fetchPayments = dispatch => async () => {
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
@@ -163,7 +176,6 @@ const fetchPayments = dispatch => async () => {
 };
 
 // Pay Payment
-
 const payPayment = dispatch => async ({ paymentId }) => {
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
@@ -179,7 +191,6 @@ const payPayment = dispatch => async ({ paymentId }) => {
 };
 
 // Fetch Condos
-
 const fetchCondos = dispatch => async () => {
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
@@ -196,7 +207,6 @@ const fetchCondos = dispatch => async () => {
 };
 
 // Fetch Condo Detail
-
 const fetchCondo = dispatch => async ({ condoId }) => {
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
@@ -216,6 +226,6 @@ const fetchCondo = dispatch => async ({ condoId }) => {
 
 export const { Context, Provider } = createDataContext(
   reducer,
-  { fetchPosts, fetchRequests, fetchFriends, handleRequest, sendFriendReq, deleteFriend, fetchPayments, payPayment, fetchCondos, fetchCondo },
+  { fetchPosts, fetchRequests, fetchFriends, acceptRequest, sendFriendReq, deleteFriend, fetchPayments, payPayment, fetchCondos, fetchCondo },
   { posts: [], friends: [], payments: [], condos: [], parkingSpots: [], storageRooms: [], isLoading: false, error: '', success:'' }
 );
