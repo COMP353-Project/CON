@@ -4,8 +4,27 @@ import React from 'react';
 import PostAdButton from './PostAdButton';
 import BackButton from '../../../Global/BackButton';
 import CondoNav from '../../CondoNav';
+import { useParams } from 'react-router-dom';
+import { Context as CondoAssociationContext } from '../../../../context/CondoAssociationContext';
+
 
 const AdForm = ({ isEdit, id }) => {
+  const { deleteAd } = React.useContext(CondoAssociationContext);
+  const { condo_assoc_post_id } = useParams();
+  console.log(condo_assoc_post_id)
+
+  /**
+   * Function that deletes an ad
+   */
+  const deleteAnAd = async () => {
+    await deleteAd({ condo_assoc_post_id });
+  };
+
+  React.useEffect(() => {
+    deleteAnAd();
+  }, []);
+
+
   return (
     <>
       <CondoNav />
@@ -14,11 +33,11 @@ const AdForm = ({ isEdit, id }) => {
         <div className="page-header">
           <div className="title-text">{isEdit ? 'Edit Ad' : 'Post Ad'}</div>
           {isEdit
-          ? <div className="buttons-container">
-            <div className="delete">Delete Ad</div>
-            <PostAdButton title="Edit Ad" />
-          </div>
-          : <PostAdButton />}
+            ? <div className="buttons-container">
+              <div onClick={deleteAnAd} className="delete">Delete Ad</div>
+              <PostAdButton title="Edit Ad" />
+            </div>
+            : <PostAdButton />}
         </div>
         <form className="ui form">
           <div className="field">

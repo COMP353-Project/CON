@@ -236,12 +236,21 @@ const udpdateAd = dispatch => async ({ adId, condoAssociationId, title, contactN
 
 // Delete Ad
 
-const deleteAd = dispatch => async ({ adId }) => {
+// const deleteAd = dispatch => async ({ adId }) => {
+const deleteAd = dispatch => async ({ condo_assoc_post_id }) => {
+  console.log(condo_assoc_post_id);
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
-
   try {
-    await axios.delete('', { adId }); // DELETE ad URL
+    const response = await axios({
+      method: 'delete',
+      url: 'http://localhost/con/CON/api/ads/deleteAd.php',
+      headers: {
+        'content-type': 'application/json'
+      },
+      data: { condo_assoc_post_id, user_id: localStorage.getItem('userid') } // add condo_assoc title
+    });
+    console.log(response);
   } catch (e) {
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });

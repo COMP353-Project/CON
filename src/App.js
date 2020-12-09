@@ -55,14 +55,14 @@ function App () {
                     <Route path="/my-account" component={MyAccount} />
                     <Route path="/email" component={Email}></Route>
                     <Route path="/login" component={Login} exact></Route>
-                    
+
                     {/* Group routes */}
                     <Route path="/groups" component={GroupsLanding} exact></Route>
                     <Route path="/groups/:id/home" component={GroupsHome} exact />
                     <Route path="/groups/:id/posts" component={Groups} exact />
                     <Route path="/groups/:id/requests" component={GroupsRequests} exact />
                     <Route path="/groups/my-groups" component={MyGroups} exact></Route>
-                    <Route path="/groups/all-groups" component={AllGroups} exact/>
+                    <Route path="/groups/all-groups" component={AllGroups} exact />
 
                     {/* Admin routes */}
                     <Route path="/admin" component={AdminHome} exact />
@@ -79,8 +79,8 @@ function App () {
                     <Route path="/condo-association/discussions" component={Discussions} exact />
 
                     <Route path="/condo-association/ads/new" component={PostAd} />
-                    <Route path="/condo-association/ads/:id/edit" component={EditAd} />
-                    <Route path="/condo-association/ads/:id" component={Ad} />
+                    <Route path="/condo-association/ads/:condo_assoc_post_id/edit" component={EditAd} />
+                    <Route path="/condo-association/ads/:condo_assoc_post_id" component={Ad} />
                     <Route path="/condo-association/ads" component={Ads} />
 
                     <Route path="/condo-association/meetings" component={CondoMeetings} exact />
