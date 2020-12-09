@@ -22,7 +22,7 @@ const Conversations = () => {
         </Link>
       </div>
       <div>
-        {error ? <p style={{ color: 'red' }}>{error}</p> : null}
+        {error && <p style={{ color: 'red' }}>{error}</p>}
         <Inbox />
       </div>
     </div>

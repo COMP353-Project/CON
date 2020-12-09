@@ -167,3 +167,8 @@
 .horizontal-separator .large {
   margin-right: 20px;
 }
+
+.is-error.bold,
+is-success.bold {
+  font-weight: 800;
+}

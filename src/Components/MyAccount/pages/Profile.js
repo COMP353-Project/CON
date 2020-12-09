@@ -6,13 +6,6 @@ import DiscussionCard from '../../CondoAssociation/Discussions/components/Discus
 import AdCard from '../../CondoAssociation/Ads/components/AdCard';
 import { Context as AccountContext } from '../../../context/AccountContext';
 
-// const user = {
-//   id: 0,
-//   name: 'User Name',
-//   email: 'email@email.com',
-//   address: '1111 Street, City, State, Country'
-// };
-
 const discussions = [
   {
     id: 0,

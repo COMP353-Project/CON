@@ -24,7 +24,6 @@ const signin = dispatch => async ({ email, password }) => {
 
   try {
     const response = await axios.post(LOGIN_ENDPOINT, { email, password }); // POST Sign In URL
-    console.log(response);
 
     if (response.status === 200 && response.data.jwt && response.data.expireAt) {
       dispatch({ type: 'signin', payload: response.data });
