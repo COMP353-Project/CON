@@ -55,6 +55,7 @@ if($row) {
         echo json_encode(
             [
                 "message" => "Successful login.",
+                "id" => $id,
                 "jwt" => $jwt,
                 "admin" => $is_admin,
                 "email" => $email,
