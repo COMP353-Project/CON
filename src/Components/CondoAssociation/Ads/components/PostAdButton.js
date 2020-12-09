@@ -1,4 +1,3 @@
-import '../../../../css/GlobalStyles.css'
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Context as CondoAssociationContext } from '../../../../context/CondoAssociationContext';

@@ -1,5 +1,4 @@
 import '../css/AdForm.css';
-import '../../../../css/GlobalStyles.css'
 import React from 'react';
 import PostAdButton from './PostAdButton';
 import BackButton from '../../../Global/BackButton';

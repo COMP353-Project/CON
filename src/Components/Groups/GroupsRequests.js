@@ -1,11 +1,8 @@
-import { Card, Box, Button, ListItem, ListItemText, List, Container } from '@material-ui/core';
-import { PinDropSharp } from '@material-ui/icons';
+import { Card, Button, ListItem, ListItemText, Container } from '@material-ui/core';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import '../../css/GroupsStyle.css'
 import GroupsNav from './GroupsNav.js'
 import MyGroupNav from './MyGroupNav.js'
-import '../../css/GlobalStyles.css'
 
 function GroupsRequests () {
 
