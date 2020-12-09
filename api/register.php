@@ -27,6 +27,6 @@ if ($result) {
     http_response_code(200);
     echo json_encode(array("message" => "User was successfully registered."));
 } else {
-    http_response_code(400);
     echo json_encode(array("message" => "Unable to register the user."));
+    http_response_code(400);
 }

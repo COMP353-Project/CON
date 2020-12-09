@@ -14,20 +14,25 @@ const Conversation = () => {
     fetchConversation({ conversationId: id });
   }, []);
 
-  const renderConversationMessages = () => {
-    if (!messages) return null;
-
-    return messages.map(({ id, first_name, last_name, created_at, content }) => {
-      const from = first_name + ' ' + last_name;
+  const RenderConversationMessages = () => {
+    if(messages.length){
+      return messages.map(({ id, first_name, last_name, created_at, content }) => {
+        const from = first_name + ' ' + last_name;
+        return (
+          <ConversationMessage
+            key={id}
+            from={from}
+            date={created_at}
+            message={content}
+          />
+        );
+      })
+    }
+    else {
       return (
-        <ConversationMessage
-          key={id}
-          from={from}
-          date={created_at}
-          message={content}
-        />
-      );
-    })
+        <p className="is-error">No Message included.</p>
+      )
+    }
   };
 
   return (
@@ -41,9 +46,8 @@ const Conversation = () => {
           {isLoading ? <Spinner /> : null}
         </div>
         <div className="body">
-          {renderConversationMessages()}
+          <RenderConversationMessages />
           <div style={{ height: '10px' }} />
-          {error ? <p style={{ color: 'red' }}>{error}</p> : null}
           <div style={{ height: '10px' }} />
           <form className="ui form">
             <div className="field message-form">
@@ -58,9 +62,9 @@ const Conversation = () => {
               <div
                 className="submit-button"
                 onClick={async () => {
-                  setMessage('');
                   await sendEmail({ conversationId: id, content: message });
                   fetchConversation({ conversationId: id });
+                  setMessage('');
                 }}
               >
                 Send

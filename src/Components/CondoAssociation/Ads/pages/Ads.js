@@ -39,7 +39,9 @@ const Ads = () => {
       });
     }
     else {
-      <div>No ads to show!</div>
+      return (
+        <div>No ads to show!</div>
+      );
     }
   }
 
