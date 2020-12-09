@@ -8,8 +8,7 @@ const reducer = (state, action) => {
     case 'set_error': return { ...state, error: action.payload };
     case 'reset_error': return { ...state, error: '' };
     case 'fetch_conversations': return { ...state, conversations: action.payload };
-    case 'fetch_sent_messages': return { ...state, sentMessages: action.payload };
-    case 'fetch_conversation': return { ...state, conversation: action.payload };
+    case 'fetch_conversation': return { ...state, messages: action.payload };
     default: return state;
   }
 };
@@ -21,25 +20,10 @@ const fetchConversations = dispatch => async () => {
   dispatch({ type: 'start_loading' });
 
   try {
-    const { data } = await axios.get(''); // GET conversations URL
-    dispatch({ type: 'fetch_conversations', payload: data.conversations });
-
-    dispatch({ type: 'stop_loading' });
-  } catch (e) {
-    dispatch({ type: 'stop_loading' });
-    dispatch({ type: 'set_error', payload: e.message });
-  }
-};
-
-// Fetch Sent
-
-const fetchSent = dispatch => async () => {
-  dispatch({ type: 'reset_error' });
-  dispatch({ type: 'start_loading' });
-
-  try {
-    const { data } = await axios.get(''); // GET sent_messages URL
-    dispatch({ type: 'sent_messages', payload: data });
+    const { data } = await axios.get(
+    `http://localhost:8080/CON/api/email/get_conversations.php?id=${localStorage.getItem('userid')}`
+    ); // GET conversations URL
+    dispatch({ type: 'fetch_conversations', payload: data });
 
     dispatch({ type: 'stop_loading' });
   } catch (e) {
@@ -55,7 +39,9 @@ const fetchConversation = dispatch => async ({ conversationId }) => {
   dispatch({ type: 'start_loading' });
 
   try {
-    const { data } = await axios.get('', { params: { conversationId } }); // GET conversation URL
+    const { data } = await axios.get(
+      `http://localhost:8080/CON/api/email/get_messages.php?id=${conversationId}`
+    ); // GET conversation URL
     dispatch({ type: 'fetch_conversation', payload: data });
 
     dispatch({ type: 'stop_loading' });
@@ -72,10 +58,12 @@ const sendEmail = dispatch => async ({ conversationId, content }) => {
   dispatch({ type: 'start_loading' });
 
   try {
-    await axios.post('', { conversationId, content }); // POST email URL
-
-    fetchConversation({ conversationId });
+    await axios.post(
+      'http://localhost:8080/CON/api/email/send_message.php',
+      { conversation_id: conversationId, content, user_id: localStorage.getItem('userid') }
+    ); // POST email URL
   } catch (e) {
+    console.log(e.message);
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });
   }
@@ -88,9 +76,12 @@ const createConversation = dispatch => async ({ subject, recipients, content }) 
   dispatch({ type: 'start_loading' });
 
   try {
-    const { data } = await axios.post('', { subject, recipients, content }); // POST conversation URL
+    const { data } = await axios.post(
+      'http://localhost:8080/CON/api/email/create_conversation.php',
+      { subject, recipients, content, user_id: localStorage.getItem('userid') }
+    ); // POST conversation URL
 
-    return data.id;
+    return data;
   } catch (e) {
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });
@@ -104,15 +95,17 @@ const leaveConversation = dispatch => async ({ conversationId }) => {
   dispatch({ type: 'start_loading' });
 
   try {
-    await axios.post('', { conversationId }); // LEAVE conversation URL
-
-    fetchConversations();
+    await axios.delete(
+      'http://localhost:8080/CON/api/email/leave_conversation.php',
+      { data: { conversation_id: conversationId, user_id: localStorage.getItem('userid') } }
+    ); // LEAVE conversation URL
   } catch (e) {
+    console.log(e.message);
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });
   }
 };
 
 export const { Context, Provider } = createDataContext(reducer, {
-  fetchConversations, fetchConversation, fetchSent, sendEmail, createConversation, leaveConversation
-}, { conversations: [], sentMessages: [], conversation: null, isLoading: false, error: '' });
+  fetchConversations, fetchConversation, sendEmail, createConversation, leaveConversation
+}, { conversations: [], messages: [], isLoading: false, error: '' });

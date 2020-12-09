@@ -1,39 +1,29 @@
 import '../css/Conversations.css';
-import React from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import Inbox from './Inbox';
-import Sent from './Sent';
 import ComposeButton from '../components/ComposeButton';
+import { Context as EmailContext } from '../../../context/EmailContext';
+import Spinner from '../../Global/Spinner';
 
 const Conversations = () => {
-  const path = window.location.pathname;
-  const isSent = path === '/email/sent' || path === '/email/sent/';
+  const { state: { isLoading, error } } = useContext(EmailContext);
 
   return (
     <div>
       <div className="page-header">
-        <div className="select-menu">
-          <Link
-            to="/email/"
-            className="header-button"
-            style={{ fontWeight: `${!isSent ? 'bold' : '300'}` }}
-          >Inbox</Link>
+        <div style={{ display: 'flex', flexDirection: 'row' }}>
+          <h1>Inbox</h1>
           <div style={{ width: '10px' }} />
-          <Link
-            to="/email/sent"
-            className="header-button"
-            style={{ fontWeight: `${isSent ? 'bold' : '300'}` }}
-          >Sent</Link>
+          {isLoading ? <Spinner /> : null}
         </div>
         <Link to="/email/compose">
           <ComposeButton />
         </Link>
       </div>
       <div>
-        <Switch>
-          <Route path="/email/sent" component={Sent} />
-          <Route path="/email/" component={Inbox} />
-        </Switch>
+        {error ? <p style={{ color: 'red' }}>{error}</p> : null}
+        <Inbox />
       </div>
     </div>
   );

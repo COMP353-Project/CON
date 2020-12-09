@@ -1,21 +1,28 @@
 import '../css/ConversationsTable.css';
-import React from 'react';
+import React, { useContext } from 'react';
 import ConversationsTableHeader from './ConversationsTableHeader';
 import ConversationsTableTile from './ConversationsTableTile';
+import { Context as EmailContext } from '../../../context/EmailContext';
 
 const ConversationsTable = ({ conversations }) => {
+  const { leaveConversation, fetchConversations } = useContext(EmailContext);
+
   const renderConversationsTableTiles = () => {
     if (!conversations) return null;
 
-    return conversations.map(({ id, subject, recipients, date }) => {
+    return Object.keys(conversations).map(key => {
+      const { id, subject, members, updated_at } = conversations[key];
       return (
         <ConversationsTableTile
           key={id}
           id={id}
           subject={subject}
-          recipients={recipients}
-          date={date}
-          onDelete={() => console.log(`Leave Conversation: ${id}`)}
+          members={members}
+          date={updated_at}
+          onDelete={async () => {
+            await leaveConversation({ conversationId: id });
+            fetchConversations();
+          }}
         />
       );
     });

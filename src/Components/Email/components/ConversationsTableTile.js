@@ -2,11 +2,15 @@ import '../css/ConversationsTableTile.css';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const ConversationsTableTile = ({ id, subject, recipients, date, onDelete }) => {
+const ConversationsTableTile = ({ id, subject, members, date, onDelete }) => {
   const renderRecipients = () => {
+    const size = Object.keys(members).length;
+
     let str = '';
-    for (let i = 0; i < recipients.length; i++) {
-      str += recipients[i] + (i < (recipients.length - 1) ? ', ' : '');
+    let count = 0;
+    for (let key in members) {
+      count ++;
+      str += members[key] + (count === size ? '' : ', ');
     }
     return str;
   };
@@ -18,7 +22,7 @@ const ConversationsTableTile = ({ id, subject, recipients, date, onDelete }) => 
           {subject}
         </Link>
       </div>
-      <div className="conversations-table-el">{recipients ? renderRecipients() : ''}</div>
+      <div className="conversations-table-el">{members ? renderRecipients() : ''}</div>
       <div className="conversations-table-el">{date}</div>
       <div className="conversations-table-el del" onClick={onDelete ? onDelete : () => {}}>X</div>
     </div>
