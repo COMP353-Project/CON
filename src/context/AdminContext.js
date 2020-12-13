@@ -39,6 +39,31 @@ const registerUser = dispatch => async (data) => {
   }
 };
 
+// fetch users
+const fetchUsers = dispatch => async () => {
+  const PROMOTE_ENDPOINT = 'http://localhost:8080/con/api/users/users.php';
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'reset_success' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    const response = await axios({
+      method: 'get',
+      url: PROMOTE_ENDPOINT,
+      headers: {
+        'content-type': 'application/json'
+      },
+    });
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_success', payload: 'fetchUsers' });
+    return response.data;
+  }
+  catch (e) {
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: 'fetchUsers' });
+  }
+};
+
 // Promote User
 const promoteUser = dispatch => async (data) => {
   const PROMOTE_ENDPOINT = 'http://localhost:8080/con/api/users/promote.php';
@@ -93,108 +118,108 @@ const deleteUser = dispatch => async (data) => {
 
 // Delete Group
 const deleteGroup = dispatch => async (data) => {
-    const DELETE_ENDPOINT = 'http://localhost:8080/con/api/groups/delete.php';
-    dispatch({ type: 'reset_error' });
-    dispatch({ type: 'reset_success' });
-    dispatch({ type: 'start_loading' });
-  
-    try {
-      const response = await axios({
-        method: 'delete',
-        url: DELETE_ENDPOINT,
-        headers: {
-          'content-type': 'application/json'
-        },
-        data: data
-      });
-      dispatch({ type: 'stop_loading' });
-      dispatch({ type: 'set_success', payload: 'deleteGroup' });
-      return response;
-    }
-    catch (e) {
-      dispatch({ type: 'stop_loading' });
-      dispatch({ type: 'set_error', payload: 'deleteGroup' });
-    }
+  const DELETE_ENDPOINT = 'http://localhost:8080/con/api/groups/delete.php';
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'reset_success' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    const response = await axios({
+      method: 'delete',
+      url: DELETE_ENDPOINT,
+      headers: {
+        'content-type': 'application/json'
+      },
+      data: data
+    });
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_success', payload: 'deleteGroup' });
+    return response;
+  }
+  catch (e) {
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: 'deleteGroup' });
+  }
 };
 
 // Delete Condo Association
 const registerCA = dispatch => async (data) => {
-    const REGISTER_ENDPOINT = 'http://localhost:8080/con/api/associations/register.php';
-    dispatch({ type: 'reset_error' });
-    dispatch({ type: 'reset_success' });
-    dispatch({ type: 'start_loading' });
-  
-    try {
-      const response = await axios({
-        method: 'post',
-        url: REGISTER_ENDPOINT,
-        headers: {
-          'content-type': 'application/json'
-        },
-        data: data
-      });
-      dispatch({ type: 'stop_loading' });
-      dispatch({ type: 'set_success', payload: 'registerCA' });
-      return response;
-    }
-    catch (e) {
-      dispatch({ type: 'stop_loading' });
-      dispatch({ type: 'set_error', payload: 'registerCA' });
-    }
+  const REGISTER_ENDPOINT = 'http://localhost:8080/con/api/associations/register.php';
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'reset_success' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    const response = await axios({
+      method: 'post',
+      url: REGISTER_ENDPOINT,
+      headers: {
+        'content-type': 'application/json'
+      },
+      data: data
+    });
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_success', payload: 'registerCA' });
+    return response;
+  }
+  catch (e) {
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: 'registerCA' });
+  }
 };
-  
+
 // Register User to Condo Association
 const assignUser = dispatch => async (data) => {
-    const ASSIGNMENT_ENDPOINT = 'http://localhost:8080/con/api/associations/assign.php';
-    dispatch({ type: 'reset_error' });
-    dispatch({ type: 'reset_success' });
-    dispatch({ type: 'start_loading' });
-  
-    try {
-      const response = await axios({
-        method: 'post',
-        url: ASSIGNMENT_ENDPOINT,
-        headers: {
-          'content-type': 'application/json'
-        },
-        data: data
-      });
-      dispatch({ type: 'stop_loading' });
-      dispatch({ type: 'set_success', payload: 'assignCA' });
-      return response;
-    }
-    catch (e) {
-      dispatch({ type: 'stop_loading' });
-      dispatch({ type: 'set_error', payload: 'assignCA' });
-    }
+  const ASSIGNMENT_ENDPOINT = 'http://localhost:8080/con/api/associations/assign.php';
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'reset_success' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    const response = await axios({
+      method: 'post',
+      url: ASSIGNMENT_ENDPOINT,
+      headers: {
+        'content-type': 'application/json'
+      },
+      data: data
+    });
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_success', payload: 'assignCA' });
+    return response;
+  }
+  catch (e) {
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: 'assignCA' });
+  }
 };
-  
+
 // Delete Condo Association
 const deleteCA = dispatch => async (data) => {
-    const DELETE_ENDPOINT = 'http://localhost:8080/con/api/associations/delete.php';
-    dispatch({ type: 'reset_error' });
-    dispatch({ type: 'reset_success' });
-    dispatch({ type: 'start_loading' });
-  
-    try {
-      const response = await axios({
-        method: 'delete',
-        url: DELETE_ENDPOINT,
-        headers: {
-          'content-type': 'application/json'
-        },
-        data: data
-      });
-      dispatch({ type: 'stop_loading' });
-      dispatch({ type: 'set_success', payload: 'deleteCA' });
-      return response;
-    }
-    catch (e) {
-      dispatch({ type: 'stop_loading' });
-      dispatch({ type: 'set_error', payload: 'deleteCA' });
-    }
+  const DELETE_ENDPOINT = 'http://localhost:8080/con/api/associations/delete.php';
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'reset_success' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    const response = await axios({
+      method: 'delete',
+      url: DELETE_ENDPOINT,
+      headers: {
+        'content-type': 'application/json'
+      },
+      data: data
+    });
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_success', payload: 'deleteCA' });
+    return response;
+  }
+  catch (e) {
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: 'deleteCA' });
+  }
 };
 
 export const { Context, Provider } = createDataContext(reducer, {
-  registerUser, promoteUser, deleteUser, deleteGroup, registerCA, assignUser, deleteCA
-}, { isLoading: false, error: '', success: '', user: null});
+  registerUser, promoteUser, deleteUser, deleteGroup, registerCA, assignUser, deleteCA, fetchUsers
+}, { isLoading: false, error: '', success: '', user: null });

@@ -4,16 +4,22 @@ import FriendRequestCard from '../components/FriendRequestCard';
 import FriendCard from '../components/FriendCard';
 import '../css/Friends.css'
 import { Context as AccountContext } from '../../../context/AccountContext';
+import { Context as AdminContext } from '../../../context/AdminContext';
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+
 
 const Friends = () => {
   const [email, setEmail] = React.useState("");
+  const [emails, setEmails] = React.useState([]);
   const [requestsError, setRError] = React.useState("");
   const [requestsSuccess, setRSuccess] = React.useState("");
   const [friendsError, setFError] = React.useState("");
   const [friendsSuccess, setFSuccess] = React.useState("");
   const [requests, setRequests] = React.useState([]);
   const [friends, setFriends] = React.useState([]);
-  const { sendFriendReq, fetchRequests, fetchFriends, state:{ error, success, isLoading } } = React.useContext(AccountContext);
+  const { sendFriendReq, fetchRequests, fetchFriends, state: { error, success, isLoading } } = React.useContext(AccountContext);
+  const { fetchUsers } = React.useContext(AdminContext);
 
   const getRequestsError = (errorFromChild) => {
     setRError(errorFromChild)
@@ -34,6 +40,7 @@ const Friends = () => {
   React.useEffect(() => {
     getRequests();
     getFriends();
+    getUsers();
   }, []);
 
   const getRequests = async () => {
@@ -44,7 +51,10 @@ const Friends = () => {
   const getFriends = async () => {
     setFriends(await fetchFriends({ receiver_id: localStorage.getItem('userid') }
     ));
-    
+  };
+
+  const getUsers = async () => {
+    setEmails(await fetchUsers());
   };
 
   const sendReq = async (e) => {
@@ -60,7 +70,7 @@ const Friends = () => {
   }
 
   const RenderRequests = () => {
-    if(requests) {
+    if (requests) {
       return requests.map(({ sender_id, first_name, last_name, created_at }) => {
         return (
           <Fragment key={sender_id}>
@@ -84,7 +94,7 @@ const Friends = () => {
   };
 
   const RenderFriends = () => {
-    if(friends) {
+    if (friends) {
       return friends.map(({ sender_id, receiver_id, first_name, last_name, created_at }) => {
         const id = sender_id === localStorage.getItem('userid') ? receiver_id : sender_id;
         return (
@@ -104,7 +114,7 @@ const Friends = () => {
     else {
       return (
         <div className="friend-empty">No friends!</div>
-      );     
+      );
     }
 
   };
@@ -112,13 +122,35 @@ const Friends = () => {
   return (
     <div>
       <form className="friend-add" onSubmit={sendReq}>
-        <input type="text"
-          id="send-friend-req"
+        <Autocomplete
+          options={emails}
           className="friend-field"
-          placeholder="Enter User Email"
-          onChange={e => setEmail(e.target.value)}
+          id="email"
+          emails
+          getOptionLabel={(option) => option.email}
+          renderOption={(option) => (
+            <React.Fragment>
+              <div className='dropdown-label'>
+                <span className='name'>{option.first_name} {option.last_name}</span>
+                <span className='email'>{option.email}</span>
+              </div>
+            </React.Fragment>
+          )}
+
+          renderInput={(params) =>
+            <TextField
+              {...params}
+              id="send-friend-req"
+              label="Enter User Email"
+              type="email"
+              variant="outlined"
+              value={email}
+              required
+              onChange={e => setEmail(e.target.value)}
+            />
+          }
         />
-        {isLoading ? <Spinner/> : <input type="submit" value="Add Friend" className="post-btn"/>}
+        {isLoading ? <Spinner /> : <input type="submit" value="Add Friend" className="post-btn" />}
       </form>
       {error === "sendFriendReq" && <p className="is-error primary">Error sending request</p>}
       {success === "sendFriendReq" && <p className="is-success">Friend request sent</p>}
@@ -129,7 +161,7 @@ const Friends = () => {
             {requestsSuccess && <div className="is-success bold">{requestsSuccess}</div>}
             {requestsError && <div className="is-error bold">{requestsError}</div>}
           </div>
-          <RenderRequests/>
+          <RenderRequests />
         </div>
         <div>
           <div className="friends-header">
