@@ -4,16 +4,27 @@ import { Link } from 'react-router-dom';
 import '../../css/GroupsStyle.css'
 import CreateGroupButton from './CreateGroupBtn';
 import GroupsNav from './GroupsNav.js'
+import {Context as GroupsContext} from '../../context/GroupsContext.js'
 
 function MyGroups () {
-
-    const [groups, setGroups] = React.useState(() => [{ id: 1 }, { id: 2 }])
+    const { fetchMyGroups, fetchGroup } = React.useContext(GroupsContext);
+    const [groups, setGroups] = React.useState([])
 
     const isAdmin = true;
-
+    var isLoading = true;
     const onDelete = () => {
 
     }
+
+    const getMyGroups = async() => {
+      setGroups( await fetchMyGroups(localStorage.getItem("userid")));
+      console.log(groups)
+      isLoading = false;
+    }
+
+    React.useEffect(() => {
+      getMyGroups();
+    }, []);
 
     return (
       <div>
