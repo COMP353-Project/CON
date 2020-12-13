@@ -19,8 +19,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   $result = @mysqli_query($conn, $create_post);
 
-  $post_id = '';
-
   if ($result) {
     $post_id = mysqli_insert_id($conn);
   }
