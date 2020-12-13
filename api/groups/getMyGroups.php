@@ -8,7 +8,7 @@ $rest_json = file_get_contents("php://input");
 $conn = mysqli_connect("localhost", "root", "zhawa", "con");
 $user_id = $_GET['id'];
 
-$query = "SELECT id, name, description FROM groups1 INNER JOIN group_members WHERE groups1.id = group_members.group_id AND group_members.user_id = '$user_id'";
+$query = "SELECT id, name, description FROM `groups` INNER JOIN group_members WHERE groups1.id = group_members.group_id AND group_members.user_id = '$user_id'";
 
 $result = mysqli_query($conn, $query);
 

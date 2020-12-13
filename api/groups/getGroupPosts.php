@@ -10,7 +10,7 @@ $group_id = $_GET['id'];
 
 $query = "SELECT group_content_post.title, group_content_post.description, posts.user_id, posts.created_at, users.first_name, users.last_name FROM group_content_post, posts, users 
 INNER JOIN group_posts 
-WHERE group_posts.post_id = group_content_post.group_post_id AND posts.id = group_posts.post_id AND group_posts.group_id = '$group_id' AND group_posts.group_id = 1 AND posts.user_id = users.id";
+WHERE group_posts.post_id = group_content_post.group_post_id AND posts.id = group_posts.post_id AND group_posts.group_id = '$group_id' AND posts.user_id = users.id";
 
 $result = mysqli_query($conn, $query);
 

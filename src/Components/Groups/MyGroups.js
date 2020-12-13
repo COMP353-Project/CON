@@ -11,20 +11,22 @@ function MyGroups () {
     const [groups, setGroups] = React.useState([])
 
     const isAdmin = true;
-    var isLoading = true;
     const onDelete = () => {
 
     }
 
     const getMyGroups = async() => {
       setGroups( await fetchMyGroups(localStorage.getItem("userid")));
-      console.log(groups)
-      isLoading = false;
     }
 
     React.useEffect(() => {
       getMyGroups();
     }, []);
+
+    const sendIDtoLocalStorage = (groupID) => {
+        localStorage.setItem("groupID", groupID)
+        console.log(localStorage.getItem("groupID"))
+    }
 
     return (
       <div>
@@ -38,7 +40,7 @@ function MyGroups () {
               { groups.map(group => {
                 return (
                   <div className="group-container">
-                      <Button component={Link} 
+                      <Button onClick={() => sendIDtoLocalStorage(group.id)}component={Link} 
                           to={{
                               pathname: "/groups/" + group.id +"/home",
                               state: { id: group.id}

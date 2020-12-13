@@ -67,8 +67,7 @@ function Groups () {
     const { createPost, fetchPosts} = React.useContext(GroupsContext);
     const classes = useStyles();
     const theme = useTheme();
-
-    const [groupID, setGroupID] = React.useState(1)
+    const [groupID, setGroupID] = React.useState(() => localStorage.getItem("groupID"))
     const [currentUser, setCurrentUser] = React.useState("Ziad");
     const [posts, setPosts] = React.useState([]);
     const [chats, setChats] = React.useState(() => [{text: "Hey guys", date: "24-12-2010  12:22", user: currentUser}, {text: "Hola", date: "24-11-2010  9:56", user:currentUser}]);
@@ -78,14 +77,14 @@ function Groups () {
     const [viewOnly, setViewOnly] = React.useState(false);
     const [open, setOpen] = React.useState(false);
     const [postTitleInput, setPostTitle] = React.useState("");
-
+    
     const getPosts = async() => {
-      console.log(groupID)
       setPosts(await fetchPosts(groupID));
     }
 
     const sendPosts = async(user_id, group_id, title, description) => {
-      await( createPost(user_id, group_id, title, description))
+      const data = await( createPost(user_id, group_id, title, description))
+      getPosts()
     }
 
     React.useEffect(() => {
@@ -118,10 +117,14 @@ function Groups () {
     const handlePost = (text, title, user) => {
         if(postTextInput.length > 0){
             console.log("Received: " + text)
-            var newPosts = posts
-            newPosts.push({title: "title", description: text, date: getDate(), user: user})
-            setPosts(newPosts)
+            var newPosts;
+            if(posts)
+             newPosts = posts
+            else newPosts = []
             sendPosts(localStorage.getItem("userid"), groupID, title, text)
+            console.log(getDate())
+            newPosts.push({title: title, user: user, date: new Date(), description: text })
+            setPosts(newPosts)
             setPostText("")
             setPostTitle("")
         } else alert("Text field cannot be empty!")
@@ -215,7 +218,7 @@ function Groups () {
           </Drawer>
         </div>
         <div className="post-container">
-          {posts.map(post => {
+          {posts==null ? <div></div> : posts.map(post => {
              return (
                <Post description={post.description} title={post.title} user={post.first_name + " " + post.last_name} date = {post.created_at}/>
               );
@@ -226,7 +229,7 @@ function Groups () {
           <label>Attach images and text here!</label>
           <div className="post-input-wrapper">
               <OutlinedInput type="text" placeholder="Write a title..." fullWidth="true" multiline="true" rows="1" value ={postTitleInput} onChange={handlePostTitleChange}/>
-             <OutlinedInput type="text" placeholder="Write a post..." fullWidth="true" multiline="true" rows="5" value ={postTextInput} onChange={handlePostTextChange}/>
+              <OutlinedInput type="text" placeholder="Write a post..." fullWidth="true" multiline="true" rows="5" value ={postTextInput} onChange={handlePostTextChange}/>
               <Button type ="submit" variant="outlined" onClick={() => handlePost(postTextInput, postTitleInput, currentUser)}>Post</Button>
               <input type="file" accept=".jpg,.png,.gif" onChange={handleFileUpload}></input>
               <label>View only</label><Checkbox checked={viewOnly} onChange={handleShareCheckbox}></Checkbox>
