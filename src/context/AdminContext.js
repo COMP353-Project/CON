@@ -220,6 +220,32 @@ const deleteCA = dispatch => async (data) => {
   }
 };
 
+// Delete Condo Association
+const createAdminPost = dispatch => async (data) => {
+  const POST_ENDPOINT = 'http://localhost:8080/con/api/associations/createAdminPost.php';
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'reset_success' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    const response = await axios({
+      method: 'post',
+      url: POST_ENDPOINT,
+      headers: {
+        'content-type': 'application/json'
+      },
+      data: data
+    });
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_success', payload: 'createAdminPost' });
+    return response;
+  }
+  catch (e) {
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: 'createAdminPost' });
+  }
+};
+
 export const { Context, Provider } = createDataContext(reducer, {
-  registerUser, promoteUser, deleteUser, deleteGroup, registerCA, assignUser, deleteCA, fetchUsers
+  registerUser, promoteUser, deleteUser, deleteGroup, registerCA, assignUser, deleteCA, fetchUsers, createAdminPost
 }, { isLoading: false, error: '', success: '', user: null });
