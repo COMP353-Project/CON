@@ -13,7 +13,6 @@ const reducer = (state, action) => {
     case 'fetch_discussion': return { ...state, discussion: action.payload };
     case 'fetch_ads': return { ...state, ads: action.payload };
     case 'fetch_ad': return { ...state, ad: action.payload };
-    case 'fetch_all_ads': return { ...state, all_ads: action.payload };
     case 'fetch_admin_meetings': return { ...state, adminMeetings: action.payload };
     case 'fetch_admin_meeting': return { ...state, adminMeeting: action.payload };
     case 'fetch_general_meetings': return { ...state, generalMeetings: action.payload };

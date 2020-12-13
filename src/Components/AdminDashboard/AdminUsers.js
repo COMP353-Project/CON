@@ -162,6 +162,14 @@ function AdminUsers () {
               id="email"
               emails
               getOptionLabel={(option) => option.email}
+              renderOption={(option) => (
+                <React.Fragment>
+                  <div className='dropdown-label'>
+                    <span className='name'>{option.first_name} {option.last_name}</span>
+                    <span className='email'>{option.email}</span>
+                  </div>
+                </React.Fragment>
+              )}              
               renderInput={(params) =>
                 <TextField
                   {...params}
@@ -192,6 +200,14 @@ function AdminUsers () {
               id="email"
               emails
               getOptionLabel={(option) => option.email}
+              renderOption={(option) => (
+                <React.Fragment>
+                  <div className='dropdown-label'>
+                    <span className='name'>{option.first_name} {option.last_name}</span>
+                    <span className='email'>{option.email}</span>
+                  </div>
+                </React.Fragment>
+              )}
               renderInput={(params) =>
                 <TextField
                   {...params}
