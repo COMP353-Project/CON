@@ -43,6 +43,10 @@
   background-color: rgb(195, 0, 0);
 }
 
+.post-btn.grey {
+  background-color: rgb(149, 149, 149);
+}
+
 .details-button {
   color: rgb(57, 168, 149);
   font-weight: bold;
@@ -63,6 +67,14 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 15px;
+}
+
+.page-header.hp {
+  justify-content: center;
+}
+
+.hp-section-title {
+  margin-top: 50px;
 }
 
 /* CARD STYLES */
@@ -120,7 +132,7 @@
   color: rgb(57, 168, 149);
 }
 
-.card-description {
+.card-description, .card-agenda{
   margin-bottom: 15px;
 }
 

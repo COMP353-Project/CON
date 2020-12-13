@@ -5,7 +5,8 @@ import NavBar from './Components/NavBar/NavBar';
 import GroupsLanding from './Components/Groups/GroupsLanding';
 import GroupsHome from './Components/Groups/GroupsHome'
 import GroupsRequests from './Components/Groups/GroupsRequests'
-import PublicHomePage from './Components/Home/PublicHomePage';
+import PublicHomepage from './Components/Home/PublicHomePage';
+import PrivateHomepage from './Components/Home/PrivateHomePage';
 import MyAccount from './Components/MyAccount/MyAccount';
 import Email from './Components/Email/Email';
 import Groups from './Components/Groups/Groups';
@@ -56,7 +57,8 @@ function App () {
                 <main>
                   <NavBar />
                   <Switch>
-                    <Route path="/" component={PublicHomePage} exact />
+                    <Route path="/" component={PublicHomepage} exact />
+                    <Route path="/home" component={PrivateHomepage} exact />
                     <Route path="/my-account" component={MyAccount} />
                     <Route path="/email" component={Email}></Route>
                     <Route path="/login" component={Login} exact></Route>

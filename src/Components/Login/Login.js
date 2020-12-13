@@ -19,7 +19,7 @@ function LoginFormWithContext (props) {
         const data = await signin({ email: email, password: password });
         if (data) {
             setError(false);
-            props.history.push('/condo-association');
+            props.history.push('/home');
         }
         else {
             setError(true);

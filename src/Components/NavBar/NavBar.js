@@ -20,7 +20,7 @@ function NavBar (props) {
             <div>
                 <AppBar position="static">
                     <Toolbar style={{ backgroundColor: '#32a895' }}>
-                    <Link className="logo-wrapper" to='/'><img className="logo" src={condoLogo} alt="condo"></img></Link>
+                    <Link className="logo-wrapper" to={localStorage.getItem('user') ? '/home' : '/'}><img className="logo" src={condoLogo} alt="condo"></img></Link>
                         <div style={{ display: 'flex' }}>
                             <Button component={Link} to='/admin' color="inherit" className="nav-link" >Admin</Button>
                             <Button component={Link} to='/condo-association' color="inherit" className="nav-link">Condo Association</Button>
@@ -67,8 +67,6 @@ function NavBar (props) {
                     <Toolbar style={{ backgroundColor: '#32a895' }}>
                     <Link className="logo-wrapper" to='/'><img className="logo" src={condoLogo} alt="condo"></img></Link>
                         <div style={{ display: 'flex' }}>
-                            <Button component={Link} to='/' color="inherit" className="nav-link" >Ads</Button>
-                            <Button component={Link} to='/login' color="inherit" className="nav-link">Condo Association</Button>
                             <Button color="inherit" className="nav-link" component={Link} to='login'>Login</Button>
                         </div>
                     </Toolbar>
