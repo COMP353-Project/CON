@@ -1,14 +1,22 @@
 import React, { Fragment } from 'react';
+import AdminPostCard from './AdminPostCard';
 import { Context as CondoAssociationContext } from '../../context/CondoAssociationContext';
+import { Context as AdminContext } from '../../context/AdminContext';
 import AdCard from '../CondoAssociation/Ads/components/AdCard';
 import MeetingCard from '../CondoAssociation/Meetings/components/MeetingCard';
 
 function PrivateHomePage (props) {
     const { fetchAllAds, fetchAdminMeetings, fetchGeneralMeetings } = React.useContext(CondoAssociationContext);
+    const { fetchAdminPosts } = React.useContext(AdminContext);
+    const [adminPosts, setadminPosts] = React.useState([]);
     const [ads, setAds] = React.useState([]);
     const [generalMeetings, setGeneralMeetings] = React.useState([]);
     const [adminMeetings, setAdminMeetings] = React.useState([]);
     
+    const getAdminPosts = async () => {
+      setadminPosts(await fetchAdminPosts());
+    };
+
     const getAllAds = async () => {
       setAds(await fetchAllAds(localStorage.getItem('userid')));
     };
@@ -21,7 +29,25 @@ function PrivateHomePage (props) {
       setAdminMeetings(await fetchAdminMeetings());
     };
 
-
+    const RenderAdminPosts = () => {
+      if (adminPosts) {
+        return adminPosts.map(({ id, content, title }) => {
+          return (
+            <Fragment key={id}>
+              <AdminPostCard
+                title={title}
+                content={content}
+              />
+            </Fragment>
+          );
+        });
+      }
+      else {
+        return (
+          <div></div>
+        );
+      }
+    }
 
     const RenderAds = () => {
       if (ads) {
@@ -96,6 +122,7 @@ function PrivateHomePage (props) {
     };
 
     React.useEffect(() => {
+      getAdminPosts();
       getAllAds();
       getGeneralMeetings();
       if(localStorage.getItem('admin') === '1'){
@@ -107,14 +134,20 @@ function PrivateHomePage (props) {
       <div>
         <div className="page-container">
           <div className="page-header hp">
-            <h1>Welcome!</h1>
+            <h1>Welcome CON member!</h1>
+          </div>
+          <h1 className="hp-section-title">Admin Announcements</h1>
+          <div className="hp-admin-posts">
+            <RenderAdminPosts />
           </div>
           <h1 className="hp-section-title">Recent Ads</h1>
           <RenderAds />
           <h1 className="hp-section-title">Recent Meetings</h1>
-          <RenderGeneralMeetings />
-          <RenderAdminMeetings />
-          <h1 className="hp-section-title">Recent Group posts</h1>
+          <div className="hp-meetings">
+            <RenderGeneralMeetings />
+            <RenderAdminMeetings />
+          </div>
+          {/* <h1 className="hp-section-title">Recent Group posts</h1> */}
           {/* <RenderGroupPosts /> */}
         </div>
       </div>

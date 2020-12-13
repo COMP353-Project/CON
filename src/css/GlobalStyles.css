@@ -77,6 +77,16 @@
   margin-top: 50px;
 }
 
+.hp-admin-posts, .hp-meetings{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+}
+
+.admin-post-title {
+  text-align: center;
+}
+
 /* CARD STYLES */
 .page-container {
   padding: 30px;
@@ -87,6 +97,10 @@
   padding: 20px;
   box-shadow: 2px 5px 2px #aaaaaa;
   margin-bottom: 20px;
+}
+
+.card.admin.hp {
+  border: 4px solid #ffbd2d;
 }
 
 .card-comment {

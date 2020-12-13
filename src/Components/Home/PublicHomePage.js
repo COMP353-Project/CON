@@ -1,21 +1,47 @@
 import React, { Fragment } from 'react';
+import AdminPostCard from './AdminPostCard';
 import { Context as CondoAssociationContext } from '../../context/CondoAssociationContext';
+import { Context as AdminContext } from '../../context/AdminContext';
 import AdCard from '../CondoAssociation/Ads/components/AdCard';
 
 function PublicHomePage (props) {
     const { fetchAds } = React.useContext(CondoAssociationContext);
+    const { fetchAdminPosts } = React.useContext(AdminContext);
+    const [adminPosts, setadminPosts] = React.useState([]);
     const [ads, setAds] = React.useState([]);
     
-    /**
-     * Function that fetches ads
-     */
+    const getAdminPosts = async () => {
+      setadminPosts(await fetchAdminPosts());
+    };
+
     const getAds = async () => {
-        setAds(await fetchAds());
+      setAds(await fetchAds());
     };
 
     React.useEffect(() => {
-        getAds();
+      getAdminPosts();
+      getAds();
     }, []);
+
+    const RenderAdminPosts = () => {
+      if (adminPosts) {
+        return adminPosts.map(({ id, content, title }) => {
+          return (
+            <Fragment key={id}>
+              <AdminPostCard
+                title={title}
+                content={content}
+              />
+            </Fragment>
+          );
+        });
+      }
+      else {
+        return (
+          <div></div>
+        );
+      }
+    }
 
     const RenderAds = () => {
       if (ads) {
@@ -44,9 +70,14 @@ function PublicHomePage (props) {
     return (
       <div>
         <div className="page-container">
-          <div className="page-header">
-            <h1>Condo Renting Association</h1>
+          <div className="page-header hp">
+            <h1>Welcome stranger!</h1>
           </div>
+          <h1 className="hp-section-title">Admin Announcements</h1>
+          <div className="hp-admin-posts">
+            <RenderAdminPosts />
+          </div>
+          <h1 className="hp-section-title">Recent Ads</h1>
           <RenderAds />
         </div>
       </div>
