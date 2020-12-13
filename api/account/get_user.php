@@ -4,7 +4,7 @@ header("Access-Control-Allow-Methods: GET");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, X-Requested-With");
 header("Content-Type: application/json; charset=UTF-8");
 
-$conn = mysqli_connect("localhost", "root", "", "con");
+$conn = mysqli_connect("localhost", "root", "mysql", "con");
 $id = $_GET['id'];
 
 $query = 'SELECT first_name, last_name, email, address FROM Users WHERE id = ' .$id;
