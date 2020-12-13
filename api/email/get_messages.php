@@ -14,16 +14,22 @@ WHERE m.conversation_id = ' . $id . ' ORDER BY m.created_at;';
 
 $result = @mysqli_query($conn, $query);
 
-$messages = array();
-while($row = $result->fetch_assoc()) {
-  $message = array(
-    'id' => $row['id'],
-    'first_name' => $row['first_name'],
-    'last_name' => $row['last_name'],
-    'created_at' => $row['created_at'],
-    'content' => $row['content']
-  );
-  array_push($messages, $message);
+if($result){
+  $messages = array();
+  while($row = $result->fetch_assoc()) {
+    $message = array(
+      'id' => $row['id'],
+      'first_name' => $row['first_name'],
+      'last_name' => $row['last_name'],
+      'created_at' => $row['created_at'],
+      'content' => $row['content']
+    );
+    array_push($messages, $message);
+  }
+  echo json_encode($messages);
+  http_response_code(200);
 }
-echo json_encode($messages);
-http_response_code(200);
+else {
+  echo json_encode(array("message" => "No message"));
+  http_response_code(400);
+}

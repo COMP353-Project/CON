@@ -13,7 +13,6 @@ function CondoMeetings () {
   const [generalMeetings, setGeneralMeetings] = useState([]);
   const [adminMeetings, setAdminMeetings] = useState([]);
 
-
   /**
    * Function that fetches general meetings
    */
@@ -56,7 +55,9 @@ function CondoMeetings () {
       });
     }
     else {
+      return(
       <div>No meetings to show!</div>
+      );
     }
   };
 
@@ -78,7 +79,9 @@ function CondoMeetings () {
       });
     }
     else {
-      <div>No meetings to show!</div>
+      return(
+        <div>No meetings to show!</div>
+      );
     }
   };
 

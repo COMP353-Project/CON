@@ -4,17 +4,30 @@ import './AdminStyles.css';
 import TextField from '@material-ui/core/TextField';
 import Spinner from '../Global/Spinner';
 import { Context as AdminContext } from '../../context/AdminContext';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
 function AdminUsers () {
-  const { registerUser, promoteUser, deleteUser, state: { error, success, isLoading } } = React.useContext(AdminContext);
+  const { fetchUsers, registerUser, promoteUser, deleteUser, state: { error, success, isLoading } } = React.useContext(AdminContext);
 
   const [firstName, setFirstName] = React.useState("");
   const [lastName, setLastName] = React.useState("");
   const [regEmail, setRegEmail] = React.useState("");
   const [regAddress, setRegAddress] = React.useState("");
-  const [regPassword, setRegPassword] = React.useState("")
-  const [promoteEmail, setPromoteEmail] = React.useState("")
-  const [delEmail, setDelEmail] = React.useState("")
+  const [regPassword, setRegPassword] = React.useState("");
+  const [promoteEmail, setPromoteEmail] = React.useState("");
+  const [delEmail, setDelEmail] = React.useState("");
+  const [emails, setEmails] = React.useState([]);
+
+  /**
+  * Function that fetches a list of user emails
+  */
+  const getUsers = async () => {
+    setEmails(await fetchUsers());
+  };
+
+  React.useEffect(() => {
+    getUsers();
+  }, []);
 
   /**
    * Function that handles user registration
@@ -144,14 +157,23 @@ function AdminUsers () {
         <form className="container--form" onSubmit={handlePromotion}>
           <h3 className="form__title">Promote user to system admin</h3>
           <div className="form__field">
-            <TextField
-              id="promote-user-email"
-              label="Email"
-              type="email"
-              variant="outlined"
-              value={promoteEmail}
-              required
-              onChange={e => setPromoteEmail(e.target.value)}
+            <Autocomplete
+              options={emails}
+              id="email"
+              emails
+              getOptionLabel={(option) => option.email}
+              renderInput={(params) =>
+                <TextField
+                  {...params}
+                  id="promote-user-email"
+                  label="Email"
+                  type="email"
+                  variant="outlined"
+                  value={promoteEmail}
+                  required
+                  onChange={e => setPromoteEmail(e.target.value)}
+                />
+              }
             />
           </div>
           <div className="btn-container">
@@ -165,14 +187,23 @@ function AdminUsers () {
         <form className="container--form" onSubmit={handleDelete}>
           <h3 className="form__title">Delete existing user</h3>
           <div className="form__field">
-            <TextField
-              id="delete-user-email"
-              label="Email"
-              type="email"
-              variant="outlined"
-              value={delEmail}
-              required
-              onChange={e => setDelEmail(e.target.value)}
+            <Autocomplete
+              options={emails}
+              id="email"
+              emails
+              getOptionLabel={(option) => option.email}
+              renderInput={(params) =>
+                <TextField
+                  {...params}
+                  id="delete-user-email"
+                  label="Email"
+                  type="email"
+                  variant="outlined"
+                  value={delEmail}
+                  required
+                  onChange={e => setDelEmail(e.target.value)}
+                />
+              }
             />
           </div>
           <div className="btn-container">

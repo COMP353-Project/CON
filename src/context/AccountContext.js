@@ -27,7 +27,7 @@ const fetchUser = dispatch => async () => {
   dispatch({ type: 'start_loading' });
 
   try {
-    const { data } = await axios.get(`http://localhost:8080/CON/api/account/get_user.php?id=${localStorage.getItem('userid')}`);
+    const { data } = await axios.get(`http://localhost:8080/con/api/account/get_user.php?id=${localStorage.getItem('userid')}`);
     dispatch({ type: 'fetch_user', payload: data });
 
     dispatch({ type: 'stop_loading' });
@@ -45,7 +45,7 @@ const updateProfile = dispatch => async ({ firstName, lastName, email, address }
 
   try {
     await axios.put(
-      'http://localhost:8080/CON/api/account/update_profile.php',
+      'http://localhost:8080/con/api/account/update_profile.php',
       { first_name: firstName, last_name: lastName, email, address, id: localStorage.getItem('userid') }
     );
 
@@ -67,7 +67,7 @@ const updatePassword = dispatch => async ({ currentPassword, newPassword, confir
     if (newPassword !== confirmNewPassword) throw new Error('Passwords must match');
 
     const response = await axios.put(
-      'http://localhost:8080/CON/api/account/update_password.php',
+      'http://localhost:8080/con/api/account/update_password.php',
       { id: localStorage.getItem('userid'), current_password: currentPassword, new_password: newPassword }
     );
 
