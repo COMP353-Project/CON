@@ -43,6 +43,16 @@
   background-color: rgb(195, 0, 0);
 }
 
+.del-plain {
+  color: rgb(195, 0, 0);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.del-plain:hover {
+  text-decoration: underline;
+}
+
 .details-button {
   color: rgb(57, 168, 149);
   font-weight: bold;
@@ -174,18 +184,17 @@ is-success.bold {
   font-weight: 800;
 }
 
-.dropdown-label {	
-  display: flex;	
-  color: rgb(50,168, 149);	
-  width: 100%;	
-  border-bottom: 1px solid grey;	
-  padding: 10px 0;	
-}	
+.dropdown-label {
+  display: flex;
+  color: rgb(50, 168, 149);
+  width: 100%;
+  border-bottom: 1px solid grey;
+  padding: 10px 0;
+}
 
-.dropdown-label .name {	
-  font-weight: 600;	
-  margin-right: 15px;	
-  color: black;	
-  text-transform: capitalize;	
-} 	
-
+.dropdown-label .name {
+  font-weight: 600;
+  margin-right: 15px;
+  color: black;
+  text-transform: capitalize;
+}

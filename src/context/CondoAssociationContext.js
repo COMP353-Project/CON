@@ -21,6 +21,8 @@ const reducer = (state, action) => {
     case 'fetch_poll': return { ...state, poll: action.payload };
     case 'fetch_elections': return { ...state, elections: action.payload };
     case 'fetch_election': return { ...state, election: action.payload };
+    case 'fetch_contracts': return { ...state, contracts: action.payload };
+    case 'fetch_contract': return { ...state, contract: action.payload };
     default: return state;
   }
 };
@@ -431,11 +433,90 @@ const voteElection = dispatch => async ({ electionId, candidateId }) => {
   }
 };
 
+// Fetch Contracts
+
+const fetchContracts = dispatch => async () => {
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    const response = await axios.get(`http://localhost:8080/con/api/contracts/get_contracts.php?id=${localStorage.getItem('userid')}`);
+
+    dispatch({ type: 'fetch_contracts', payload: response.data });
+  } catch (e) {
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: e.message });
+  }
+};
+
+// Create Contract
+
+const createContract = dispatch => async ({ name, description, budget }) => {
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    await axios.post('http://localhost:8080/con/api/contracts/create_contract.php', { name, description, budget, id: localStorage.getItem('userid') });
+  } catch (e) {
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: e.message });
+  }
+};
+
+// Fetch Contract
+
+const fetchContract = dispatch => async ({ id }) => {
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    const response = await axios.get(`http://localhost:8080/con/api/contracts/get_contract.php?id=${id}`);
+
+    dispatch({ type: 'fetch_contract', payload: response.data });
+  } catch (e) {
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: e.message });
+  }
+};
+
+// Add Submission
+
+const addSubmission = dispatch => async ({ contract_id, poster, statement }) => {
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    await axios.post('http://localhost:8080/con/api/contracts/create_submission.php', { contract_id, poster, statement });
+  } catch (e) {
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: e.message });
+  }
+};
+
+// Delete Contract
+
+const deleteContract = dispatch => async ({ id }) => {
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    await axios.delete(
+      'http://localhost:8080/con/api/contracts/delete_contract.php',
+      { data: { id } }
+    );
+  } catch (e) {
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: e.message });
+  }
+};
+
 export const { Context, Provider } = createDataContext(reducer, {
   fetchCondoAssociations, fetchCondoAssociation, fetchDiscussions, fetchDiscussion, createDiscussion, updateDiscussion,
   deleteDiscussion, addComment, fetchAds, fetchAd, createAd, udpdateAd, deleteAd, fetchAdminMeetings, fetchAdminMeeting,
-  fetchGeneralMeetings, fetchGeneralMeeting, fetchPolls, fetchPoll, votePoll, fetchElections, fetchElection, voteElection
+  fetchGeneralMeetings, fetchGeneralMeeting, fetchPolls, fetchPoll, votePoll, fetchElections, fetchElection, voteElection,
+  fetchContracts, createContract, fetchContract, addSubmission, deleteContract
 }, {
   condoAssociations: [], condoAssociation: null, discussions: [], discussion: {}, ads: [], ad: null, adminMeetings: [],
-  adminMeeting: null, generalMeetings: [], generalMeeting: null, polls: [], poll: null, elections: [], election: null
+  adminMeeting: null, generalMeetings: [], generalMeeting: null, polls: [], poll: null, elections: [], election: null, contracts: [],
+  contract: {}
 });
