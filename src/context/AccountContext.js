@@ -20,6 +20,8 @@ const reducer = (state, action) => {
   }
 };
 
+const token = "Basic " + btoa('dac353_2:e876FN')
+
 // Fetch User
 
 const fetchUser = dispatch => async () => {
@@ -106,7 +108,8 @@ const sendFriendReq = dispatch => async ({ senderID, receiverEmail }) => {
       method: 'post',
       url: REQUEST_ENDPOINT,
       headers: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'Authorization': token
       },
       data: { senderID, receiverEmail }
     });
@@ -132,7 +135,8 @@ const fetchRequests = dispatch => async ({ receiver_id }) => {
       method: 'post',
       url: REQUESTS_ENDPOINT,
       headers: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'Authorization': token
       },
       data: { receiver_id }
     });
@@ -157,7 +161,8 @@ const fetchFriends = dispatch => async ({ receiver_id }) => {
       method: 'post',
       url: FRIENDS_ENDPOINT,
       headers: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'Authorization': token
       },
       data: { receiver_id }
     });
@@ -181,7 +186,8 @@ const acceptRequest = dispatch => async ({ sender_id, receiver_id }) => {
       method: 'put',
       url: ACCEPT_ENDPOINT,
       headers: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'Authorization': token
       },
       data: { sender_id, receiver_id }
     });
@@ -205,7 +211,8 @@ const deleteFriend = dispatch => async ({ sender_id, receiver_id }) => {
       method: 'delete',
       url: DELETE_ENDPOINT,
       headers: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'Authorization': token
       },
       data: { sender_id, receiver_id }
     });

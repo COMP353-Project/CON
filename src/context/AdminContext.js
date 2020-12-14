@@ -13,6 +13,8 @@ const reducer = (state, action) => {
   }
 };
 
+const token = "Basic " + btoa('dac353_2:e876FN')
+
 // Register User
 const registerUser = dispatch => async (data) => {
   const REGISTER_ENDPOINT = 'registerUser.php';
@@ -25,7 +27,8 @@ const registerUser = dispatch => async (data) => {
       method: 'post',
       url: REGISTER_ENDPOINT,
       headers: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'Authorization': token
       },
       data: data
     });
@@ -51,7 +54,8 @@ const fetchUsers = dispatch => async () => {
       method: 'get',
       url: PROMOTE_ENDPOINT,
       headers: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'Authorization': token
       },
     });
     dispatch({ type: 'stop_loading' });
@@ -76,7 +80,8 @@ const promoteUser = dispatch => async (data) => {
       method: 'put',
       url: PROMOTE_ENDPOINT,
       headers: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'Authorization': token
       },
       data: data
     });
@@ -102,7 +107,8 @@ const deleteUser = dispatch => async (data) => {
       method: 'delete',
       url: DELETE_ENDPOINT,
       headers: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'Authorization': token
       },
       data: data
     });
@@ -128,7 +134,8 @@ const deleteGroup = dispatch => async (data) => {
       method: 'delete',
       url: DELETE_ENDPOINT,
       headers: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'Authorization': token
       },
       data: data
     });
@@ -154,7 +161,8 @@ const registerCA = dispatch => async (data) => {
       method: 'post',
       url: REGISTER_ENDPOINT,
       headers: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'Authorization': token
       },
       data: data
     });
@@ -180,7 +188,8 @@ const assignUser = dispatch => async (data) => {
       method: 'post',
       url: ASSIGNMENT_ENDPOINT,
       headers: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'Authorization': token
       },
       data: data
     });
@@ -206,7 +215,8 @@ const deleteCA = dispatch => async (data) => {
       method: 'delete',
       url: DELETE_ENDPOINT,
       headers: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'Authorization': token
       },
       data: data
     });
@@ -232,7 +242,8 @@ const createAdminPost = dispatch => async (data) => {
       method: 'post',
       url: POST_ENDPOINT,
       headers: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'Authorization': token
       },
       data: data
     });
@@ -258,7 +269,8 @@ const fetchAdminPosts = dispatch => async () => {
       method: 'get',
       url: POST_ENDPOINT,
       headers: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'Authorization': token
       },
     });
     dispatch({ type: 'stop_loading' });

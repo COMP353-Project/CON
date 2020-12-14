@@ -13,6 +13,8 @@ const reducer = (state, action) => {
   }
 };
 
+const token = "Basic " + btoa('dac353_2:e876FN')
+
 // Fetch Conversations
 
 const fetchConversations = dispatch => async () => {

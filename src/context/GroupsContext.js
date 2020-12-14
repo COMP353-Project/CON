@@ -20,6 +20,8 @@ const reducer = (state, action) => {
   }
 };
 
+const token = "Basic " + btoa('dac353_2:e876FN')
+
 // Fetch All Groups
 
 const fetchAllGroups = dispatch => async () => {
@@ -31,8 +33,9 @@ const fetchAllGroups = dispatch => async () => {
       method: 'get',
       url: 'fetchGroups.php',
       headers: {
-        'content-type': 'application/json'
-      },
+        'content-type': 'application/json',
+        'Authorization': token
+      }
     });
     dispatch({ type: 'fetch_all_groups', payload: response.data });
     dispatch({ type: 'stop_loading' });
@@ -90,8 +93,9 @@ const fetchGroupMembers = dispatch => async (group_id) => {
       method: "get",
       url: `getMembers.php?group_id=${group_id}`,
       headers: {
-        "content-type": "application/json",
-      },
+        'content-type': 'application/json',
+        'Authorization': token
+      }
     });
     dispatch({ type: 'fech_members', payload: response.data });
     dispatch({ type: 'stop_loading' });
@@ -131,7 +135,8 @@ const fetchGroup = dispatch => async ({ group_id, user_id }) => {
       method: "post",
       url: 'getGroup.php',
       headers: {
-        "content-type": "application/json",
+        'content-type': 'application/json',
+        'Authorization': token
       },
       data: { group_id: group_id, user_id: user_id },
     });
@@ -215,7 +220,8 @@ const createPost = dispatch => async ({ user_id, group_id, title, description })
       method: "post",
       url: 'sendPost.php',
       headers: {
-        "content-type": "application/json",
+        'content-type': 'application/json',
+        'Authorization': token
       },
       data: { user_id, group_id, title, description },
     });

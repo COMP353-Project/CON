@@ -27,6 +27,8 @@ const reducer = (state, action) => {
   }
 };
 
+const token = "Basic " + btoa('dac353_2:e876FN')
+
 // Fetch Condo Associations
 
 const fetchCondoAssociations = dispatch => async () => {
@@ -38,7 +40,8 @@ const fetchCondoAssociations = dispatch => async () => {
       method: 'get',
       url: 'fetchAssociations.php',
       headers: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'Authorization': token
       },
     }); dispatch({ type: 'fetch_condo_associations', payload: response.data });
 
@@ -213,6 +216,10 @@ const fetchAd = dispatch => async ({ condo_assoc_post_id }) => {
     const response = await axios({
       method: 'get',
       url: `getAd.php?condo_assoc_post_id=${condo_assoc_post_id}`,
+      headers: {
+        'content-type': 'application/json',
+        'Authorization': token
+      }
     });
 
     dispatch({ type: 'fetch_ad', payload: response.data });
@@ -265,7 +272,8 @@ const deleteAd = dispatch => async ({ condo_assoc_post_id }) => {
       method: 'delete',
       url: 'deleteAd.php',
       headers: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'Authorization': token
       },
       data: { condo_assoc_post_id, user_id: localStorage.getItem('userid') } // add condo_assoc title
     });
@@ -303,6 +311,10 @@ const fetchAdminMeeting = dispatch => async ({ id }) => {
     const response = await axios({
       method: 'get',
       url: `getAdminMeeting.php?id=${id}`,
+      headers: {
+        'content-type': 'application/json',
+        'Authorization': token
+      }
     });
     dispatch({ type: 'fetch_admin_meeting', payload: response.data });
     dispatch({ type: 'stop_loading' });
@@ -340,6 +352,10 @@ const fetchGeneralMeeting = dispatch => async ({ id }) => {
     const response = await axios({
       method: 'get',
       url: `getGeneralMeeting.php?id=${id}`,
+      headers: {
+        'content-type': 'application/json',
+        'Authorization': token
+      }
     });
 
     dispatch({ type: 'stop_loading' });
@@ -458,7 +474,6 @@ const fetchContracts = dispatch => async () => {
 
   try {
     const response = await axios.get(`get_contracts.php?id=${localStorage.getItem('userid')}`);
-    console.log(response)
     dispatch({ type: 'fetch_contracts', payload: response.data });
   } catch (e) {
     dispatch({ type: 'stop_loading' });

@@ -16,6 +16,8 @@ const reducer = (state, action) => {
   }
 };
 
+const token = "Basic " + btoa('dac353_2:e876FN')
+
 // Sign In
 const signin = dispatch => async ({ email, password }) => {
   const LOGIN_ENDPOINT = 'login.php'
