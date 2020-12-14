@@ -1,9 +1,9 @@
 import '../css/PostDiscussionButton.css';
 import React from 'react';
 
-const PostDiscussionButton = ({ title }) => {
+const PostDiscussionButton = ({ title, onClick }) => {
   return (
-    <div className="post-btn">
+    <div className="post-btn" onClick={onClick}>
       {title || 'Post Discussion'}
     </div>
   );
