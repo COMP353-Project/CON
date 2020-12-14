@@ -33,6 +33,10 @@ import CondoVotes from './Components/CondoAssociation/Votes/pages/Votes';
 import Vote from './Components/CondoAssociation/Votes/pages/Vote';
 import PostVote from './Components/CondoAssociation/Votes/pages/PostVote';
 import EditVote from './Components/CondoAssociation/Votes/pages/EditVote';
+import Contracts from './Components/CondoAssociation/Contracts/pages/Contracts';
+import PostContract from './Components/CondoAssociation/Contracts/pages/PostContract';
+import Contract from './Components/CondoAssociation/Contracts/pages/Contract';
+import PostSubmission from './Components/CondoAssociation/Contracts/pages/SubmissionForm';
 
 // Importing Providers
 import { Provider as AccountProvider } from './context/AccountContext';
@@ -95,9 +99,12 @@ function App () {
                     <Route path="/condo-association/votes/new" component={PostVote} />
                     <Route path="/condo-association/votes/:id" component={Vote} exact />
                     <Route path="/condo-association/votes/:id/edit" component={EditVote} />
-
                     <Route path="/condo-association/votes" component={CondoVotes} exact />
 
+                    <Route path="/condo-association/contracts/new" component={PostContract} />
+                    <Route path="/condo-association/contracts/:id/submissions/new" component={PostSubmission} />
+                    <Route path="/condo-association/contracts/:id" component={Contract} />
+                    <Route path="/condo-association/contracts" component={Contracts} />
                   </Switch>
                 </main>
               </GroupsProvider>

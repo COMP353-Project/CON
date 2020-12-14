@@ -8,19 +8,18 @@ $rest_json = file_get_contents("php://input");
 $_DELETE = json_decode($rest_json, true);
 $conn = mysqli_connect("localhost", "root", "", "con");
 
-$conversation_id = $_DELETE['conversation_id'];
-$user_id = $_DELETE['user_id'];
+$id = $_DELETE['id'];
 
-$query = 'DELETE FROM part_of WHERE conversation_id = ' . $conversation_id . ' AND user_id = ' . $user_id . ';';
+$query = "DELETE FROM Posts WHERE id = $id";
 
 if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
-  $result = @mysqli_query($conn, $query);
+  $result = mysqli_query($conn, $query);
 
   if ($result) {
-    echo json_encode(array("message" => "successfully left conversation"));
     http_response_code(200);
+    echo json_encode(array("message" => "Successfully deleted"));
   } else {
-    echo json_encode(array("message" => "Unable to leave conversation."));
     http_response_code(400);
+    echo json_encode(array("message" => "Error"));
   }
 }

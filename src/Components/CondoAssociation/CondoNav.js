@@ -9,6 +9,7 @@ function CondoNav () {
       <Button component={NavLink} to='/condo-association/ads' color="inherit" activeClassName="selected">Ads</Button>
       <Button component={NavLink} to='/condo-association/meetings' color="inherit" activeClassName="selected">Meetings</Button>
       <Button component={NavLink} to='/condo-association/votes' color="inherit" activeClassName="selected">Votes</Button>
+      <Button component={NavLink} to='/condo-association/contracts' color="inherit" activeClassName="selected">Contracts</Button>
     </div>
   );
 }
