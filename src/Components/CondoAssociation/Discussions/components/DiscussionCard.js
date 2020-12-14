@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Box from '../../../Global/Box';
 
-const DiscussionCard = ({ id, title, author, date, description, commentsLength }) => {
+const DiscussionCard = ({ id, title, author, date, description }) => {
   const renderDescription = () => {
     if (description.length < 250) return description;
 
@@ -21,7 +21,7 @@ const DiscussionCard = ({ id, title, author, date, description, commentsLength }
         <div className="card-description">{renderDescription()}</div>
         <Link to={`/condo-association/discussions/${id}`}>
           <div className="comments-button">
-            View Comments ({commentsLength})
+            View Comments
           </div>
         </Link>
       </Box>

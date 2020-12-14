@@ -21,6 +21,8 @@ const reducer = (state, action) => {
     case 'fetch_poll': return { ...state, poll: action.payload };
     case 'fetch_elections': return { ...state, elections: action.payload };
     case 'fetch_election': return { ...state, election: action.payload };
+    case 'fetch_contracts': return { ...state, contracts: action.payload };
+    case 'fetch_contract': return { ...state, contract: action.payload };
     default: return state;
   }
 };
@@ -67,13 +69,15 @@ const fetchCondoAssociation = dispatch => async ({ condoAssociationId }) => {
 
 // Fetch Discussion
 
-const fetchDiscussions = dispatch => async ({ condoAssociationId }) => {
+const fetchDiscussions = dispatch => async () => {
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
 
   try {
-    const { data } = await axios.get('', { params: { condoAssociationId } }); // GET discussions URL
-    dispatch({ type: 'fetch_discussions', payload: data });
+    const response = await axios.get(
+      `http://localhost:8080/con/api/discussions/get_discussions.php?id=${localStorage.getItem('userid')}`
+    );
+    dispatch({ type: 'fetch_discussions', payload: response.data });
 
     dispatch({ type: 'stop_loading' });
   } catch (e) {
@@ -89,8 +93,11 @@ const fetchDiscussion = dispatch => async ({ discussionId }) => {
   dispatch({ type: 'start_loading' });
 
   try {
-    const { data } = await axios.get('', { params: { discussionId } }); // GET discussion URL
-    dispatch({ type: 'fetch_discussion', payload: data });
+    const response = await axios.get(
+      `http://localhost:8080/con/api/discussions/get_discussion.php?id=${discussionId}`
+    );
+
+    dispatch({ type: 'fetch_discussion', payload: response.data });
 
     dispatch({ type: 'stop_loading' });
   } catch (e) {
@@ -101,20 +108,14 @@ const fetchDiscussion = dispatch => async ({ discussionId }) => {
 
 // Create Discussion
 
-const createDiscussion = dispatch => async ({ user_id, id, title, content, is_public }) => {
+const createDiscussion = dispatch => async ({ title, content, isPublic }) => {
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
 
   try {
-    const response = await axios({
-      method: 'post',
-      url: 'http://localhost:8080/con/api/discussions/addDiscussion.php',
-      headers: {
-        'content-type': 'application/json'
-      },
-      data: { user_id, id, title, content, is_public } // add condo_assoc title
+    await axios.post('http://localhost:8080/con/api/discussions/create_discussion.php', {
+      title, content, is_public: isPublic ? 1 : 0, id: localStorage.getItem('userid')
     });
-    return response;
   }
   catch (e) {
     dispatch({ type: 'stop_loading' });
@@ -124,12 +125,15 @@ const createDiscussion = dispatch => async ({ user_id, id, title, content, is_pu
 
 // Update Discussion
 
-const updateDiscussion = dispatch => async ({ discussionId, condoAssociationId, title, isPublic, content }) => {
+const updateDiscussion = dispatch => async ({ discussionId, title, isPublic, content }) => {
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
 
   try {
-    await axios.put('', { discussionId, title, isPublic, content }); // PUT discussion URL
+    await axios.put(
+      'http://localhost:8080/con/api/discussions/update_discussion.php',
+      { id: discussionId, title, is_public: isPublic, content }
+    );
   } catch (e) {
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });
@@ -143,7 +147,7 @@ const deleteDiscussion = dispatch => async ({ discussionId }) => {
   dispatch({ type: 'start_loading' });
 
   try {
-    await axios.delete('', { discussionId }); // DELETE discussion URL
+    await axios.delete('http://localhost:8080/con/api/discussions/delete_discussion.php', { data: { id: discussionId } });
   } catch (e) {
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });
@@ -157,9 +161,7 @@ const addComment = dispatch => async ({ discussionId, content }) => {
   dispatch({ type: 'start_loading' });
 
   try {
-    await axios.post('', { discussionId, content }); // POST comment URL
-
-    fetchDiscussion({ discussionId });
+    await axios.post('http://localhost:8080/con/api/discussions/create_comment.php', { discussion_id: discussionId, content, id: localStorage.getItem('userid') });
   } catch (e) {
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });
@@ -448,11 +450,90 @@ const voteElection = dispatch => async ({ electionId, candidateId }) => {
   }
 };
 
+// Fetch Contracts
+
+const fetchContracts = dispatch => async () => {
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    const response = await axios.get(`http://localhost:8080/con/api/contracts/get_contracts.php?id=${localStorage.getItem('userid')}`);
+    console.log(response)
+    dispatch({ type: 'fetch_contracts', payload: response.data });
+  } catch (e) {
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: e.message });
+  }
+};
+
+// Create Contract
+
+const createContract = dispatch => async ({ name, description, budget }) => {
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    await axios.post('http://localhost:8080/con/api/contracts/create_contract.php', { name, description, budget, id: localStorage.getItem('userid') });
+  } catch (e) {
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: e.message });
+  }
+};
+
+// Fetch Contract
+
+const fetchContract = dispatch => async ({ id }) => {
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    const response = await axios.get(`http://localhost:8080/con/api/contracts/get_contract.php?id=${id}`);
+
+    dispatch({ type: 'fetch_contract', payload: response.data });
+  } catch (e) {
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: e.message });
+  }
+};
+
+// Add Submission
+
+const addSubmission = dispatch => async ({ contract_id, poster, statement }) => {
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    await axios.post('http://localhost:8080/con/api/contracts/create_submission.php', { contract_id, poster, statement });
+  } catch (e) {
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: e.message });
+  }
+};
+
+// Delete Contract
+
+const deleteContract = dispatch => async ({ id }) => {
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    await axios.delete(
+      'http://localhost:8080/con/api/contracts/delete_contract.php',
+      { data: { id } }
+    );
+  } catch (e) {
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: e.message });
+  }
+};
+
 export const { Context, Provider } = createDataContext(reducer, {
   fetchCondoAssociations, fetchCondoAssociation, fetchDiscussions, fetchDiscussion, createDiscussion, updateDiscussion,
   deleteDiscussion, addComment, fetchAds, fetchAllAds, fetchAd, createAd, udpdateAd, deleteAd, fetchAdminMeetings, fetchAdminMeeting,
-  fetchGeneralMeetings, fetchGeneralMeeting, fetchPolls, fetchPoll, votePoll, fetchElections, fetchElection, voteElection
+  fetchGeneralMeetings, fetchGeneralMeeting, fetchPolls, fetchPoll, votePoll, fetchElections, fetchElection, voteElection,
+  fetchContracts, createContract, fetchContract, addSubmission, deleteContract
 }, {
-  condoAssociations: [], condoAssociation: null, discussions: [], discussion: null, ads: [], ad: null, adminMeetings: [],
-  adminMeeting: null, generalMeetings: [], generalMeeting: null, polls: [], poll: null, elections: [], election: null
+  condoAssociations: [], condoAssociation: null, discussions: [], discussion: {}, ads: [], ad: null, adminMeetings: [],
+  adminMeeting: null, generalMeetings: [], generalMeeting: null, polls: [], poll: null, elections: [], election: null, contracts: [],
+  contract: {}
 });
