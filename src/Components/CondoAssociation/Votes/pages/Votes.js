@@ -76,7 +76,7 @@ function CondoVotes () {
 
       <div className={pollsSelected ? 'page-container poll' : 'page-container election'}>
         <div className="page-header">
-          <h1>Votes</h1>
+          <h1>Votes (hardcoded)</h1>
           <Link to="/condo-association/Votes/new">
             <PostVoteButton />
           </Link>
