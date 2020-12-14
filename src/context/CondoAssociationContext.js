@@ -173,7 +173,7 @@ const fetchAds = dispatch => async () => {
   dispatch({ type: 'start_loading' });
 
   try {
-    const response = await axios.get('http://localhost/con/CON/api/ads/getAds.php'); // GET ads URL
+    const response = await axios.get('http://localhost:8080/con/api/ads/getAds.php'); // GET ads URL
     dispatch({ type: 'fetch_ads', payload: response.data });
     dispatch({ type: 'stop_loading' });
     return response.data;
@@ -193,7 +193,7 @@ const fetchAd = dispatch => async ({ condo_assoc_post_id }) => {
 
     const response = await axios({
       method: 'get',
-      url: `http://localhost/con/CON/api/ads/getAd.php?condo_assoc_post_id=${condo_assoc_post_id}`,
+      url: `http://localhost:8080/con/api/ads/getAd.php?condo_assoc_post_id=${condo_assoc_post_id}`,
     });
 
     dispatch({ type: 'fetch_ad', payload: response.data });
@@ -244,7 +244,7 @@ const deleteAd = dispatch => async ({ condo_assoc_post_id }) => {
   try {
     const response = await axios({
       method: 'delete',
-      url: 'http://localhost/con/CON/api/ads/deleteAd.php',
+      url: 'http://localhost:8080/con/api/ads/deleteAd.php',
       headers: {
         'content-type': 'application/json'
       },
@@ -263,7 +263,7 @@ const fetchAdminMeetings = dispatch => async () => {
   dispatch({ type: 'start_loading' });
 
   try {
-    const response = await axios.get('http://localhost/con/CON/api/meetings/getAdminMeetings.php'); // GET general_meetings URL
+    const response = await axios.get('http://localhost:8080/con/api/meetings/getAdminMeetings.php'); // GET general_meetings URL
     dispatch({ type: 'fetch_admin_meetings', payload: response.data });
 
     dispatch({ type: 'stop_loading' });
@@ -283,7 +283,7 @@ const fetchAdminMeeting = dispatch => async ({ id }) => {
   try {
     const response = await axios({
       method: 'get',
-      url: `http://localhost/con/CON/api/meetings/getAdminMeeting.php?id=${id}`,
+      url: `http://localhost:8080/con/api/meetings/getAdminMeeting.php?id=${id}`,
     });
     dispatch({ type: 'fetch_admin_meeting', payload: response.data });
     dispatch({ type: 'stop_loading' });
@@ -301,7 +301,7 @@ const fetchGeneralMeetings = dispatch => async () => {
   dispatch({ type: 'start_loading' });
 
   try {
-    const response = await axios.get('http://localhost/con/CON/api/meetings/getGeneralMeetings.php'); // GET general_meetings URL
+    const response = await axios.get('http://localhost:8080/con/api/meetings/getGeneralMeetings.php'); // GET general_meetings URL
     dispatch({ type: 'fetch_general_meetings', payload: response.data });
     dispatch({ type: 'stop_loading' });
     return response.data;
@@ -320,7 +320,7 @@ const fetchGeneralMeeting = dispatch => async ({ id }) => {
   try {
     const response = await axios({
       method: 'get',
-      url: `http://localhost/con/CON/api/meetings/getGeneralMeeting.php?id=${id}`,
+      url: `http://localhost:8080/con/api/meetings/getGeneralMeeting.php?id=${id}`,
     });
 
     dispatch({ type: 'stop_loading' });
