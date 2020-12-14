@@ -147,8 +147,12 @@
   color: rgb(57, 168, 149);
 }
 
-.card-description, .card-agenda{
+.card-description, .card-agenda {
   margin-bottom: 15px;
+}
+
+.card-description.centered {
+  text-align: center;
 }
 
 /* STATUS STYLES */
@@ -168,31 +172,6 @@
 .is-success {
   margin-top: 20px;
   color: blue;
-}
-
-/* SPACING STYLES */
-.vertical-separator .small {
-  margin-bottom: 10px;
-}
-
-.vertical-separator .medium {
-  margin-bottom: 15px;
-}
-
-.vertical-separator .large {
-  margin-bottom: 20px;
-}
-
-.horizontal-separator .small {
-  margin-right: 10px;
-}
-
-.horizontal-separator .medium {
-  margin-right: 15px;
-}
-
-.horizontal-separator .large {
-  margin-right: 20px;
 }
 
 .is-error.bold,
