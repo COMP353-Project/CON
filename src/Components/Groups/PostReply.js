@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../../css/GroupsStyle.css'
+
 import { makeStyles } from '@material-ui/core/styles';
 import { Accordion, AccordionSummary, AccordionDetails, Divider, Container, Card, List, ListItem, ListItemText, Button, OutlinedInput } from '@material-ui/core';
 

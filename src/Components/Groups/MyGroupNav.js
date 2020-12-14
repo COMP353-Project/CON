@@ -1,9 +1,9 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 
 function MyGroupNav () {
-  const[id, setID] = React.useState(localStorage.getItem("groupID"));
+  const { id } = useParams();
   
   return (
     <div className="nav">

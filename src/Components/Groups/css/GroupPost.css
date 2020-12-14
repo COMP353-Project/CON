@@ -1,29 +1,7 @@
-.title-box {
-  display: flex;
-  flex-direction: row;
+.group-post.title {
+  margin: 20px 0;
 }
 
-.title-text {
-  font-size: 25px;
-  font-weight: 500;
-  color: black;
-}
-
-.author {
-  color: rgb(57, 168, 149);
-}
-
-.date {
-  color: #757575;
-  font-weight: 600;
-}
-
-.comments-button {
-  color: rgb(57, 168, 149);
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.comments-button:hover {
-  text-decoration: underline;
+.group-post {
+  border: 1px solid black !important;
 }

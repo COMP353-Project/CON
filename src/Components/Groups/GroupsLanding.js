@@ -1,7 +1,7 @@
 import { Button, ListItem, ListItemText, List, Container } from '@material-ui/core';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../../css/GroupsStyle.css'
+
 import GroupsNav from './GroupsNav.js'
 
 function GroupsLanding () {
