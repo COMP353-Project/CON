@@ -20,7 +20,7 @@ const Condos = () => {
 
   return (
     <div>
-      <h1>My Condos</h1>
+      <h1>My Condos (hardcoded)</h1>
       {renderCondos()}
     </div>
   );

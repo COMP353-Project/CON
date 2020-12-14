@@ -49,14 +49,14 @@ const FinancialStatus = () => {
 
   return (
     <div>
-      <h1>Financial Status</h1>
+      <h1>Financial Status (hardcoded)</h1>
       <div style={{ display: 'flex', flexDirection: 'row', fontSize: '18px', marginBottom: '40px' }}>
         <span style={{ fontWeight: 'bold' }}>Total due:</span>
         <div style={{ color: 'rgb(57, 168, 149)', fontWeight: 'bold' }}>1500$</div>
       </div>
-      <h2>Payments</h2>
+      <h2>Payments (hardcoded)</h2>
       {renderPayments()}
-      <h2>Transactions</h2>
+      <h2>Transactions (hardcoded)</h2>
       {renderTransactions()}
     </div>
   );

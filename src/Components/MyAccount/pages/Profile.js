@@ -97,11 +97,10 @@ const Profile = () => {
       </div>
       <div className="info"><span className="label">Email Address:</span><div className="space" />{user.email}</div>
       <div className="info"><span className="label">Address:</span><div className="space" />{user.address}</div>
-      <h2>Discussion Posts</h2>
+      <h2>Discussion Posts (hardcoded)</h2>
       {renderDiscussions()}
-      <h2>Ads Posted</h2>
+      <h2>Ads Posted (hardcoded)</h2>
       {renderAds()}
-      <h2>Group Posts</h2>
     </div>
   );
 };

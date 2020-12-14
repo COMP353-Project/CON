@@ -38,7 +38,7 @@ const Condo = () => {
   return (
     <div>
       <BackButton />
-      <h2 className="condo-heading">Condo Details</h2>
+      <h2 className="condo-heading">Condo Details (Hardcoded)</h2>
       <div className="condo-spec">
         <div className="condo-spec-title">Condo:</div>
         <div className="condo-spec-value">1341234</div>
@@ -51,9 +51,9 @@ const Condo = () => {
         <div className="condo-spec-title">Acquired:</div>
         <div className="condo-spec-value">January 12th 2020</div>
       </div>
-      <h2 className="condo-heading">Parking Spots</h2>
+      <h2 className="condo-heading">Parking Spots (Hardcoded)</h2>
         {renderParkings()}
-      <h2 className="condo-heading">Storage Spaces</h2>
+      <h2 className="condo-heading">Storage Spaces (Hardcoded)</h2>
         {renderStorages()}
     </div>
   );
