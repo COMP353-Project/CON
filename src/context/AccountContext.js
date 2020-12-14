@@ -196,7 +196,7 @@ const acceptRequest = dispatch => async ({ sender_id, receiver_id }) => {
 
 // Delete Friend or Friend Request
 const deleteFriend = dispatch => async ({ sender_id, receiver_id }) => {
-  const DELETE_ENDPOINT = 'http://localhost:8080/con/api/account/friends/delete.php'
+  const DELETE_ENDPOINT = 'http://localhost:8080/con/api/account/friends/deleteFriend.php'
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
 
