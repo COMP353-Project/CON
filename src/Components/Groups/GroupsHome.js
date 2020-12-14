@@ -1,6 +1,5 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import '../../css/GroupsStyle.css';
 import GroupsNav from './GroupsNav.js';
 import MyGroupNav from './MyGroupNav.js';
 import { Context as GroupsContext } from '../../context/GroupsContext.js';

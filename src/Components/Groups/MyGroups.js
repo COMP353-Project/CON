@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../../css/GroupsStyle.css'
+
 import CreateGroupButton from './CreateGroupBtn';
 import GroupsNav from './GroupsNav.js'
 import { Context as GroupsContext } from '../../context/GroupsContext.js'

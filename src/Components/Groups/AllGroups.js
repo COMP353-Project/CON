@@ -1,7 +1,6 @@
-import { Button, ListItem, ListItemText, List, Container } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../../css/GroupsStyle.css'
 import GroupsNav from './GroupsNav.js'
 import { Context as GroupsContext } from '../../context/GroupsContext.js'
 
