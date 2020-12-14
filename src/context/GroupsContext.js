@@ -25,10 +25,16 @@ const fetchAllGroups = dispatch => async () => {
   dispatch({ type: 'start_loading' });
 
   try {
-    const { data } = await axios.get(''); // GET all groups URL
-    dispatch({ type: 'fetch_all_groups', payload: data });
-
+    const response = await axios({
+      method: 'get',
+      url: 'http://localhost/con/CON/api/groups/fetch.php',
+      headers: {
+        'content-type': 'application/json'
+      },
+    });
+    dispatch({ type: 'fetch_all_groups', payload: response.data });
     dispatch({ type: 'stop_loading' });
+    return response.data;
   } catch (e) {
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });
@@ -44,7 +50,7 @@ const requestGroup = dispatch => async ({ groupId }) => {
   try {
     await axios.post('', { groupId }); // POST group_request URL
 
-    fetchAllGroups();
+    // fetchAllGroups();
   } catch (e) {
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });
@@ -125,7 +131,7 @@ const leaveGroup = dispatch => async ({ groupId }) => {
   dispatch({ type: 'start_loading' });
 
   try {
-    await axios.delete('', { groupId }); // DELETE group_member URL
+    await axios.delete('', { groupId }); // DELETE group_member URL
   } catch (e) {
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });
