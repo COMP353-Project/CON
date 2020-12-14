@@ -183,6 +183,23 @@ const fetchAds = dispatch => async () => {
   }
 };
 
+// Fetch Ads
+
+const fetchAllAds = dispatch => async ( id ) => {
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    const response = await axios.get(`http://localhost:8080/con/api/ads/getAllAds.php?id=${id}`);
+    dispatch({ type: 'fetch_all_ads', payload: response.data });
+    dispatch({ type: 'stop_loading' });
+    return response.data;
+  } catch (e) {
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: e.message });
+  }
+};
+
 // Fetch Ad
 
 const fetchAd = dispatch => async ({ condo_assoc_post_id }) => {
@@ -433,7 +450,7 @@ const voteElection = dispatch => async ({ electionId, candidateId }) => {
 
 export const { Context, Provider } = createDataContext(reducer, {
   fetchCondoAssociations, fetchCondoAssociation, fetchDiscussions, fetchDiscussion, createDiscussion, updateDiscussion,
-  deleteDiscussion, addComment, fetchAds, fetchAd, createAd, udpdateAd, deleteAd, fetchAdminMeetings, fetchAdminMeeting,
+  deleteDiscussion, addComment, fetchAds, fetchAllAds, fetchAd, createAd, udpdateAd, deleteAd, fetchAdminMeetings, fetchAdminMeeting,
   fetchGeneralMeetings, fetchGeneralMeeting, fetchPolls, fetchPoll, votePoll, fetchElections, fetchElection, voteElection
 }, {
   condoAssociations: [], condoAssociation: null, discussions: [], discussion: null, ads: [], ad: null, adminMeetings: [],

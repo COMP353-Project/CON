@@ -91,7 +91,7 @@ const Profile = () => {
         <h1>{user.first_name} {user.last_name}</h1>
         <div className="buttons-box">
           <Link to="/my-account/edit">
-            <Button title="Edit Profile" />
+            <Button className="post-btn" title="Edit Profile" />
           </Link>
         </div>
       </div>

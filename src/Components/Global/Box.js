@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Box = ({ children }) => {
+const Box = ({ children, extraClasses }) => {
   return (
-    <div className="card">
+    <div className={extraClasses + " card"}>
       {children}
     </div>
   );

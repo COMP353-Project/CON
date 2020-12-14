@@ -220,6 +220,57 @@ const deleteCA = dispatch => async (data) => {
   }
 };
 
+// Delete Condo Association
+const createAdminPost = dispatch => async (data) => {
+  const POST_ENDPOINT = 'http://localhost:8080/con/api/admin/createAdminPost.php';
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'reset_success' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    const response = await axios({
+      method: 'post',
+      url: POST_ENDPOINT,
+      headers: {
+        'content-type': 'application/json'
+      },
+      data: data
+    });
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_success', payload: 'createAdminPost' });
+    return response;
+  }
+  catch (e) {
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: 'createAdminPost' });
+  }
+};
+
+// Delete Condo Association
+const fetchAdminPosts = dispatch => async () => {
+  const POST_ENDPOINT = 'http://localhost:8080/con/api/admin/getAdminPosts.php';
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'reset_success' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    const response = await axios({
+      method: 'get',
+      url: POST_ENDPOINT,
+      headers: {
+        'content-type': 'application/json'
+      },
+    });
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_success', payload: 'getAdminPost' });
+    return response.data;
+  }
+  catch (e) {
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: 'getAdminPost' });
+  }
+};
+
 export const { Context, Provider } = createDataContext(reducer, {
-  registerUser, promoteUser, deleteUser, deleteGroup, registerCA, assignUser, deleteCA, fetchUsers
+  registerUser, promoteUser, deleteUser, deleteGroup, registerCA, assignUser, deleteCA, fetchUsers, createAdminPost, fetchAdminPosts
 }, { isLoading: false, error: '', success: '', user: null });

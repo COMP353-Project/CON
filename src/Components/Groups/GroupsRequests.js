@@ -19,8 +19,8 @@ function GroupsRequests () {
                              <ListItem>
                                 <ListItemText inset="false" primary={user.username}/>    
                             </ListItem>
-                            <Button>Accept</Button>
-                            <Button>Reject</Button>
+                            <Button className="post-btn">Accept</Button>
+                            <Button className="post-btn del">Reject</Button>
                             </Card>
                         </Container>
                     );

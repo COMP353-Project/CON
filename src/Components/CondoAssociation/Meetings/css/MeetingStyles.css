@@ -12,3 +12,7 @@
 .page-container.general .card.admin {
   display: none;
 }
+
+.card.admin {
+  border: 4px solid #f37303
+}

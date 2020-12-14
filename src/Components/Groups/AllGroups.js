@@ -30,7 +30,7 @@ function AllGroups () {
                           <p>{"Click this to go to group " + group.id}</p>
                       </Button>
                       <div>Users go here</div>
-                      {isAdmin ? <Button>Delete</Button> : <div></div>}
+                      {isAdmin ? <Button className="post-btn red">Delete</Button> : <div></div>}
                   </div>
                 );
               })}

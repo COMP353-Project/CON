@@ -32,6 +32,7 @@ const EditProfile = () => {
       <div className="page-header">
         <h1>Edit Info</h1>
         <Button
+          className="post-btn"
           title="Edit Info"
           onClick={async () => {
             await updateProfile({ firstName, lastName, email, address });
@@ -65,6 +66,7 @@ const EditProfile = () => {
       <div className="page-header">
         <h1>Privacy</h1>
         <Button
+          className="post-btn"
           title="Update Privacy Settings"
           onClick={async () => {
             await updatePassword({ currentPassword, newPassword, confirmNewPassword });
