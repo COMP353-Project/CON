@@ -185,7 +185,7 @@ const fetchAds = dispatch => async () => {
 
 // Fetch Ads
 
-const fetchAllAds = dispatch => async ( id ) => {
+const fetchAllAds = dispatch => async (id) => {
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
 
