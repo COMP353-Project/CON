@@ -458,7 +458,7 @@ const fetchContracts = dispatch => async () => {
 
   try {
     const response = await axios.get(`http://localhost:8080/con/api/contracts/get_contracts.php?id=${localStorage.getItem('userid')}`);
-
+    console.log(response)
     dispatch({ type: 'fetch_contracts', payload: response.data });
   } catch (e) {
     dispatch({ type: 'stop_loading' });
@@ -530,7 +530,8 @@ const deleteContract = dispatch => async ({ id }) => {
 export const { Context, Provider } = createDataContext(reducer, {
   fetchCondoAssociations, fetchCondoAssociation, fetchDiscussions, fetchDiscussion, createDiscussion, updateDiscussion,
   deleteDiscussion, addComment, fetchAds, fetchAllAds, fetchAd, createAd, udpdateAd, deleteAd, fetchAdminMeetings, fetchAdminMeeting,
-  fetchGeneralMeetings, fetchGeneralMeeting, fetchPolls, fetchPoll, votePoll, fetchElections, fetchElection, voteElection
+  fetchGeneralMeetings, fetchGeneralMeeting, fetchPolls, fetchPoll, votePoll, fetchElections, fetchElection, voteElection,
+  fetchContracts, createContract, fetchContract, addSubmission, deleteContract
 }, {
   condoAssociations: [], condoAssociation: null, discussions: [], discussion: {}, ads: [], ad: null, adminMeetings: [],
   adminMeeting: null, generalMeetings: [], generalMeeting: null, polls: [], poll: null, elections: [], election: null, contracts: [],

@@ -1,4 +1,3 @@
-import '../../../../css/GlobalStyles.css';
 import React, { useContext, useEffect } from 'react';
 import CondoNav from '../../CondoNav';
 import { Link } from 'react-router-dom';
