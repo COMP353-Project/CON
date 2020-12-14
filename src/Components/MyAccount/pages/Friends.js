@@ -8,9 +8,7 @@ import { Context as AdminContext } from '../../../context/AdminContext';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
-
 const Friends = () => {
-  const [email, setEmail] = React.useState("");
   const [emails, setEmails] = React.useState([]);
   const [requestsError, setRError] = React.useState("");
   const [requestsSuccess, setRSuccess] = React.useState("");
@@ -18,6 +16,8 @@ const Friends = () => {
   const [friendsSuccess, setFSuccess] = React.useState("");
   const [requests, setRequests] = React.useState([]);
   const [friends, setFriends] = React.useState([]);
+  const [emailValue, setEmailValue] = React.useState('');
+  const [emailInputValue, setEmailInputValue] = React.useState('');
   const { sendFriendReq, fetchRequests, fetchFriends, state: { error, success, isLoading } } = React.useContext(AccountContext);
   const { fetchUsers } = React.useContext(AdminContext);
 
@@ -62,11 +62,11 @@ const Friends = () => {
 
     sendFriendReq({
       senderID: localStorage.getItem('userid'),
-      receiverEmail: email
+      receiverEmail: emailInputValue
     });
 
     // Reset form values
-    setEmail('');
+    setEmailValue('');
   }
 
   const RenderRequests = () => {
@@ -123,11 +123,10 @@ const Friends = () => {
     <div>
       <form className="friend-add" onSubmit={sendReq}>
         <Autocomplete
-          options={emails}
           className="friend-field"
+          options={emails ? emails : []}
+          noOptionsText={emails ? 'Cannot find that user' : 'No users exist'}
           id="email"
-          emails
-          getOptionLabel={(option) => option.email}
           renderOption={(option) => (
             <React.Fragment>
               <div className='dropdown-label'>
@@ -136,19 +135,16 @@ const Friends = () => {
               </div>
             </React.Fragment>
           )}
-
-          renderInput={(params) =>
-            <TextField
-              {...params}
-              id="send-friend-req"
-              label="Enter User Email"
-              type="email"
-              variant="outlined"
-              value={email}
-              required
-              onChange={e => setEmail(e.target.value)}
-            />
-          }
+          value={emailValue}
+          onChange={(event, newValue) => {
+            setEmailValue(newValue)
+          }}
+          inputValue={emailInputValue}
+          onInputChange={(event, newInputValue) => {
+            setEmailInputValue(newInputValue);
+          }}
+          getOptionLabel={(option) => option.email}
+          renderInput={(params) => <TextField {...params} required type="email" label="Select User" id="send-friend-req" variant="outlined" />}
         />
         {isLoading ? <Spinner /> : <input type="submit" value="Add Friend" className="post-btn" />}
       </form>

@@ -14,9 +14,11 @@ function AdminUsers () {
   const [regEmail, setRegEmail] = React.useState("");
   const [regAddress, setRegAddress] = React.useState("");
   const [regPassword, setRegPassword] = React.useState("");
-  const [promoteEmail, setPromoteEmail] = React.useState("");
-  const [delEmail, setDelEmail] = React.useState("");
   const [emails, setEmails] = React.useState([]);
+  const [promoteValue, setPromoteValue] = React.useState('');
+  const [promoteInputValue, setPromoteInputValue] = React.useState('');
+  const [deleteValue, setDeleteValue] = React.useState('');
+  const [deleteInputValue, setDeleteInputValue] = React.useState('');
 
   /**
   * Function that fetches a list of user emails
@@ -45,7 +47,7 @@ function AdminUsers () {
 
     registerUser(info);
 
-    // Reset form values
+    // Reset form promoteValues
     setFirstName('');
     setLastName('');
     setRegEmail('');
@@ -60,12 +62,13 @@ function AdminUsers () {
   const handlePromotion = async (e) => {
     e.preventDefault();
     const info = {
-      email: promoteEmail
+      // email: promoteEmail
+      email: promoteInputValue
     }
     promoteUser(info);
 
-    // Reset form values
-    setPromoteEmail('');
+    // Reset form promoteValues
+    setPromoteInputValue('');
   }
 
   /**
@@ -75,12 +78,12 @@ function AdminUsers () {
   const handleDelete = async (e) => {
     e.preventDefault();
     const info = {
-      email: delEmail
+      email: deleteInputValue
     }
     deleteUser(info);
 
-    // Reset form values
-    setDelEmail('');
+    // Reset form promote values
+    setDeleteInputValue('');
   }
 
   return (
@@ -158,10 +161,17 @@ function AdminUsers () {
           <h3 className="form__title">Promote user to system admin</h3>
           <div className="form__field">
             <Autocomplete
-              options={emails}
-              id="email"
-              emails
+              value={promoteValue}
+              onChange={(event, newValue) => {
+                setPromoteValue(newValue);
+              }}
+              inputValue={promoteInputValue}
+              onInputChange={(event, newInputValue) => {
+                setPromoteInputValue(newInputValue);
+              }}
               getOptionLabel={(option) => option.email}
+              id="controllable-states-demo"
+              options={emails ? emails : []}
               renderOption={(option) => (
                 <React.Fragment>
                   <div className='dropdown-label'>
@@ -169,19 +179,9 @@ function AdminUsers () {
                     <span className='email'>{option.email}</span>
                   </div>
                 </React.Fragment>
-              )}              
-              renderInput={(params) =>
-                <TextField
-                  {...params}
-                  id="promote-user-email"
-                  label="Email"
-                  type="email"
-                  variant="outlined"
-                  value={promoteEmail}
-                  required
-                  onChange={e => setPromoteEmail(e.target.value)}
-                />
-              }
+              )}
+              noOptionsText={emails ? 'Cannot find that user' : 'No users exist'}
+              renderInput={(params) => <TextField {...params} variant="outlined" label="Select User" required/>}
             />
           </div>
           <div className="btn-container">
@@ -196,10 +196,20 @@ function AdminUsers () {
           <h3 className="form__title">Delete existing user</h3>
           <div className="form__field">
             <Autocomplete
-              options={emails}
-              id="email"
-              emails
+              value={deleteValue}
+              onChange={(event, newValue) => {
+                setDeleteValue(newValue);
+              }}
+              inputValue={deleteInputValue}
+              onInputChange={(event, newInputValue) => {
+                setDeleteInputValue(newInputValue);
+              }}
               getOptionLabel={(option) => option.email}
+<<<<<<< HEAD
+=======
+              id="controllable-states-demo"
+              options={emails ? emails : []}
+>>>>>>> f7e935d97058c9d5bcc96d743e2a5efa00c4a189
               renderOption={(option) => (
                 <React.Fragment>
                   <div className='dropdown-label'>
@@ -208,6 +218,7 @@ function AdminUsers () {
                   </div>
                 </React.Fragment>
               )}
+<<<<<<< HEAD
               renderInput={(params) =>
                 <TextField
                   {...params}
@@ -220,6 +231,10 @@ function AdminUsers () {
                   onChange={e => setDelEmail(e.target.value)}
                 />
               }
+=======
+              noOptionsText={emails ? 'Cannot find that user' : 'No users exist'}
+              renderInput={(params) => <TextField {...params} variant="outlined" label="Select User" required/>}
+>>>>>>> f7e935d97058c9d5bcc96d743e2a5efa00c4a189
             />
           </div>
           <div className="btn-container">

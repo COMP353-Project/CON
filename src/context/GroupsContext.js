@@ -25,10 +25,16 @@ const fetchAllGroups = dispatch => async () => {
   dispatch({ type: 'start_loading' });
 
   try {
-    const { data } = await axios.get(''); // GET all groups URL
-    dispatch({ type: 'fetch_all_groups', payload: data });
-
+    const response = await axios({
+      method: 'get',
+      url: 'http://localhost:8080/con/api/groups/fetch.php',
+      headers: {
+        'content-type': 'application/json'
+      },
+    });
+    dispatch({ type: 'fetch_all_groups', payload: response.data });
     dispatch({ type: 'stop_loading' });
+    return response.data;
   } catch (e) {
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });
@@ -53,15 +59,43 @@ const requestGroup = dispatch => async ({ groupId }) => {
 
 // Fetch My Groups
 
-const fetchMyGroups = dispatch => async () => {
+const fetchMyGroups = dispatch => async (id) => {
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
 
   try {
-    const { data } = await axios.get(''); // GET My Groups URL
-    dispatch({ type: 'fech_my_groups', payload: data });
-
+    const response = await axios.get(`http://localhost:8080/con/api/groups/getMyGroups.php?id=${id}`);
+    console.log(response)
+    dispatch({ type: 'fech_my_groups', payload: response });
     dispatch({ type: 'stop_loading' });
+
+    console.log(response.data)
+    return response.data;
+  } catch (e) {
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_error', payload: e.message });
+  }
+};
+
+// Fetch Group Members
+
+const fetchGroupMembers = dispatch => async (group_id) => {
+  dispatch({ type: 'reset_error' });
+  dispatch({ type: 'start_loading' });
+
+  try {
+    const response = await axios({
+      method: "get",
+      url: `http://localhost:8080/con/api/groups/getMembers.php?group_id=${group_id}`,
+      headers: {
+        "content-type": "application/json",
+      },
+    });
+    dispatch({ type: 'fech_members', payload: response.data });
+    dispatch({ type: 'stop_loading' });
+
+    // console.log(response)
+    return response.data;
   } catch (e) {
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });
@@ -86,15 +120,22 @@ const createGroup = dispatch => async ({ name, description }) => {
 
 // Fetch Group
 
-const fetchGroup = dispatch => async ({ groupId }) => {
+const fetchGroup = dispatch => async ({ group_id, user_id }) => {
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
 
   try {
-    const { data } = await axios.get('', { params: { groupId } }); // GET group URL
-    dispatch({ type: 'fetch_group', payload: data });
-
+    const response = await axios({
+      method: "post",
+      url: 'http://localhost:8080/con/api/groups/getGroup.php',
+      headers: {
+        "content-type": "application/json",
+      },
+      data: { group_id: group_id, user_id: user_id },
+    });
+    dispatch({ type: 'fetch_group', payload: response.data });
     dispatch({ type: 'stop_loading' });
+    return response.data;
   } catch (e) {
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });
@@ -122,7 +163,7 @@ const leaveGroup = dispatch => async ({ groupId }) => {
   dispatch({ type: 'start_loading' });
 
   try {
-    await axios.delete('', { groupId }); // DELETE group_member URL
+    await axios.delete('', { groupId }); // DELETE group_member URL
   } catch (e) {
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });
@@ -131,15 +172,16 @@ const leaveGroup = dispatch => async ({ groupId }) => {
 
 // Fetch Posts
 
-const fetchPosts = dispatch => async ({ groupId }) => {
+const fetchPosts = dispatch => async (groupId) => {
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
-
   try {
-    const { data } = await axios.get('', { params: { groupId } }); // GET group_posts URL
-    dispatch({ type: 'fetch_posts', payload: data });
+    const response = await axios.get(`http://localhost:8080/api/groups/getGroupPosts.php?id=${groupId}`); // GET group_posts URL
+    dispatch({ type: 'fetch_posts', payload: response });
 
     dispatch({ type: 'stop_loading' });
+    console.log(response.data)
+    return response.data
   } catch (e) {
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });
@@ -163,14 +205,20 @@ const fetchPost = dispatch => async ({ postId }) => {
 
 // Create Discussion Post
 
-const createPost = dispatch => async ({ groupId, title, content, type }) => {
+const createPost = dispatch => async (user_id, group_id, title, description) => {
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
-
   try {
-    const { data } = await axios.post('', { groupId, title, content, type }); // POST post URL
-
-    return data.id;
+    const response = await axios({
+      method: "post",
+      url: 'http://localhost:8080/con/api/groups/sendPost.php',
+      headers: {
+        "content-type": "application/json",
+      },
+      data: { user_id, group_id, title, description },
+    });
+    console.log(response.data)
+    return response.data;
   } catch (e) {
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });
@@ -288,7 +336,7 @@ const handleRequest = dispatch => async ({ groupId, userId, accept }) => {
 };
 
 export const { Context, Provider } = createDataContext(reducer, {
-  fetchAllGroups, requestGroup, fetchMyGroups, createGroup, fetchGroup, editGroup, leaveGroup, fetchPosts, fetchPost,
+  fetchAllGroups, requestGroup, fetchMyGroups, fetchGroupMembers, createGroup, fetchGroup, editGroup, leaveGroup, fetchPosts, fetchPost,
   createPost, editPost, deletePost, addComment, fetchChatMessages, sendChatMessage, fetchRequests, handleRequest
 }, {
   myGroups: [], allGroups: [], group: null, posts: [], post: null, chatMessages: [], requests: [], isLoading: false, error: ''

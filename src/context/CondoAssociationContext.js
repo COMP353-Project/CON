@@ -32,10 +32,16 @@ const fetchCondoAssociations = dispatch => async () => {
   dispatch({ type: 'start_loading' });
 
   try {
-    const { data } = await axios.get(''); // GET condo_associations URL
-    dispatch({ type: 'fetch_condo_associations', payload: data });
+    const response = await axios({
+      method: 'get',
+      url: 'http://localhost:8080/con/api/associations/fetch.php',
+      headers: {
+        'content-type': 'application/json'
+      },
+    }); dispatch({ type: 'fetch_condo_associations', payload: response.data });
 
     dispatch({ type: 'stop_loading' });
+    return response.data;
   } catch (e) {
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });

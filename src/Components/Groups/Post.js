@@ -1,47 +1,31 @@
-import React, { Component } from 'react';
-import '../../css/GroupsStyle.css'
-import { Accordion, AccordionSummary, AccordionDetails, Divider, Container, Card, List, ListItem, ListItemText, Button, OutlinedInput } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import './css/GroupPost.css';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import Box from '../Global/Box';
 import PostReply from './PostReply.js'
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    backgroundColor: '#E5E5E5',
-  },
-  reply: {
-    backgroundColor: 'white',
-  },
-  list: {
-    width: '100%',
-  }
-}));
-
-function Post (props) {
-  const viewOnly = props.viewOnly;
-  const [text, setText] = React.useState(props.text)
-  const [imagePath, setImgPath] = React.useState(props.imagePath)
-  const [date, setDate] = React.useState(props.date)
-  const [user, setUser] = React.useState(props.user)
+const Post = ({title, user, date, description }) => {
   const [replies, setReplies] = React.useState([{ comment: "i agree", user: "John", date: "24-12-2010  12:22" }, { comment: "pineapple", user: "Bob", date: "24-12-2010  12:22" }])
+  const renderDescription = () => {
+    if (description.length < 250) return description;
+
+    return description.substring(0, 250) + '...';
+  };
 
   return (
-    <div className="group-post">
-      <Container fixed>
-        <Card variant="outlined">
-          <img className="postedImage" src={imagePath} alt="" />
-          <ListItem>
-            <ListItemText inset="false" secondary={"Posted by: " + user + " at " + date} primary={text} />
-          </ListItem>
-        </Card>
-      </Container>
-      {!viewOnly ? <PostReply replies={replies} /> : <Container fixed>
-        <Card variant="outlined">
-          <ListItem>
-            <ListItemText inset="false" secondary="View Only" />
-          </ListItem>
-        </Card>
-      </Container>}
+    <div>
+      <Box>
+        <div className="card-info">
+          <h3 className="card-title"/*style={{ fontSize: '25px', fontWeight: 500 }}*/>{title}</h3>
+          <div className="card-author">{user}</div>
+          <div className="card-date">{date}</div>
+        </div>
+        <div className="card-description">{renderDescription()}</div>
+        <PostReply replies={replies} />
+      </Box>
+      
     </div>
   );
-}
-export default Post
+};
+
+export default Post;
