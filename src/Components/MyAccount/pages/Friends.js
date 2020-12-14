@@ -124,7 +124,8 @@ const Friends = () => {
       <form className="friend-add" onSubmit={sendReq}>
         <Autocomplete
           className="friend-field"
-          options={emails}
+          options={emails ? emails : []}
+          noOptionsText={emails ? 'Cannot find that user' : 'No users exist'}
           id="email"
           renderOption={(option) => (
             <React.Fragment>
@@ -143,7 +144,7 @@ const Friends = () => {
             setEmailInputValue(newInputValue);
           }}
           getOptionLabel={(option) => option.email}
-          renderInput={(params) => <TextField {...params} required type="email" label="Enter user email" id="send-friend-req" variant="outlined" />}
+          renderInput={(params) => <TextField {...params} required type="email" label="Select User" id="send-friend-req" variant="outlined" />}
         />
         {isLoading ? <Spinner /> : <input type="submit" value="Add Friend" className="post-btn" />}
       </form>
