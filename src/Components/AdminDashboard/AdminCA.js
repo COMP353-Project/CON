@@ -130,7 +130,7 @@ function AdminCA () {
               renderOption={(option) => (
                 <React.Fragment>
                   <div className='dropdown-label'>
-                    <span className='email'>{option.name}</span>
+                    <span className='name'>{option.name}</span>
                   </div>
                 </React.Fragment>
               )}
@@ -191,7 +191,7 @@ function AdminCA () {
               renderOption={(option) => (
                 <React.Fragment>
                   <div className='dropdown-label'>
-                    <span className='email'>{option.name}</span>
+                    <span className='name'>{option.name}</span>
                   </div>
                 </React.Fragment>
               )}
