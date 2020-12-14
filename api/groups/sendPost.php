@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $description = $_POST['description'];
   $title = $_POST['title'];
  
-  $conn = mysqli_connect("localhost", "root", "zhawa", "con");
+  $conn = mysqli_connect("localhost", "root", "", "con");
 
   //insert user id into posts table
   $post_query = "INSERT into posts(user_id) VALUES('$user_id');";

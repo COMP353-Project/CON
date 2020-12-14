@@ -5,7 +5,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 header("Content-Type: application/json; charset=UTF-8");
 
 $rest_json = file_get_contents("php://input");
-$conn = mysqli_connect("localhost", "root", "zhawa", "con");
+$conn = mysqli_connect("localhost", "root", "", "con");
 $group_id = $_GET['id'];
 
 $query = "SELECT group_content_post.title, group_content_post.description, posts.user_id, posts.created_at, users.first_name, users.last_name FROM group_content_post, posts, users 

@@ -5,7 +5,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 header("Content-Type: application/json; charset=UTF-8");
 
 $rest_json = file_get_contents("php://input");
-$conn = mysqli_connect("localhost", "root", "zhawa", "con");
+$conn = mysqli_connect("localhost", "root", "", "con");
 $user_id = $_GET['id'];
 
 $query = "SELECT id, name, description FROM `groups` INNER JOIN group_members WHERE groups1.id = group_members.group_id AND group_members.user_id = '$user_id'";
