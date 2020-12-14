@@ -529,14 +529,8 @@ const deleteContract = dispatch => async ({ id }) => {
 
 export const { Context, Provider } = createDataContext(reducer, {
   fetchCondoAssociations, fetchCondoAssociation, fetchDiscussions, fetchDiscussion, createDiscussion, updateDiscussion,
-<<<<<<< HEAD
-  deleteDiscussion, addComment, fetchAds, fetchAd, createAd, udpdateAd, deleteAd, fetchAdminMeetings, fetchAdminMeeting,
-  fetchGeneralMeetings, fetchGeneralMeeting, fetchPolls, fetchPoll, votePoll, fetchElections, fetchElection, voteElection,
-  fetchContracts, createContract, fetchContract, addSubmission, deleteContract
-=======
   deleteDiscussion, addComment, fetchAds, fetchAllAds, fetchAd, createAd, udpdateAd, deleteAd, fetchAdminMeetings, fetchAdminMeeting,
   fetchGeneralMeetings, fetchGeneralMeeting, fetchPolls, fetchPoll, votePoll, fetchElections, fetchElection, voteElection
->>>>>>> develop
 }, {
   condoAssociations: [], condoAssociation: null, discussions: [], discussion: {}, ads: [], ad: null, adminMeetings: [],
   adminMeeting: null, generalMeetings: [], generalMeeting: null, polls: [], poll: null, elections: [], election: null, contracts: [],
