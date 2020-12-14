@@ -48,7 +48,8 @@ function AdminGroups () {
           <div className="form__field">
             <Autocomplete
               className="friend-field"
-              options={groups}
+              options={groups ? groups : []}
+              noOptionsText={'No groups exist'}
               id="delete-group"
               renderOption={(option) => (
                 <React.Fragment>
@@ -66,7 +67,7 @@ function AdminGroups () {
                 setDeleteInputValue(newInputValue);
               }}
               getOptionLabel={(option) => option.name}
-              renderInput={(params) => <TextField {...params} type='text' required label="Group name" id="delete-group" variant="outlined" />}
+              renderInput={(params) => <TextField {...params} type='text' required label="Select Group" id="delete-group" variant="outlined" />}
             />
           </div>
           <div className="btn-container">

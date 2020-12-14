@@ -7,20 +7,22 @@ header("Content-Type: application/json; charset=UTF-8");
 $conn = mysqli_connect("localhost", "root", "", "con");
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-$query = "SELECT * FROM `Groups`";
+  $query = "SELECT * FROM Admin_posts";
 
-$result = @mysqli_query($conn, $query);
+  $result = @mysqli_query($conn, $query);
 
-if ($result->num_rows > 0) {
+  if ($result->num_rows > 0) {
     $array = array();
     while($row = $result->fetch_assoc()) {
-        array_push($array, $row);
-  }
+      array_push($array, $row);
+    }
     echo json_encode($array);
     http_response_code(200);
-} 
- else {
+  }
+  else {
     http_response_code(400);
-    echo json_encode(array("message" => "Unable to fetch groups"));
+    echo json_encode(array("message" => "Unable to fetch meetings."));
+  }
 }
-}
+
+

@@ -22,7 +22,7 @@ const MeetingCard = ({ id, title, created_at, description, agenda, resolution, m
       {resolution && < Link to={`/condo-association/meetings-general/${id}`}>
         <div className="details-button">View Details</div>
       </Link>}
-    </div >
+    </div>
   );
 };
 

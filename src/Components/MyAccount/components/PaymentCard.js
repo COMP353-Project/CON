@@ -11,6 +11,7 @@ const PaymentCard = ({ isPaid, description, date, fee }) => {
         <div style={{ flex: 1, display: 'flex', justifyContent: 'center', fontWeight: 'bold', color: 'rgb(57, 168, 149)' }}>{fee}$</div>
         <div style={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
           <Button
+            className={isPaid ? 'post-btn grey' : 'post-btn'}
             title={isPaid ? 'Paid' : 'Pay'}
             style={{ paddingLeft: '30px', paddingRight: '30px' }}
             color={isPaid ? '#696969' : null}

@@ -171,8 +171,17 @@ function AdminUsers () {
               }}
               getOptionLabel={(option) => option.email}
               id="controllable-states-demo"
-              options={emails}
-              renderInput={(params) => <TextField {...params} variant="outlined" />}
+              options={emails ? emails : []}
+              renderOption={(option) => (
+                <React.Fragment>
+                  <div className='dropdown-label'>
+                    <span className='name'>{option.first_name} {option.last_name}</span>
+                    <span className='email'>{option.email}</span>
+                  </div>
+                </React.Fragment>
+              )}
+              noOptionsText={emails ? 'Cannot find that user' : 'No users exist'}
+              renderInput={(params) => <TextField {...params} variant="outlined" label="Select User" required/>}
             />
           </div>
           <div className="btn-container">
@@ -197,8 +206,17 @@ function AdminUsers () {
               }}
               getOptionLabel={(option) => option.email}
               id="controllable-states-demo"
-              options={emails}
-              renderInput={(params) => <TextField {...params} variant="outlined" />}
+              options={emails ? emails : []}
+              renderOption={(option) => (
+                <React.Fragment>
+                  <div className='dropdown-label'>
+                    <span className='name'>{option.first_name} {option.last_name}</span>
+                    <span className='email'>{option.email}</span>
+                  </div>
+                </React.Fragment>
+              )}
+              noOptionsText={emails ? 'Cannot find that user' : 'No users exist'}
+              renderInput={(params) => <TextField {...params} variant="outlined" label="Select User" required/>}
             />
           </div>
           <div className="btn-container">

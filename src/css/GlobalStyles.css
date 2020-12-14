@@ -52,6 +52,9 @@
 .del-plain:hover {
   text-decoration: underline;
 }
+.post-btn.grey {
+  background-color: rgb(149, 149, 149);
+}
 
 .details-button {
   color: rgb(57, 168, 149);
@@ -75,6 +78,25 @@
   margin-bottom: 15px;
 }
 
+.page-header.hp {
+  justify-content: center;
+}
+
+.hp-section-title {
+  margin-top: 50px;
+}
+
+.hp-admin-posts,
+.hp-meetings {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+}
+
+.admin-post-title {
+  text-align: center;
+}
+
 /* CARD STYLES */
 .page-container {
   padding: 30px;
@@ -85,6 +107,10 @@
   padding: 20px;
   box-shadow: 2px 5px 2px #aaaaaa;
   margin-bottom: 20px;
+}
+
+.card.admin.hp {
+  border: 4px solid #ffbd2d;
 }
 
 .card-comment {
@@ -131,8 +157,13 @@
   color: rgb(57, 168, 149);
 }
 
-.card-description {
+.card-description,
+.card-agenda {
   margin-bottom: 15px;
+}
+
+.card-description.centered {
+  text-align: center;
 }
 
 /* STATUS STYLES */
@@ -152,31 +183,6 @@
 .is-success {
   margin-top: 20px;
   color: blue;
-}
-
-/* SPACING STYLES */
-.vertical-separator .small {
-  margin-bottom: 10px;
-}
-
-.vertical-separator .medium {
-  margin-bottom: 15px;
-}
-
-.vertical-separator .large {
-  margin-bottom: 20px;
-}
-
-.horizontal-separator .small {
-  margin-right: 10px;
-}
-
-.horizontal-separator .medium {
-  margin-right: 15px;
-}
-
-.horizontal-separator .large {
-  margin-right: 20px;
 }
 
 .is-error.bold,

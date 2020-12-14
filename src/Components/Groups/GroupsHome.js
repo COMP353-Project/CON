@@ -1,6 +1,5 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import '../../css/GroupsStyle.css';
 import GroupsNav from './GroupsNav.js';
 import MyGroupNav from './MyGroupNav.js';
 import { Context as GroupsContext } from '../../context/GroupsContext.js';
@@ -37,7 +36,7 @@ function GroupsHome () {
             return members.map(({ first_name, last_name, created_at }) => {
                 return (
                     <React.Fragment>
-                        <List>
+                        <List className='card'>
                             <ListItem>
                                 <ListItemAvatar>
                                     <Avatar>
@@ -78,9 +77,9 @@ function GroupsHome () {
                 <div className="page-header hp">
                     <h1>{group.name}</h1>
                 </div>
-                <p className='card-description'>{group.description}</p>
-                <h1 className="hp-section-title">Members</h1>
-                <div className="hp-meetings">
+                <p className='card-description centered'>{group.description}</p>
+                <h1>Members</h1>
+                <div>
                     <RenderGroupMembers />
                 </div>
             </div>

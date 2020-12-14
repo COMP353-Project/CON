@@ -2,22 +2,20 @@ import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import '../src/css/GlobalStyles.css';
 import NavBar from './Components/NavBar/NavBar';
-import GroupsLanding from './Components/Groups/GroupsLanding';
 import GroupsHome from './Components/Groups/GroupsHome'
 import GroupsRequests from './Components/Groups/GroupsRequests'
-import PublicHomePage from './Components/Home/PublicHomePage';
+import PublicHomepage from './Components/Home/PublicHomePage';
+import PrivateHomepage from './Components/Home/PrivateHomePage';
 import MyAccount from './Components/MyAccount/MyAccount';
 import Email from './Components/Email/Email';
 import Groups from './Components/Groups/Groups';
 import AllGroups from './Components/Groups/AllGroups'
 import MyGroups from './Components/Groups/MyGroups'
 import Login from './Components/Login/Login';
-import AdminHome from './Components/AdminDashboard/AdminHome';
 import AdminUsers from './Components/AdminDashboard/AdminUsers';
 import AdminPost from './Components/AdminDashboard/AdminPost';
 import AdminGroups from './Components/AdminDashboard/AdminGroups';
 import AdminCA from './Components/AdminDashboard/AdminCA';
-import CondoHome from './Components/CondoAssociation/CondoHome';
 import Discussions from './Components/CondoAssociation/Discussions/pages/Discussions';
 import PostDiscussion from './Components/CondoAssociation/Discussions/components/DiscussionForm';
 import Discussion from './Components/CondoAssociation/Discussions/pages/Discussion';
@@ -60,13 +58,13 @@ function App () {
                 <main>
                   <NavBar />
                   <Switch>
-                    <Route path="/" component={PublicHomePage} exact />
+                    <Route path="/" component={PublicHomepage} exact />
+                    <Route path="/home" component={PrivateHomepage} exact />
                     <Route path="/my-account" component={MyAccount} />
                     <Route path="/email" component={Email}></Route>
                     <Route path="/login" component={Login} exact></Route>
 
                     {/* Group routes */}
-                    <Route path="/groups" component={GroupsLanding} exact></Route>
                     <Route path="/groups/:id/home" component={GroupsHome} exact />
                     <Route path="/groups/:id/posts" component={Groups} exact />
                     <Route path="/groups/:id/requests" component={GroupsRequests} exact />
@@ -74,14 +72,12 @@ function App () {
                     <Route path="/groups/all-groups" component={AllGroups} exact />
 
                     {/* Admin routes */}
-                    <Route path="/admin" component={AdminHome} exact />
                     <Route path="/admin/users" component={AdminUsers} exact />
                     <Route path="/admin/groups" component={AdminGroups} exact />
                     <Route path="/admin/ca" component={AdminCA} exact />
                     <Route path="/admin/post" component={AdminPost} exact />
 
                     {/* Condo association routes */}
-                    <Route path="/condo-association" component={CondoHome} exact />
                     <Route path="/condo-association/discussions/new" component={PostDiscussion} exact />
                     <Route path="/condo-association/discussions/:id/edit" component={EditDiscussion} exact />
                     <Route path="/condo-association/discussions/:id" component={Discussion} exact />

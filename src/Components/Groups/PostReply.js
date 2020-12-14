@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../../css/GroupsStyle.css'
+
 import { makeStyles } from '@material-ui/core/styles';
 import { Accordion, AccordionSummary, AccordionDetails, Divider, Container, Card, List, ListItem, ListItemText, Button, OutlinedInput } from '@material-ui/core';
 
@@ -73,7 +73,7 @@ const handleTextChange = ({target}) => {
                   )}</List>
                   <div className="reply-input-wrapper">
                     <OutlinedInput type="text" className ={classes.reply} className="postText" value ={textInput} placeholder="Write a reply..." fullWidth="true" multiline="true" rows="2" onChange={handleTextChange} />
-                    <Button type ="submit" variant="outlined" onClick={() => handleReply(textInput, props.user)}>Reply</Button>
+                    <Button type="submit" className="post-btn" variant="outlined" onClick={() => handleReply(textInput, props.user)}>Reply</Button>
                   </div>
                   </div>
                 </AccordionDetails>

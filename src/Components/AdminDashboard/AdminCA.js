@@ -125,11 +125,12 @@ function AdminCA () {
           <div className="form__field">
             <Autocomplete
               className="friend-field"
-              options={associations}
+              options={associations ? associations : []}
+              noOptionsText={'No associations exist'}
               renderOption={(option) => (
                 <React.Fragment>
                   <div className='dropdown-label'>
-                    <span className='email'>{option.name}</span>
+                    <span className='name'>{option.name}</span>
                   </div>
                 </React.Fragment>
               )}
@@ -142,13 +143,14 @@ function AdminCA () {
                 setAssocInputValue(newInputValue);
               }}
               getOptionLabel={(option) => option.name}
-              renderInput={(params) => <TextField {...params} required type="text" label="Condo-Association name" id="assign-user-ca-name" variant="outlined" />}
+              renderInput={(params) => <TextField {...params} required type="text" label="Select Condo-Association" id="assign-user-ca-name" variant="outlined" />}
             />
           </div>
           <div className="form__field">
             <Autocomplete
               className="friend-field"
-              options={emails}
+              options={emails ? emails : []}
+              noOptionsText={'No emails exist'}
               id="email"
               renderOption={(option) => (
                 <React.Fragment>
@@ -167,7 +169,7 @@ function AdminCA () {
                 setEmailInputValue(newInputValue);
               }}
               getOptionLabel={(option) => option.email}
-              renderInput={(params) => <TextField {...params} required type="email" label="User email" id="assign-user-ca-email" variant="outlined" />}
+              renderInput={(params) => <TextField {...params} required type="email" label="Select User" id="assign-user-ca-email" variant="outlined" />}
             />
           </div>
           <div className="btn-container">
@@ -184,11 +186,12 @@ function AdminCA () {
           <div className="form__field">
             <Autocomplete
               className="friend-field"
-              options={associations}
+              options={associations ? associations : []}
+              noOptionsText={'No associations exist'}
               renderOption={(option) => (
                 <React.Fragment>
                   <div className='dropdown-label'>
-                    <span className='email'>{option.name}</span>
+                    <span className='name'>{option.name}</span>
                   </div>
                 </React.Fragment>
               )}
@@ -201,7 +204,7 @@ function AdminCA () {
                 setDelAssocInputValue(newInputValue);
               }}
               getOptionLabel={(option) => option.name}
-              renderInput={(params) => <TextField {...params} required type="text" label="Condo-Association name" id="assign-user-ca-name" variant="outlined" />}
+              renderInput={(params) => <TextField {...params} required type="text" label="Select Condo-Association" id="assign-user-ca-name" variant="outlined" />}
             />
           </div>
           <div className="btn-container">
