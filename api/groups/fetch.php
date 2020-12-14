@@ -7,7 +7,7 @@ header("Content-Type: application/json; charset=UTF-8");
 $conn = mysqli_connect("localhost", "root", "", "con");
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-$query = "SELECT name FROM `Groups`";
+$query = "SELECT * FROM `Groups`";
 
 $result = @mysqli_query($conn, $query);
 
