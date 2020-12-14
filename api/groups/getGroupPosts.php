@@ -8,10 +8,11 @@ $rest_json = file_get_contents("php://input");
 $conn = mysqli_connect("localhost", "root", "", "con");
 $group_id = $_GET['id'];
 
-$query = "SELECT group_content_post.title, group_content_post.description, posts.user_id, posts.created_at, users.first_name, users.last_name FROM group_content_post, posts, users 
-INNER JOIN group_posts 
-WHERE group_posts.post_id = group_content_post.group_post_id AND posts.id = group_posts.post_id AND group_posts.group_id = '$group_id' AND posts.user_id = users.id";
+$query = "SELECT Group_content_post.title, Group_content_post.description, Posts.user_id, Posts.created_at, Users.first_name, Users.last_name FROM Group_content_post, Posts, Users \n"
 
+    . "INNER JOIN Group_posts \n"
+
+    . "WHERE Group_posts.post_id = Group_content_post.group_post_id AND Posts.id = Group_posts.post_id AND Group_posts.group_id =".$group_id." AND Posts.user_id = Users.id";
 $result = mysqli_query($conn, $query);
 
 if ($result->num_rows > 0) {
