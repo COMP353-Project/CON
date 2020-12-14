@@ -29,7 +29,7 @@ const fetchAllGroups = dispatch => async () => {
   try {
     const response = await axios({
       method: 'get',
-      url: 'http://localhost:8080/con/api/groups/fetch.php',
+      url: 'http://localhost:8080/con/api/groups/fetchGroups.php',
       headers: {
         'content-type': 'application/json'
       },

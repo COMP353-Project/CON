@@ -21,7 +21,7 @@ const fetchConversations = dispatch => async () => {
 
   try {
     const { data } = await axios.get(
-    `http://localhost:8080/con/api/email/get_conversations.php?id=${localStorage.getItem('userid')}`
+      `http://localhost:8080/con/api/email/get_conversations.php?id=${localStorage.getItem('userid')}`
     ); // GET conversations URL
     dispatch({ type: 'fetch_conversations', payload: data });
     dispatch({ type: 'stop_loading' });

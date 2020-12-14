@@ -15,7 +15,7 @@ const reducer = (state, action) => {
 
 // Register User
 const registerUser = dispatch => async (data) => {
-  const REGISTER_ENDPOINT = 'http://localhost:8080/con/api/users/register.php';
+  const REGISTER_ENDPOINT = 'http://localhost:8080/con/api/users/registerUser.php';
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'reset_success' });
   dispatch({ type: 'start_loading' });
@@ -41,7 +41,7 @@ const registerUser = dispatch => async (data) => {
 
 // fetch users
 const fetchUsers = dispatch => async () => {
-  const PROMOTE_ENDPOINT = 'http://localhost:8080/con/api/users/users.php';
+  const PROMOTE_ENDPOINT = 'http://localhost:8080/con/api/users/getUsers.php';
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'reset_success' });
   dispatch({ type: 'start_loading' });
@@ -66,7 +66,7 @@ const fetchUsers = dispatch => async () => {
 
 // Promote User
 const promoteUser = dispatch => async (data) => {
-  const PROMOTE_ENDPOINT = 'http://localhost:8080/con/api/users/promote.php';
+  const PROMOTE_ENDPOINT = 'http://localhost:8080/con/api/users/promoteUser.php';
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'reset_success' });
   dispatch({ type: 'start_loading' });
@@ -92,7 +92,7 @@ const promoteUser = dispatch => async (data) => {
 
 // Delete User
 const deleteUser = dispatch => async (data) => {
-  const DELETE_ENDPOINT = 'http://localhost:8080/con/api/users/delete.php';
+  const DELETE_ENDPOINT = 'http://localhost:8080/con/api/users/deleteUser.php';
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'reset_success' });
   dispatch({ type: 'start_loading' });
@@ -118,7 +118,7 @@ const deleteUser = dispatch => async (data) => {
 
 // Delete Group
 const deleteGroup = dispatch => async (data) => {
-  const DELETE_ENDPOINT = 'http://localhost:8080/con/api/groups/delete.php';
+  const DELETE_ENDPOINT = 'http://localhost:8080/con/api/groups/deleteGroup.php';
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'reset_success' });
   dispatch({ type: 'start_loading' });
@@ -144,7 +144,7 @@ const deleteGroup = dispatch => async (data) => {
 
 // Delete Condo Association
 const registerCA = dispatch => async (data) => {
-  const REGISTER_ENDPOINT = 'http://localhost:8080/con/api/associations/register.php';
+  const REGISTER_ENDPOINT = 'http://localhost:8080/con/api/associations/registerAssociation.php';
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'reset_success' });
   dispatch({ type: 'start_loading' });
@@ -170,7 +170,7 @@ const registerCA = dispatch => async (data) => {
 
 // Register User to Condo Association
 const assignUser = dispatch => async (data) => {
-  const ASSIGNMENT_ENDPOINT = 'http://localhost:8080/con/api/associations/assign.php';
+  const ASSIGNMENT_ENDPOINT = 'http://localhost:8080/con/api/associations/assignAssociation.php';
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'reset_success' });
   dispatch({ type: 'start_loading' });
@@ -196,7 +196,7 @@ const assignUser = dispatch => async (data) => {
 
 // Delete Condo Association
 const deleteCA = dispatch => async (data) => {
-  const DELETE_ENDPOINT = 'http://localhost:8080/con/api/associations/delete.php';
+  const DELETE_ENDPOINT = 'http://localhost:8080/con/api/associations/deleteAssociation.php';
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'reset_success' });
   dispatch({ type: 'start_loading' });
