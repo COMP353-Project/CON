@@ -111,18 +111,8 @@ const createDiscussion = dispatch => async ({ title, content, isPublic }) => {
   dispatch({ type: 'start_loading' });
 
   try {
-<<<<<<< HEAD
-    const response = await axios({
-      method: 'post',
-      url: 'http://localhost/con/CON/api/discussions/addDiscussion.php',
-      headers: {
-        'content-type': 'application/json'
-      },
-      data: { user_id, id, title, content, is_public } // add condo_assoc title
-=======
     await axios.post('http://localhost:8080/con/api/discussions/create_discussion.php', {
       title, content, is_public: isPublic ? 1 : 0, id: localStorage.getItem('userid')
->>>>>>> kamil/front-end
     });
   }
   catch (e) {
