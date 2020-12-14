@@ -6,7 +6,7 @@ header("Content-Type: application/json; charset=UTF-8");
 
 $rest_json = file_get_contents("php://input");
 $_POST = json_decode($rest_json, true);
-$conn = mysqli_connect("localhost", "root", "", "con");
+$conn = mysqli_connect("localhost", "root", "mysql", "con");
 
 $users_table = 'Users';
 $friend_req_table = 'Friend_requests';

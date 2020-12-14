@@ -51,7 +51,6 @@ const updateProfile = dispatch => async ({ firstName, lastName, email, address }
 
     dispatch({ type: 'stop_loading' });
   } catch (e) {
-    console.log(e.message);
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });
   }
@@ -70,9 +69,6 @@ const updatePassword = dispatch => async ({ currentPassword, newPassword, confir
       'http://localhost:8080/con/api/account/update_password.php',
       { id: localStorage.getItem('userid'), current_password: currentPassword, new_password: newPassword }
     );
-
-    console.log(response);
-
     dispatch({ type: 'stop_loading' });
   } catch (e) {
     console.log(e.message);
@@ -138,9 +134,9 @@ const fetchRequests = dispatch => async ({ receiver_id }) => {
       headers: {
         'content-type': 'application/json'
       },
-      data: {receiver_id}
+      data: { receiver_id }
     });
-    dispatch({ type: 'set_error' , payload: 'fetchRequests'});
+    dispatch({ type: 'set_error', payload: 'fetchRequests' });
     dispatch({ type: 'stop_loading' });
     return response.data;
   } catch (e) {
@@ -163,9 +159,9 @@ const fetchFriends = dispatch => async ({ receiver_id }) => {
       headers: {
         'content-type': 'application/json'
       },
-      data: {receiver_id}
+      data: { receiver_id }
     });
-    dispatch({ type: 'set_success' , payload: 'fetchFriends'});
+    dispatch({ type: 'set_success', payload: 'fetchFriends' });
     dispatch({ type: 'stop_loading' });
     return response.data;
   } catch (e) {
@@ -187,9 +183,9 @@ const acceptRequest = dispatch => async ({ sender_id, receiver_id }) => {
       headers: {
         'content-type': 'application/json'
       },
-      data: {sender_id, receiver_id }
+      data: { sender_id, receiver_id }
     });
-    dispatch({ type: 'set_success' , payload: 'acceptFriendRequest'});
+    dispatch({ type: 'set_success', payload: 'acceptFriendRequest' });
     dispatch({ type: 'stop_loading' });
     return response.data;
   } catch (e) {
@@ -211,9 +207,9 @@ const deleteFriend = dispatch => async ({ sender_id, receiver_id }) => {
       headers: {
         'content-type': 'application/json'
       },
-      data: {sender_id, receiver_id }
+      data: { sender_id, receiver_id }
     });
-    dispatch({ type: 'set_success' , payload: 'deleteFriend'});
+    dispatch({ type: 'set_success', payload: 'deleteFriend' });
     dispatch({ type: 'stop_loading' });
     return response.data;
   } catch (e) {
@@ -289,7 +285,9 @@ const fetchCondo = dispatch => async ({ condoId }) => {
 
 export const { Context, Provider } = createDataContext(
   reducer,
-  { fetchPosts, fetchFriends, acceptRequest, sendFriendReq, deleteFriend, fetchPayments, payPayment, fetchCondos,
-    fetchCondo, fetchUser, updateProfile, updatePassword, fetchRequests },
+  {
+    fetchPosts, fetchFriends, acceptRequest, sendFriendReq, deleteFriend, fetchPayments, payPayment, fetchCondos,
+    fetchCondo, fetchUser, updateProfile, updatePassword, fetchRequests
+  },
   { posts: [], friends: [], payments: [], condos: [], parkingSpots: [], storageRooms: [], isLoading: false, error: '', user: {} }
 );

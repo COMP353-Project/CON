@@ -15,7 +15,6 @@ const AdminMeeting = () => {
       */
     const getAdminMeeting = async () => {
         setAdminMeeting(await fetchAdminMeeting({ id }));
-        console.log(adminMeeting);
     };
 
     React.useEffect(() => {
