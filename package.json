@@ -1,5 +1,6 @@
 {
   "name": "con",
+  "proxy": "https://dac353.encs.concordia.ca",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

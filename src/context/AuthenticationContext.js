@@ -18,14 +18,16 @@ const reducer = (state, action) => {
 
 // Sign In
 const signin = dispatch => async ({ email, password }) => {
-  const LOGIN_ENDPOINT = 'http://localhost:8080/con/api/users/login.php'
+  const LOGIN_ENDPOINT = 'login.php'
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
 
   try {
     const response = await axios.post(LOGIN_ENDPOINT, { email, password }); // POST Sign In URL
 
-    if (response.status === 200 && response.data.jwt && response.data.expireAt) {
+    // if (response.status === 200 && response.data.jwt && response.data.expireAt) {
+    if (response.status === 200 && response.data.expireAt) {
+
       dispatch({ type: 'signin', payload: response.data });
       localStorage.setItem('is_authenticated', true);
       localStorage.setItem('userid', response.data.id);

@@ -1,6 +1,6 @@
 <?php
-require "../../vendor/autoload.php";
-use \Firebase\JWT\JWT;
+// require "../../vendor/autoload.php";
+// use \Firebase\JWT\JWT;
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
@@ -8,9 +8,8 @@ header("Content-Type: application/json; charset=UTF-8");
 
 $rest_json = file_get_contents("php://input");
 $_POST = json_decode($rest_json, true);
-$conn = mysqli_connect("localhost", "root", "", "con");
+$conn = mysqli_connect("dac353.encs.concordia.ca", "dac353_2", "e876FN", "dac353_2");
 $table_name = 'Users';
-
 $email = $_POST['email'];
 $password = $_POST['password'];
 
@@ -51,12 +50,12 @@ if($row) {
                 "address" => $address
         ));
  
-        $jwt = JWT::encode($token, $secret_key);
+        // $jwt = JWT::encode($token, $secret_key);
         echo json_encode(
             [
                 "message" => "Successful login.",
                 "id" => $id,
-                "jwt" => $jwt,
+                // "jwt" => $jwt,
                 "admin" => $is_admin,
                 "email" => $email,
                 "expireAt" => $expire_claim,

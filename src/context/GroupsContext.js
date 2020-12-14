@@ -29,7 +29,7 @@ const fetchAllGroups = dispatch => async () => {
   try {
     const response = await axios({
       method: 'get',
-      url: 'http://localhost:8080/con/api/groups/fetchGroups.php',
+      url: 'fetchGroups.php',
       headers: {
         'content-type': 'application/json'
       },
@@ -66,7 +66,7 @@ const fetchMyGroups = dispatch => async (id) => {
   dispatch({ type: 'start_loading' });
 
   try {
-    const response = await axios.get(`http://localhost:8080/con/api/groups/getMyGroups.php?id=${id}`);
+    const response = await axios.get(`getMyGroups.php?id=${id}`);
     console.log(response)
     dispatch({ type: 'fech_my_groups', payload: response });
     dispatch({ type: 'stop_loading' });
@@ -88,7 +88,7 @@ const fetchGroupMembers = dispatch => async (group_id) => {
   try {
     const response = await axios({
       method: "get",
-      url: `http://localhost:8080/con/api/groups/getMembers.php?group_id=${group_id}`,
+      url: `getMembers.php?group_id=${group_id}`,
       headers: {
         "content-type": "application/json",
       },
@@ -129,7 +129,7 @@ const fetchGroup = dispatch => async ({ group_id, user_id }) => {
   try {
     const response = await axios({
       method: "post",
-      url: 'http://localhost:8080/con/api/groups/getGroup.php',
+      url: 'getGroup.php',
       headers: {
         "content-type": "application/json",
       },
@@ -178,7 +178,7 @@ const fetchPosts = dispatch => async (groupId) => {
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
   try {
-    const response = await axios.get(`http://localhost:8080/con/api/groups/getGroupPosts.php?id=${groupId}`); // GET group_posts URL
+    const response = await axios.get(`getGroupPosts.php?id=${groupId}`); // GET group_posts URL
     dispatch({ type: 'fetch_posts', payload: response });
 
     dispatch({ type: 'stop_loading' });
@@ -207,13 +207,13 @@ const fetchPost = dispatch => async ({ postId }) => {
 
 // Create Discussion Post
 
-const createPost = dispatch => async ({user_id, group_id, title, description}) => {
+const createPost = dispatch => async ({ user_id, group_id, title, description }) => {
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
   try {
     const response = await axios({
       method: "post",
-      url: 'http://localhost:8080/con/api/groups/sendPost.php',
+      url: 'sendPost.php',
       headers: {
         "content-type": "application/json",
       },
