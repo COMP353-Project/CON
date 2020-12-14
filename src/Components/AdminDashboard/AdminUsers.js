@@ -205,11 +205,8 @@ function AdminUsers () {
                 setDeleteInputValue(newInputValue);
               }}
               getOptionLabel={(option) => option.email}
-<<<<<<< HEAD
-=======
               id="controllable-states-demo"
               options={emails ? emails : []}
->>>>>>> f7e935d97058c9d5bcc96d743e2a5efa00c4a189
               renderOption={(option) => (
                 <React.Fragment>
                   <div className='dropdown-label'>
@@ -218,23 +215,8 @@ function AdminUsers () {
                   </div>
                 </React.Fragment>
               )}
-<<<<<<< HEAD
-              renderInput={(params) =>
-                <TextField
-                  {...params}
-                  id="delete-user-email"
-                  label="Email"
-                  type="email"
-                  variant="outlined"
-                  value={delEmail}
-                  required
-                  onChange={e => setDelEmail(e.target.value)}
-                />
-              }
-=======
               noOptionsText={emails ? 'Cannot find that user' : 'No users exist'}
               renderInput={(params) => <TextField {...params} variant="outlined" label="Select User" required/>}
->>>>>>> f7e935d97058c9d5bcc96d743e2a5efa00c4a189
             />
           </div>
           <div className="btn-container">
