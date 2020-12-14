@@ -17,6 +17,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { ChatBubble } from '@material-ui/icons';
 import GroupsNav from './GroupsNav.js'
 import MyGroupNav from './MyGroupNav.js'
+import {Context as GroupsContext} from '../../context/GroupsContext.js'
 
 const drawerWidth = 500;
 
@@ -63,17 +64,33 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Groups () {
+    const { createPost, fetchPosts} = React.useContext(GroupsContext);
     const classes = useStyles();
     const theme = useTheme();
-
+    const [groupID, setGroupID] = React.useState(() => localStorage.getItem("groupID"))
     const [currentUser, setCurrentUser] = React.useState("Ziad");
-    const [posts, setPosts] = React.useState(() => [{text: "I want this apt", imagePath:"h", date: "24-12-2010  12:22", user: currentUser, viewOnly: true}, {text: "How much is this", imagePath:"h", date: "24-11-2010  9:56", user:currentUser, viewOnly: false}]);
+    const [posts, setPosts] = React.useState([]);
     const [chats, setChats] = React.useState(() => [{text: "Hey guys", date: "24-12-2010  12:22", user: currentUser}, {text: "Hola", date: "24-11-2010  9:56", user:currentUser}]);
     const [postTextInput, setPostText] = React.useState("");
     const [chatTextInput, setChatText] = React.useState("");
     const [imageInput, setImageURL] = React.useState(0);
     const [viewOnly, setViewOnly] = React.useState(false);
     const [open, setOpen] = React.useState(false);
+    const [postTitleInput, setPostTitle] = React.useState("");
+    
+    const getPosts = async() => {
+      setPosts(await fetchPosts(groupID));
+    }
+
+    const sendPosts = async(user_id, group_id, title, description) => {
+      const data = await( createPost(user_id, group_id, title, description))
+      getPosts()
+    }
+
+    React.useEffect(() => {
+      getPosts();
+      sendPosts();
+    }, []);
     
     //useEffect(() => console.log("posts changed"), [posts])
     //const posts = []
@@ -97,13 +114,19 @@ function Groups () {
         return (day + "-" + month + "-" + year + "  " + hours + ":" + minutes)
     }
 
-    const handlePost = (text, imagePath, user) => {
+    const handlePost = (text, title, user) => {
         if(postTextInput.length > 0){
-            console.log("Received: " + text + imagePath)
-            var newPosts = posts
-            newPosts.push({text: text, imagePath: imagePath, date: getDate(), user: user, viewOnly: viewOnly})
+            console.log("Received: " + text)
+            var newPosts;
+            if(posts)
+             newPosts = posts
+            else newPosts = []
+            sendPosts(localStorage.getItem("userid"), groupID, title, text)
+            console.log(getDate())
+            newPosts.push({title: title, user: user, date: new Date(), description: text })
             setPosts(newPosts)
             setPostText("")
+            setPostTitle("")
         } else alert("Text field cannot be empty!")
 
     }
@@ -122,6 +145,10 @@ function Groups () {
     const handlePostTextChange = ({target}) => {
         setPostText(target.value)
     }
+
+    const handlePostTitleChange = ({target}) => {
+      setPostTitle(target.value)
+  }
 
     const handleChatTextChange = ({target}) => {
         setChatText(target.value)
@@ -191,9 +218,9 @@ function Groups () {
           </Drawer>
         </div>
         <div className="post-container">
-          {posts.map(post => {
+          {posts==null ? <div></div> : posts.map(post => {
              return (
-               <Post text={post.text} imagePath={post.imagePath} date={post.date} user={post.user} viewOnly={post.viewOnly}/>
+               <Post description={post.description} title={post.title} user={post.first_name + " " + post.last_name} date = {post.created_at}/>
               );
             }
           )}
@@ -201,8 +228,9 @@ function Groups () {
         <div className="groupsInput">
           <label>Attach images and text here!</label>
           <div className="post-input-wrapper">
-             <OutlinedInput type="text" placeholder="Write a post..." fullWidth="true" multiline="true" rows="5" value ={postTextInput} onChange={handlePostTextChange}/>
-              <Button type ="submit" variant="outlined" onClick={() => handlePost(postTextInput, imageInput, currentUser)}>Post</Button>
+              <OutlinedInput type="text" placeholder="Write a title..." fullWidth="true" multiline="true" rows="1" value ={postTitleInput} onChange={handlePostTitleChange}/>
+              <OutlinedInput type="text" placeholder="Write a post..." fullWidth="true" multiline="true" rows="5" value ={postTextInput} onChange={handlePostTextChange}/>
+              <Button type ="submit" variant="outlined" onClick={() => handlePost(postTextInput, postTitleInput, currentUser)}>Post</Button>
               <input type="file" accept=".jpg,.png,.gif" onChange={handleFileUpload}></input>
               <label>View only</label><Checkbox checked={viewOnly} onChange={handleShareCheckbox}></Checkbox>
            </div>

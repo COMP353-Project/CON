@@ -4,15 +4,28 @@ import { Link } from 'react-router-dom';
 import '../../css/GroupsStyle.css'
 import CreateGroupButton from './CreateGroupBtn';
 import GroupsNav from './GroupsNav.js'
+import {Context as GroupsContext} from '../../context/GroupsContext.js'
 
 function MyGroups () {
-
-    const [groups, setGroups] = React.useState(() => [{ id: 1 }, { id: 2 }])
+    const { fetchMyGroups, fetchGroup } = React.useContext(GroupsContext);
+    const [groups, setGroups] = React.useState([])
 
     const isAdmin = true;
-
     const onDelete = () => {
 
+    }
+
+    const getMyGroups = async() => {
+      setGroups( await fetchMyGroups(localStorage.getItem("userid")));
+    }
+
+    React.useEffect(() => {
+      getMyGroups();
+    }, []);
+
+    const sendIDtoLocalStorage = (groupID) => {
+        localStorage.setItem("groupID", groupID)
+        console.log(localStorage.getItem("groupID"))
     }
 
     return (
@@ -27,7 +40,7 @@ function MyGroups () {
               { groups.map(group => {
                 return (
                   <div className="group-container">
-                      <Button component={Link} 
+                      <Button onClick={() => sendIDtoLocalStorage(group.id)}component={Link} 
                           to={{
                               pathname: "/groups/" + group.id +"/home",
                               state: { id: group.id}
