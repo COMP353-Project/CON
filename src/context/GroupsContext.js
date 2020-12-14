@@ -7,6 +7,8 @@ const reducer = (state, action) => {
     case 'stop_loading': return { ...state, isLoading: false };
     case 'set_error': return { ...state, error: action.payload };
     case 'reset_error': return { ...state, error: '' };
+    case 'set_success': return { ...state, success: action.payload };
+    case 'reset_success': return { ...state, success: '' };
     case 'fetch_my_groups': return { ...state, myGroups: action.payload };
     case 'fetch_all_groups': return { ...state, allGroups: action.payload };
     case 'fetch_group': return { ...state, group: action.payload };
@@ -176,7 +178,7 @@ const fetchPosts = dispatch => async (groupId) => {
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
   try {
-    const response = await axios.get(`http://localhost:8080/api/groups/getGroupPosts.php?id=${groupId}`); // GET group_posts URL
+    const response = await axios.get(`http://localhost:8080/con/api/groups/getGroupPosts.php?id=${groupId}`); // GET group_posts URL
     dispatch({ type: 'fetch_posts', payload: response });
 
     dispatch({ type: 'stop_loading' });
@@ -205,7 +207,7 @@ const fetchPost = dispatch => async ({ postId }) => {
 
 // Create Discussion Post
 
-const createPost = dispatch => async (user_id, group_id, title, description) => {
+const createPost = dispatch => async ({user_id, group_id, title, description}) => {
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
   try {
@@ -217,11 +219,12 @@ const createPost = dispatch => async (user_id, group_id, title, description) => 
       },
       data: { user_id, group_id, title, description },
     });
-    console.log(response.data)
+    dispatch({ type: 'stop_loading' });
+    dispatch({ type: 'set_success', payload: 'createGroupPost' });
     return response.data;
   } catch (e) {
     dispatch({ type: 'stop_loading' });
-    dispatch({ type: 'set_error', payload: e.message });
+    dispatch({ type: 'set_error', payload: 'createGroupPost' });
   }
 };
 
