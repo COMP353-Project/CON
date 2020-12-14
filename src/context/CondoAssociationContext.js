@@ -34,7 +34,7 @@ const fetchCondoAssociations = dispatch => async () => {
   try {
     const response = await axios({
       method: 'get',
-      url: 'http://localhost:8080/con/api/associations/fetch.php',
+      url: 'http://localhost:8080/con/api/associations/fetchAssociations.php',
       headers: {
         'content-type': 'application/json'
       },
