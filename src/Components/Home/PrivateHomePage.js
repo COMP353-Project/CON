@@ -31,7 +31,7 @@ function PrivateHomePage (props) {
 
     const RenderAdminPosts = () => {
       if (adminPosts) {
-        return adminPosts.map(({ id, content, title }) => {
+        return adminPosts.slice(0, 4).map(({ id, content, title }) => {
           return (
             <Fragment key={id}>
               <AdminPostCard
@@ -51,7 +51,7 @@ function PrivateHomePage (props) {
 
     const RenderAds = () => {
       if (ads) {
-        return ads.map(({ condo_assoc_post_id, title, description, price, contact_number, first_name, last_name, created_at }) => {
+        return ads.slice(0, 5).map(({ condo_assoc_post_id, title, description, price, contact_number, first_name, last_name, created_at }) => {
           return (
             <Fragment key={condo_assoc_post_id}>
               <AdCard
@@ -75,7 +75,7 @@ function PrivateHomePage (props) {
 
     const RenderGeneralMeetings = () => {
       if (generalMeetings) {
-        return generalMeetings.map(({ id, title, created_at, description, agenda, resolution }) => {
+        return generalMeetings.slice(0, 2).map(({ id, title, created_at, description, agenda, resolution }) => {
           return (
             <Fragment key={id}>
               <MeetingCard
@@ -99,7 +99,7 @@ function PrivateHomePage (props) {
 
     const RenderAdminMeetings = () => {
       if (adminMeetings) {
-        return adminMeetings.map(({ id, title, created_at, description, agenda, minutes }) => {
+        return adminMeetings.slice(0, 2).map(({ id, title, created_at, description, agenda, minutes }) => {
           return (
             <Fragment key={id}>
               <MeetingCard

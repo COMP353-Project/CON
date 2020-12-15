@@ -25,7 +25,7 @@ function PublicHomePage (props) {
 
     const RenderAdminPosts = () => {
       if (adminPosts) {
-        return adminPosts.map(({ id, content, title }) => {
+        return adminPosts.slice(0, 5).map(({ id, content, title }) => {
           return (
             <Fragment key={id}>
               <AdminPostCard
@@ -45,7 +45,7 @@ function PublicHomePage (props) {
 
     const RenderAds = () => {
       if (ads) {
-        return ads.map(({ condo_assoc_post_id, title, description, price, contact_number, first_name, last_name, created_at }) => {
+        return ads.slice(0, 5).map(({ condo_assoc_post_id, title, description, price, contact_number, first_name, last_name, created_at }) => {
           return (
             <Fragment key={condo_assoc_post_id}>
               <AdCard
