@@ -6,7 +6,7 @@ header("Content-Type: application/json; charset=UTF-8");
 
 $conn = mysqli_connect("localhost", "root", "", "con");
 
-// if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 $id = $_GET['id'];
 
 $query = "SELECT Meetings.*, Admin_meetings.minutes
@@ -39,5 +39,6 @@ if ($row) {
  else {
     http_response_code(400);
     echo json_encode(array("message" => "Unable to fetch meeting"));
+}
 }
 

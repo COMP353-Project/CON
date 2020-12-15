@@ -16,8 +16,6 @@ $new_password_hash = password_hash($new_password, PASSWORD_DEFAULT);
 
 $get_current_password_query = "SELECT * FROM Users WHERE id = '$id'";
 
-// // echo $get_current_password_query;
-
 $result = mysqli_query($conn, $get_current_password_query);
 $row = $result->fetch_assoc();
 

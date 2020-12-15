@@ -458,7 +458,6 @@ const fetchContracts = dispatch => async () => {
 
   try {
     const response = await axios.get(`http://localhost:8080/con/api/contracts/get_contracts.php?id=${localStorage.getItem('userid')}`);
-    console.log(response)
     dispatch({ type: 'fetch_contracts', payload: response.data });
   } catch (e) {
     dispatch({ type: 'stop_loading' });

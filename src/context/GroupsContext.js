@@ -67,11 +67,9 @@ const fetchMyGroups = dispatch => async (id) => {
 
   try {
     const response = await axios.get(`http://localhost:8080/con/api/groups/getMyGroups.php?id=${id}`);
-    console.log(response)
     dispatch({ type: 'fech_my_groups', payload: response });
     dispatch({ type: 'stop_loading' });
 
-    console.log(response.data)
     return response.data;
   } catch (e) {
     dispatch({ type: 'stop_loading' });
@@ -96,7 +94,6 @@ const fetchGroupMembers = dispatch => async (group_id) => {
     dispatch({ type: 'fech_members', payload: response.data });
     dispatch({ type: 'stop_loading' });
 
-    // console.log(response)
     return response.data;
   } catch (e) {
     dispatch({ type: 'stop_loading' });
@@ -182,7 +179,6 @@ const fetchPosts = dispatch => async (groupId) => {
     dispatch({ type: 'fetch_posts', payload: response });
 
     dispatch({ type: 'stop_loading' });
-    console.log(response.data)
     return response.data
   } catch (e) {
     dispatch({ type: 'stop_loading' });
@@ -207,7 +203,7 @@ const fetchPost = dispatch => async ({ postId }) => {
 
 // Create Discussion Post
 
-const createPost = dispatch => async ({user_id, group_id, title, description}) => {
+const createPost = dispatch => async ({ user_id, group_id, title, description }) => {
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
   try {

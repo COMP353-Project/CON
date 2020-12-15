@@ -71,7 +71,6 @@ const updatePassword = dispatch => async ({ currentPassword, newPassword, confir
     );
     dispatch({ type: 'stop_loading' });
   } catch (e) {
-    console.log(e.message);
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });
   }

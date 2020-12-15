@@ -62,7 +62,6 @@ const sendEmail = dispatch => async ({ conversationId, content }) => {
       { conversation_id: conversationId, content, user_id: localStorage.getItem('userid') }
     ); // POST email URL
   } catch (e) {
-    console.log(e.message);
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });
   }
@@ -99,7 +98,6 @@ const leaveConversation = dispatch => async ({ conversationId }) => {
       { data: { conversation_id: conversationId, user_id: localStorage.getItem('userid') } }
     ); // LEAVE conversation URL
   } catch (e) {
-    console.log(e.message);
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });
   }
