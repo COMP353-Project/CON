@@ -155,7 +155,7 @@ const deleteDiscussion = dispatch => async ({ discussionId }) => {
   dispatch({ type: 'start_loading' });
 
   try {
-    await axios.post('/delete_discussion.php', { data: { id: discussionId } });
+    await axios.post('/delete_discussion.php', { id: discussionId });
   } catch (e) {
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });
@@ -539,7 +539,7 @@ const deleteContract = dispatch => async ({ id }) => {
   try {
     await axios.post(
       '/delete_contract.php',
-      { data: { id } }
+      { id : id }
     );
   } catch (e) {
     dispatch({ type: 'stop_loading' });
