@@ -23,7 +23,7 @@ const fetchConversations = dispatch => async () => {
 
   try {
     const { data } = await axios.get(
-      `get_conversations.php?id=${localStorage.getItem('userid')}`
+      `/get_conversations.php?id=${localStorage.getItem('userid')}`
     ); // GET conversations URL
     dispatch({ type: 'fetch_conversations', payload: data });
     dispatch({ type: 'stop_loading' });
@@ -41,7 +41,7 @@ const fetchConversation = dispatch => async ({ conversationId }) => {
 
   try {
     const { data } = await axios.get(
-      `get_messages.php?id=${conversationId}`
+      `/get_messages.php?id=${conversationId}`
     ); // GET conversation URL
     dispatch({ type: 'fetch_conversation', payload: data });
 
@@ -60,7 +60,7 @@ const sendEmail = dispatch => async ({ conversationId, content }) => {
 
   try {
     await axios.post(
-      'send_message.php',
+      '/send_message.php',
       { conversation_id: conversationId, content, user_id: localStorage.getItem('userid') }
     ); // POST email URL
   } catch (e) {
@@ -78,7 +78,7 @@ const createConversation = dispatch => async ({ subject, recipients, content }) 
 
   try {
     const { data } = await axios.post(
-      'create_conversation.php',
+      '/create_conversation.php',
       { subject, recipients, content, user_id: localStorage.getItem('userid') }
     ); // POST conversation URL
 
@@ -96,8 +96,8 @@ const leaveConversation = dispatch => async ({ conversationId }) => {
   dispatch({ type: 'start_loading' });
 
   try {
-    await axios.delete(
-      'leave_conversation.php',
+    await axios.post(
+      '/leave_conversation.php',
       { data: { conversation_id: conversationId, user_id: localStorage.getItem('userid') } }
     ); // LEAVE conversation URL
   } catch (e) {

@@ -17,7 +17,7 @@ const token = "Basic " + btoa('dac353_2:e876FN')
 
 // Register User
 const registerUser = dispatch => async (data) => {
-  const REGISTER_ENDPOINT = 'registerUser.php';
+  const REGISTER_ENDPOINT = '/registerUser.php';
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'reset_success' });
   dispatch({ type: 'start_loading' });
@@ -44,7 +44,7 @@ const registerUser = dispatch => async (data) => {
 
 // fetch users
 const fetchUsers = dispatch => async () => {
-  const PROMOTE_ENDPOINT = 'getUsers.php';
+  const PROMOTE_ENDPOINT = '/getUsers.php';
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'reset_success' });
   dispatch({ type: 'start_loading' });
@@ -70,14 +70,14 @@ const fetchUsers = dispatch => async () => {
 
 // Promote User
 const promoteUser = dispatch => async (data) => {
-  const PROMOTE_ENDPOINT = 'promoteUser.php';
+  const PROMOTE_ENDPOINT = '/promoteUser.php';
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'reset_success' });
   dispatch({ type: 'start_loading' });
 
   try {
     const response = await axios({
-      method: 'put',
+      method: 'post',
       url: PROMOTE_ENDPOINT,
       headers: {
         'content-type': 'application/json',
@@ -97,14 +97,14 @@ const promoteUser = dispatch => async (data) => {
 
 // Delete User
 const deleteUser = dispatch => async (data) => {
-  const DELETE_ENDPOINT = 'deleteUser.php';
+  const DELETE_ENDPOINT = '/deleteUser.php';
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'reset_success' });
   dispatch({ type: 'start_loading' });
 
   try {
     const response = await axios({
-      method: 'delete',
+      method: 'post',
       url: DELETE_ENDPOINT,
       headers: {
         'content-type': 'application/json',
@@ -124,14 +124,14 @@ const deleteUser = dispatch => async (data) => {
 
 // Delete Group
 const deleteGroup = dispatch => async (data) => {
-  const DELETE_ENDPOINT = 'deleteGroup.php';
+  const DELETE_ENDPOINT = '/deleteGroup.php';
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'reset_success' });
   dispatch({ type: 'start_loading' });
 
   try {
     const response = await axios({
-      method: 'delete',
+      method: 'post',
       url: DELETE_ENDPOINT,
       headers: {
         'content-type': 'application/json',
@@ -151,7 +151,7 @@ const deleteGroup = dispatch => async (data) => {
 
 // Delete Condo Association
 const registerCA = dispatch => async (data) => {
-  const REGISTER_ENDPOINT = 'registerAssociation.php';
+  const REGISTER_ENDPOINT = '/registerAssociation.php';
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'reset_success' });
   dispatch({ type: 'start_loading' });
@@ -178,7 +178,7 @@ const registerCA = dispatch => async (data) => {
 
 // Register User to Condo Association
 const assignUser = dispatch => async (data) => {
-  const ASSIGNMENT_ENDPOINT = 'assignAssociation.php';
+  const ASSIGNMENT_ENDPOINT = '/assignAssociation.php';
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'reset_success' });
   dispatch({ type: 'start_loading' });
@@ -205,14 +205,14 @@ const assignUser = dispatch => async (data) => {
 
 // Delete Condo Association
 const deleteCA = dispatch => async (data) => {
-  const DELETE_ENDPOINT = 'deleteAssociation.php';
+  const DELETE_ENDPOINT = '/deleteAssociation.php';
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'reset_success' });
   dispatch({ type: 'start_loading' });
 
   try {
     const response = await axios({
-      method: 'delete',
+      method: 'post',
       url: DELETE_ENDPOINT,
       headers: {
         'content-type': 'application/json',
@@ -232,7 +232,7 @@ const deleteCA = dispatch => async (data) => {
 
 // Delete Condo Association
 const createAdminPost = dispatch => async (data) => {
-  const POST_ENDPOINT = 'createAdminPost.php';
+  const POST_ENDPOINT = '/createAdminPost.php';
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'reset_success' });
   dispatch({ type: 'start_loading' });
@@ -259,7 +259,7 @@ const createAdminPost = dispatch => async (data) => {
 
 // Delete Condo Association
 const fetchAdminPosts = dispatch => async () => {
-  const POST_ENDPOINT = 'getAdminPosts.php';
+  const POST_ENDPOINT = '/getAdminPosts.php';
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'reset_success' });
   dispatch({ type: 'start_loading' });

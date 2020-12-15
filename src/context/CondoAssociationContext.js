@@ -38,7 +38,7 @@ const fetchCondoAssociations = dispatch => async () => {
   try {
     const response = await axios({
       method: 'get',
-      url: 'fetchAssociations.php',
+      url: '/fetchAssociations.php',
       headers: {
         'content-type': 'application/json',
         'Authorization': token
@@ -78,7 +78,12 @@ const fetchDiscussions = dispatch => async () => {
 
   try {
     const response = await axios.get(
-      `get_discussions.php?id=${localStorage.getItem('userid')}`
+      `/get_discussions.php?id=${localStorage.getItem('userid')}`,
+      {
+        headers: {
+          'Authorization': token
+        }
+      }
     );
     dispatch({ type: 'fetch_discussions', payload: response.data });
 
@@ -97,7 +102,7 @@ const fetchDiscussion = dispatch => async ({ discussionId }) => {
 
   try {
     const response = await axios.get(
-      `get_discussion.php?id=${discussionId}`
+      `/get_discussion.php?id=${discussionId}`
     );
 
     dispatch({ type: 'fetch_discussion', payload: response.data });
@@ -116,7 +121,7 @@ const createDiscussion = dispatch => async ({ title, content, isPublic }) => {
   dispatch({ type: 'start_loading' });
 
   try {
-    await axios.post('create_discussion.php', {
+    await axios.post('/create_discussion.php', {
       title, content, is_public: isPublic ? 1 : 0, id: localStorage.getItem('userid')
     });
   }
@@ -133,8 +138,8 @@ const updateDiscussion = dispatch => async ({ discussionId, title, isPublic, con
   dispatch({ type: 'start_loading' });
 
   try {
-    await axios.put(
-      'update_discussion.php',
+    await axios.post(
+      '/update_discussion.php',
       { id: discussionId, title, is_public: isPublic, content }
     );
   } catch (e) {
@@ -150,7 +155,7 @@ const deleteDiscussion = dispatch => async ({ discussionId }) => {
   dispatch({ type: 'start_loading' });
 
   try {
-    await axios.delete('delete_discussion.php', { data: { id: discussionId } });
+    await axios.post('/delete_discussion.php', { data: { id: discussionId } });
   } catch (e) {
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });
@@ -164,7 +169,7 @@ const addComment = dispatch => async ({ discussionId, content }) => {
   dispatch({ type: 'start_loading' });
 
   try {
-    await axios.post('create_comment.php', { discussion_id: discussionId, content, id: localStorage.getItem('userid') });
+    await axios.post('/create_comment.php', { discussion_id: discussionId, content, id: localStorage.getItem('userid') });
   } catch (e) {
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });
@@ -178,7 +183,7 @@ const fetchAds = dispatch => async () => {
   dispatch({ type: 'start_loading' });
 
   try {
-    const response = await axios.get('getAds.php'); // GET ads URL
+    const response = await axios.get('/getAds.php'); // GET ads URL
     dispatch({ type: 'fetch_ads', payload: response.data });
     dispatch({ type: 'stop_loading' });
     return response.data;
@@ -195,7 +200,7 @@ const fetchAllAds = dispatch => async (id) => {
   dispatch({ type: 'start_loading' });
 
   try {
-    const response = await axios.get(`getAllAds.php?id=${id}`);
+    const response = await axios.get(`/getAllAds.php?id=${id}`);
     dispatch({ type: 'fetch_all_ads', payload: response.data });
     dispatch({ type: 'stop_loading' });
     return response.data;
@@ -215,7 +220,7 @@ const fetchAd = dispatch => async ({ condo_assoc_post_id }) => {
 
     const response = await axios({
       method: 'get',
-      url: `getAd.php?condo_assoc_post_id=${condo_assoc_post_id}`,
+      url: `/getAd.php?condo_assoc_post_id=${condo_assoc_post_id}`,
       headers: {
         'content-type': 'application/json',
         'Authorization': token
@@ -255,7 +260,7 @@ const udpdateAd = dispatch => async ({ adId, condoAssociationId, title, contactN
   dispatch({ type: 'start_loading' });
 
   try {
-    await axios.put('', { adId, title, contactNumber, price, isPublic, description }); // PUT ad URL
+    await axios.post('', { adId, title, contactNumber, price, isPublic, description }); // PUT ad URL
   } catch (e) {
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });
@@ -269,8 +274,8 @@ const deleteAd = dispatch => async ({ condo_assoc_post_id }) => {
   dispatch({ type: 'start_loading' });
   try {
     const response = await axios({
-      method: 'delete',
-      url: 'deleteAd.php',
+      method: 'post',
+      url: '/deleteAd.php',
       headers: {
         'content-type': 'application/json',
         'Authorization': token
@@ -290,7 +295,7 @@ const fetchAdminMeetings = dispatch => async () => {
   dispatch({ type: 'start_loading' });
 
   try {
-    const response = await axios.get('getAdminMeetings.php'); // GET general_meetings URL
+    const response = await axios.get('/getAdminMeetings.php'); // GET general_meetings URL
     dispatch({ type: 'fetch_admin_meetings', payload: response.data });
 
     dispatch({ type: 'stop_loading' });
@@ -310,7 +315,7 @@ const fetchAdminMeeting = dispatch => async ({ id }) => {
   try {
     const response = await axios({
       method: 'get',
-      url: `getAdminMeeting.php?id=${id}`,
+      url: `/getAdminMeeting.php?id=${id}`,
       headers: {
         'content-type': 'application/json',
         'Authorization': token
@@ -332,7 +337,7 @@ const fetchGeneralMeetings = dispatch => async () => {
   dispatch({ type: 'start_loading' });
 
   try {
-    const response = await axios.get('getGeneralMeetings.php'); // GET general_meetings URL
+    const response = await axios.get('/getGeneralMeetings.php'); // GET general_meetings URL
     dispatch({ type: 'fetch_general_meetings', payload: response.data });
     dispatch({ type: 'stop_loading' });
     return response.data;
@@ -351,7 +356,7 @@ const fetchGeneralMeeting = dispatch => async ({ id }) => {
   try {
     const response = await axios({
       method: 'get',
-      url: `getGeneralMeeting.php?id=${id}`,
+      url: `/getGeneralMeeting.php?id=${id}`,
       headers: {
         'content-type': 'application/json',
         'Authorization': token
@@ -473,7 +478,7 @@ const fetchContracts = dispatch => async () => {
   dispatch({ type: 'start_loading' });
 
   try {
-    const response = await axios.get(`get_contracts.php?id=${localStorage.getItem('userid')}`);
+    const response = await axios.get(`/get_contracts.php?id=${localStorage.getItem('userid')}`);
     dispatch({ type: 'fetch_contracts', payload: response.data });
   } catch (e) {
     dispatch({ type: 'stop_loading' });
@@ -488,7 +493,7 @@ const createContract = dispatch => async ({ name, description, budget }) => {
   dispatch({ type: 'start_loading' });
 
   try {
-    await axios.post('create_contract.php', { name, description, budget, id: localStorage.getItem('userid') });
+    await axios.post('/create_contract.php', { name, description, budget, id: localStorage.getItem('userid') });
   } catch (e) {
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });
@@ -502,7 +507,7 @@ const fetchContract = dispatch => async ({ id }) => {
   dispatch({ type: 'start_loading' });
 
   try {
-    const response = await axios.get(`get_contract.php?id=${id}`);
+    const response = await axios.get(`/get_contract.php?id=${id}`);
 
     dispatch({ type: 'fetch_contract', payload: response.data });
   } catch (e) {
@@ -518,7 +523,7 @@ const addSubmission = dispatch => async ({ contract_id, poster, statement }) => 
   dispatch({ type: 'start_loading' });
 
   try {
-    await axios.post('create_submission.php', { contract_id, poster, statement });
+    await axios.post('/create_submission.php', { contract_id, poster, statement });
   } catch (e) {
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });
@@ -532,8 +537,8 @@ const deleteContract = dispatch => async ({ id }) => {
   dispatch({ type: 'start_loading' });
 
   try {
-    await axios.delete(
-      'delete_contract.php',
+    await axios.post(
+      '/delete_contract.php',
       { data: { id } }
     );
   } catch (e) {

@@ -29,7 +29,7 @@ const fetchUser = dispatch => async () => {
   dispatch({ type: 'start_loading' });
 
   try {
-    const { data } = await axios.get(`get_user.php?id=${localStorage.getItem('userid')}`);
+    const { data } = await axios.get(`/get_user.php?id=${localStorage.getItem('userid')}`);
     dispatch({ type: 'fetch_user', payload: data });
 
     dispatch({ type: 'stop_loading' });
@@ -46,8 +46,8 @@ const updateProfile = dispatch => async ({ firstName, lastName, email, address }
   dispatch({ type: 'start_loading' });
 
   try {
-    await axios.put(
-      'update_profile.php',
+    await axios.post(
+      '/update_profile.php',
       { first_name: firstName, last_name: lastName, email, address, id: localStorage.getItem('userid') }
     );
 
@@ -67,8 +67,8 @@ const updatePassword = dispatch => async ({ currentPassword, newPassword, confir
   try {
     if (newPassword !== confirmNewPassword) throw new Error('Passwords must match');
 
-    const response = await axios.put(
-      'update_password.php',
+    const response = await axios.post(
+      '/update_password.php',
       { id: localStorage.getItem('userid'), current_password: currentPassword, new_password: newPassword }
     );
     dispatch({ type: 'stop_loading' });
@@ -98,7 +98,7 @@ const fetchPosts = dispatch => async () => {
 
 // Add Friend
 const sendFriendReq = dispatch => async ({ senderID, receiverEmail }) => {
-  const REQUEST_ENDPOINT = 'friends/sendRequest.php';
+  const REQUEST_ENDPOINT = '/sendRequest.php';
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'reset_success' });
   dispatch({ type: 'start_loading' });
@@ -125,7 +125,7 @@ const sendFriendReq = dispatch => async ({ senderID, receiverEmail }) => {
 
 // Fetch Requests
 const fetchRequests = dispatch => async ({ receiver_id }) => {
-  const REQUESTS_ENDPOINT = 'friends/getRequests.php'
+  const REQUESTS_ENDPOINT = '/getRequests.php'
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'reset_success' });
   dispatch({ type: 'start_loading' });
@@ -151,7 +151,7 @@ const fetchRequests = dispatch => async ({ receiver_id }) => {
 
 // Fetch Friends
 const fetchFriends = dispatch => async ({ receiver_id }) => {
-  const FRIENDS_ENDPOINT = 'friends/getFriends.php'
+  const FRIENDS_ENDPOINT = '/getFriends.php'
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'reset_success' });
   dispatch({ type: 'start_loading' });
@@ -177,13 +177,13 @@ const fetchFriends = dispatch => async ({ receiver_id }) => {
 
 // Accept Friend Request
 const acceptRequest = dispatch => async ({ sender_id, receiver_id }) => {
-  const ACCEPT_ENDPOINT = 'friends/accept.php'
+  const ACCEPT_ENDPOINT = '/accept.php'
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
 
   try {
     const response = await axios({
-      method: 'put',
+      method: 'post',
       url: ACCEPT_ENDPOINT,
       headers: {
         'content-type': 'application/json',
@@ -202,13 +202,13 @@ const acceptRequest = dispatch => async ({ sender_id, receiver_id }) => {
 
 // Delete Friend or Friend Request
 const deleteFriend = dispatch => async ({ sender_id, receiver_id }) => {
-  const DELETE_ENDPOINT = 'friends/deleteFriend.php'
+  const DELETE_ENDPOINT = '/deleteFriend.php'
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
 
   try {
     const response = await axios({
-      method: 'delete',
+      method: 'post',
       url: DELETE_ENDPOINT,
       headers: {
         'content-type': 'application/json',
@@ -247,7 +247,7 @@ const payPayment = dispatch => async ({ paymentId }) => {
   dispatch({ type: 'start_loading' });
 
   try {
-    await axios.put('', { paymentId }); // PUT payments URL
+    await axios.post('', { paymentId }); // PUT payments URL
 
     fetchPayments();
   } catch (e) {

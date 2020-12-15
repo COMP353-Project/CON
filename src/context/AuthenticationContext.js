@@ -20,7 +20,7 @@ const token = "Basic " + btoa('dac353_2:e876FN')
 
 // Sign In
 const signin = dispatch => async ({ email, password }) => {
-  const LOGIN_ENDPOINT = 'login.php'
+  const LOGIN_ENDPOINT = '/login.php'
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
 
@@ -51,7 +51,7 @@ const editProfile = dispatch => async ({ firstName, lastName, address, password 
   dispatch({ type: 'start_loading' });
 
   try {
-    const { data } = await axios.put('', { firstName, lastName, address, password }); // PUT user URL
+    const { data } = await axios.post('', { firstName, lastName, address, password }); // PUT user URL
     dispatch({ type: 'signin', payload: data });
 
     dispatch({ type: 'stop_loading' });

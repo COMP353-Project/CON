@@ -31,7 +31,7 @@ const fetchAllGroups = dispatch => async () => {
   try {
     const response = await axios({
       method: 'get',
-      url: 'fetchGroups.php',
+      url: '/fetchGroups.php',
       headers: {
         'content-type': 'application/json',
         'Authorization': token
@@ -69,12 +69,10 @@ const fetchMyGroups = dispatch => async (id) => {
   dispatch({ type: 'start_loading' });
 
   try {
-    const response = await axios.get(`getMyGroups.php?id=${id}`);
-    console.log(response)
+    const response = await axios.get(`/getMyGroups.php?id=${id}`);
     dispatch({ type: 'fech_my_groups', payload: response });
     dispatch({ type: 'stop_loading' });
 
-    console.log(response.data)
     return response.data;
   } catch (e) {
     dispatch({ type: 'stop_loading' });
@@ -91,7 +89,7 @@ const fetchGroupMembers = dispatch => async (group_id) => {
   try {
     const response = await axios({
       method: "get",
-      url: `getMembers.php?group_id=${group_id}`,
+      url: `/getMembers.php?group_id=${group_id}`,
       headers: {
         'content-type': 'application/json',
         'Authorization': token
@@ -133,7 +131,7 @@ const fetchGroup = dispatch => async ({ group_id, user_id }) => {
   try {
     const response = await axios({
       method: "post",
-      url: 'getGroup.php',
+      url: '/getGroup.php',
       headers: {
         'content-type': 'application/json',
         'Authorization': token
@@ -156,7 +154,7 @@ const editGroup = dispatch => async ({ groupId, title, description }) => {
   dispatch({ type: 'start_loading' });
 
   try {
-    await axios.put('', { groupId, title, description }); // PUT group URL
+    await axios.post('', { groupId, title, description }); // PUT group URL
   } catch (e) {
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });
@@ -170,7 +168,7 @@ const leaveGroup = dispatch => async ({ groupId }) => {
   dispatch({ type: 'start_loading' });
 
   try {
-    await axios.delete('', { groupId }); // DELETE group_member URL
+    await axios.post('', { groupId }); // DELETE group_member URL
   } catch (e) {
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });
@@ -183,7 +181,7 @@ const fetchPosts = dispatch => async (groupId) => {
   dispatch({ type: 'reset_error' });
   dispatch({ type: 'start_loading' });
   try {
-    const response = await axios.get(`getGroupPosts.php?id=${groupId}`); // GET group_posts URL
+    const response = await axios.get(`/getGroupPosts.php?id=${groupId}`); // GET group_posts URL
     dispatch({ type: 'fetch_posts', payload: response });
 
     dispatch({ type: 'stop_loading' });
@@ -218,7 +216,7 @@ const createPost = dispatch => async ({ user_id, group_id, title, description })
   try {
     const response = await axios({
       method: "post",
-      url: 'sendPost.php',
+      url: '/sendPost.php',
       headers: {
         'content-type': 'application/json',
         'Authorization': token
@@ -241,7 +239,7 @@ const editPost = dispatch => async ({ postId, title, content }) => {
   dispatch({ type: 'start_loading' });
 
   try {
-    await axios.put('', { postId, title, content }); // PUT post URL
+    await axios.post('', { postId, title, content }); // PUT post URL
   } catch (e) {
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });
@@ -255,7 +253,7 @@ const deletePost = dispatch => async ({ postId }) => {
   dispatch({ type: 'start_loading' });
 
   try {
-    await axios.delete('', { postId });
+    await axios.post('', { postId });
   } catch (e) {
     dispatch({ type: 'stop_loading' });
     dispatch({ type: 'set_error', payload: e.message });
@@ -335,7 +333,7 @@ const handleRequest = dispatch => async ({ groupId, userId, accept }) => {
   dispatch({ type: 'start_loading' });
 
   try {
-    await axios.put('', { groupId, userId, accept }); // PUT request URL
+    await axios.post('', { groupId, userId, accept }); // PUT request URL
 
     fetchRequests({ groupId });
   } catch (e) {
